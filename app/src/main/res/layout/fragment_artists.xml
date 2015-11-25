@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <gdg.androidtitlan.spotifymvp.music.ui.widget.ShadowFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_grey">
+
+        <LinearLayout
+            android:id="@+id/headerbar_artists"
+            style="@style/Theme.AppTheme.Music.HeaderBar">
+
+            <include layout="@layout/toolbar"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?actionBarSize"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <gdg.androidtitlan.spotifymvp.music.view.AutoRecyclerView
+                android:id="@+id/rv_artists"
+                style="@style/Theme.AppTheme.Music.RecyclerView"
+                />
+
+            <ProgressBar
+                android:id="@+id/pv_artists"
+                style="@style/Theme.AppTheme.Music.ProgressBar"/>
+
+            <ImageView
+                android:id="@+id/iv_artists"
+                style="@style/Theme.AppTheme.Music.ImageView"/>
+
+            <TextView
+                android:id="@+id/txt_line_artists"
+                style="@style/Theme.AppTheme.Music.TextView"
+                android:text="@string/search_music_hint"
+                android:textSize="@dimen/size_title"/>
+
+            <TextView
+                android:id="@+id/txt_subline_artists"
+                style="@style/Theme.AppTheme.Music.TextView"
+                android:text="@string/search_artist_hint"
+                android:textSize="@dimen/size_subtitle"
+                />
+
+
+        </LinearLayout>
+
+    </gdg.androidtitlan.spotifymvp.music.ui.widget.ShadowFrameLayout>
+
+</LinearLayout>

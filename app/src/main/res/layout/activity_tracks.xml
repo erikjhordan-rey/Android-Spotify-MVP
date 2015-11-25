@@ -1,0 +1,137 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_artist"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_artist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/iv_collapsing_artist"
+                    style="@style/Theme.AppTheme.Music.ImageView.Collapsing"
+                    app:layout_collapseMode="parallax"
+                    tools:ignore="ContentDescription"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_artist"
+                    style="@style/Theme.AppTheme.Music.CircularImageView"
+                    app:border_color="@android:color/white"
+                    app:border_width="2dp"/>
+
+                <TextView
+                    android:id="@+id/txt_title_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="85dp"
+                    android:gravity="center"
+                    android:text="@string/detail_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                    android:textColor="@color/white"/>
+
+
+                <TextView
+                    android:id="@+id/txt_followers_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="110dp"
+                    android:gravity="center"
+                    android:text="@string/detail_hint_followers"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse"
+                    android:textColor="@color/white"/>
+
+            </FrameLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="4dp"
+                app:layout_anchor="@id/appbar_artist"
+                app:layout_anchorGravity="bottom"
+                app:layout_collapseMode="pin"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:minHeight="?android:attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_title_tracks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_top_tracks"
+                        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                        android:textColor="@color/white"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/txt_subtitle_artist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+                        android:textColor="@color/white"
+                        android:visibility="visible"/>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_tracks"
+            style="@style/Theme.AppTheme.Music.RecyclerView"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+        <ProgressBar
+            android:id="@+id/pv_tracks"
+            android:layout_marginTop="@dimen/space_default"
+            style="@style/Theme.AppTheme.Music.ProgressBar"/>
+
+        <ImageView
+            android:id="@+id/iv_tracks"
+            style="@style/Theme.AppTheme.Music.ImageView"/>
+
+        <TextView
+            android:id="@+id/txt_line_tracks"
+            style="@style/Theme.AppTheme.Music.TextView"
+            android:text="@string/search_music_hint"
+            android:textSize="@dimen/size_title"/>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
