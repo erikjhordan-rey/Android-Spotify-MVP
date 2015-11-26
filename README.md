@@ -14,6 +14,8 @@ Libraries used on the sample project
 # Demo
 ![](https://aa1a5cf3c6e3569b77b29843c3f5b6ba8b369090.googledrive.com/host/0B9hNKr5AY4xXTXktOS11VlBaemM/Telecine_2015-11-25-17-19-04.gif)
 
+* I will write soon testing
+
 [6]: https://github.com/evant/gradle-retrolambda
 [5]: https://github.com/ReactiveX/RxAndroid
 [4]: http://square.github.io/retrofit/
