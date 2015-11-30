@@ -27,4 +27,4 @@ Libraries used on the sample project
 Developed By
 ------------
 
-* Erik Jhordan Gónzalez Reyes - <erikcaffrey10@gmail.com>
+* Erik Jhordan González Reyes - <erikcaffrey10@gmail.com>
