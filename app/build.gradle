@@ -30,7 +30,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
 
     compile supportDependencies.design
     compile supportDependencies.appcompat
@@ -50,4 +49,7 @@ dependencies {
     compile otherDependencies.butterknife
     compile otherDependencies.circleimageview
 
+    testCompile testingDependencies.junit
+    testCompile testingDependencies.mockito
+    testCompile testingDependencies.robolectric
 }

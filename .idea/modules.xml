@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpotifyMVP.iml" filepath="$PROJECT_DIR$/SpotifyMVP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Android-Spotify-MVP.iml" filepath="$PROJECT_DIR$/Android-Spotify-MVP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

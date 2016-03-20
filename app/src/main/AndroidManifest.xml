@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="gdg.androidtitlan.spotifymvp"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="gdg.androidtitlan.spotifymvp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".music.api.client.MusicApp"
+        android:name=".example.api.client.SpotifyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,10 +12,10 @@
         android:theme="@style/Theme.AppTheme.Music">
 
         <activity
-            android:name=".music.ui.activity.ArtistsActivity"
+            android:name=".example.ui.activity.ArtistsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,13 +23,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".music.ui.activity.TracksActivity"
+        <activity
+            android:name=".example.ui.activity.TracksActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
 
 
-        <service android:name=".music.service.AudioPlayerService"/>
+        <service android:name=".example.service.AudioPlayerService"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
