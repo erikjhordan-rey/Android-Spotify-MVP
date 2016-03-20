@@ -1,4 +1,4 @@
-# Android - SpotifyMVP
+# Android - Spotify+ Model View Presenter (MVP)
 Example android Model View Presenter used to explain how to use this pattern in our android applications.
 
 This example was created to support an article explanation [Model View Presenter en Android][1] (spanish).
@@ -12,6 +12,11 @@ Libraries used on the sample project
 * [Gradle Retrolambda Plugin][6]
 
 # Demo
+
+![](https://aa1a5cf3c6e3569b77b29843c3f5b6ba8b369090.googledrive.com/host/0B9hNKr5AY4xXTXktOS11VlBaemM/spotify-mvp.png)
+
+
+
 ![](https://aa1a5cf3c6e3569b77b29843c3f5b6ba8b369090.googledrive.com/host/0B9hNKr5AY4xXTXktOS11VlBaemM/Telecine_2015-11-25-17-19-04.gif)
 
 [6]: https://github.com/evant/gradle-retrolambda
