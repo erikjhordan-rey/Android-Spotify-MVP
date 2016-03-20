@@ -218,7 +218,7 @@ public class TracksActivity extends AppCompatActivity implements TracksMvpView, 
                 false);
         rv_tracks.setLayoutManager(linearLayoutManager);
         TracksAdapter adapter = new TracksAdapter();
-        adapter.setItemClickListener(tracksPresenter::launchArtistDetail);
+        adapter.setItemClickListener((tracks, track, position) -> tracksPresenter.launchArtistDetail(tracks, track, position));
         rv_tracks.setAdapter(adapter);
 
         //initialize listener for app bar
