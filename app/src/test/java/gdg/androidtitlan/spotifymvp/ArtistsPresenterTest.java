@@ -105,7 +105,7 @@ public class ArtistsPresenterTest {
         //This is a mistake because we are confirming on the
         // Interactor the responses of api calls and should be the presenter who validate the use case but it is only one example.
 
-        //if the answer was successful then we validate the correct behavior of the presenter
+        //if the answer was artists not found
         mArtistsPresenter.onArtistNotFound();
         verify(mArtistsMvpView).showArtistNotFoundMessage();
     }
@@ -117,6 +117,7 @@ public class ArtistsPresenterTest {
         when(mSpotifyService.searchArtist(artist))
                 .thenReturn(Observable.<ArtistsSearch>error(new RuntimeException("Error not connection")));
 
+        //if the answer was Network Connection
         mArtistsPresenter.onNetworkConnectionError();
         verify(mArtistsMvpView).showConnectionErrorMessage();
 
