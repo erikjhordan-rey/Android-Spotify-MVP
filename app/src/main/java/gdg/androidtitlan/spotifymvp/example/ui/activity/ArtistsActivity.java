@@ -23,8 +23,8 @@ import gdg.androidtitlan.spotifymvp.R;
 
 public class ArtistsActivity extends AppCompatActivity {
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artists);
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_artists);
+  }
 }

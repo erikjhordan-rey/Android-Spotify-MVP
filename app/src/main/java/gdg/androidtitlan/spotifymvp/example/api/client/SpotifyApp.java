@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-
-
 package gdg.androidtitlan.spotifymvp.example.api.client;
 
 import android.app.Application;
@@ -24,37 +22,34 @@ import android.content.Context;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
-
 public class SpotifyApp extends Application {
 
-    private SpotifyService mSpotifyService;
-    private Scheduler mScheduler;
+  private SpotifyService mSpotifyService;
+  private Scheduler mScheduler;
 
-    public static SpotifyApp get(Context context) {
-        return (SpotifyApp) context.getApplicationContext();
-    }
+  public static SpotifyApp get(Context context) {
+    return (SpotifyApp) context.getApplicationContext();
+  }
 
-    public SpotifyService getSpotifyService() {
-        if (mSpotifyService == null)
-            mSpotifyService = FactorySpotifyClient.create();
+  public SpotifyService getSpotifyService() {
+    if (mSpotifyService == null) mSpotifyService = FactorySpotifyClient.create();
 
-        return mSpotifyService;
-    }
+    return mSpotifyService;
+  }
 
-    //For setting mocks during testing
-    public void setSpotifyService(SpotifyService spotifyService) {
-        this.mSpotifyService = spotifyService;
-    }
+  //For setting mocks during testing
+  public void setSpotifyService(SpotifyService spotifyService) {
+    this.mSpotifyService = spotifyService;
+  }
 
-    public Scheduler SubscribeScheduler() {
-        if (mScheduler == null)
-            mScheduler = Schedulers.io();
+  public Scheduler SubscribeScheduler() {
+    if (mScheduler == null) mScheduler = Schedulers.io();
 
-        return mScheduler;
-    }
+    return mScheduler;
+  }
 
-    //User to change scheduler from tests
-    public void setScheduler(Scheduler scheduler) {
-        this.mScheduler = scheduler;
-    }
+  //User to change scheduler from tests
+  public void setScheduler(Scheduler scheduler) {
+    this.mScheduler = scheduler;
+  }
 }

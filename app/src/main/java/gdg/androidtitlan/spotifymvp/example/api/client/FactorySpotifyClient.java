@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.api.client;
 
 import retrofit.GsonConverterFactory;
@@ -23,14 +22,13 @@ import retrofit.RxJavaCallAdapterFactory;
 
 public class FactorySpotifyClient {
 
-    public static SpotifyService create() {
+  public static SpotifyService create() {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.SPOTIFY_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
+    Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.SPOTIFY_API)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .build();
 
-        return retrofit.create(SpotifyService.class);
-    }
+    return retrofit.create(SpotifyService.class);
+  }
 }

@@ -25,48 +25,46 @@ import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
 
 public class ArtistsPresenter implements Presenter<ArtistsMvpView>, ArtistCallback {
 
-    private ArtistsMvpView artistsMvpView;
-    private ArtistsInteractor artistsInteractor;
+  private ArtistsMvpView artistsMvpView;
+  private ArtistsInteractor artistsInteractor;
 
-    public ArtistsPresenter(){}
+  public ArtistsPresenter() {
+  }
 
-    @Override public void setView(ArtistsMvpView view) {
-        if (view == null)
-            throw new IllegalArgumentException("You can't set a null view");
+  @Override public void setView(ArtistsMvpView view) {
+    if (view == null) throw new IllegalArgumentException("You can't set a null view");
 
-        artistsMvpView = view;
-        artistsInteractor = new ArtistsInteractor(artistsMvpView.getContext());
-    }
+    artistsMvpView = view;
+    artistsInteractor = new ArtistsInteractor(artistsMvpView.getContext());
+  }
 
-    @Override public void detachView() {
-        artistsMvpView = null;
-    }
+  @Override public void detachView() {
+    artistsMvpView = null;
+  }
 
-    public void onSearchArtist(String string){
-        artistsMvpView.showLoading();
-        artistsInteractor.loadDataFromApi(string, this);
-    }
+  public void onSearchArtist(String string) {
+    artistsMvpView.showLoading();
+    artistsInteractor.loadDataFromApi(string, this);
+  }
 
-    public void launchArtistDetail(Artist artist){
-        artistsMvpView.launchArtistDetail(artist);
-    }
+  public void launchArtistDetail(Artist artist) {
+    artistsMvpView.launchArtistDetail(artist);
+  }
 
-    @Override public void onResponse(List<Artist> artists) {
-        artistsMvpView.hideLoading();
-        artistsMvpView.renderArtist(artists);
-    }
+  @Override public void onResponse(List<Artist> artists) {
+    artistsMvpView.hideLoading();
+    artistsMvpView.renderArtist(artists);
+  }
 
-    @Override public void onArtistNotFound() {
-        artistsMvpView.showArtistNotFoundMessage();
-    }
+  @Override public void onArtistNotFound() {
+    artistsMvpView.showArtistNotFoundMessage();
+  }
 
+  @Override public void onNetworkConnectionError() {
+    artistsMvpView.showConnectionErrorMessage();
+  }
 
-    @Override public void onNetworkConnectionError() {
-        artistsMvpView.showConnectionErrorMessage();
-    }
-
-
-    @Override public void onServerError() {
-        artistsMvpView.showServerError();
-    }
+  @Override public void onServerError() {
+    artistsMvpView.showServerError();
+  }
 }

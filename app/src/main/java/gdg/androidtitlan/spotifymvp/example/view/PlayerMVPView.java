@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.view;
 
 import android.content.ServiceConnection;
 
 import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
 
-
 public interface PlayerMVPView extends MvpView {
 
-    void onStartAudioService(String trackUrl, ServiceConnection serviceConnection);
+  void onStartAudioService(String trackUrl, ServiceConnection serviceConnection);
 
-    void setInfoTrackPlayer(int trackPosition);
+  void setInfoTrackPlayer(int trackPosition);
 
-    void isPlay();
+  void isPlay();
 
-    void isPause();
+  void isPause();
 
-    void setTimeStart(int trackCurrentPosition);
+  void setTimeStart(int trackCurrentPosition);
 
-    void setTimeFinished(AudioPlayerService audioPlayerService);
+  void setTimeFinished(AudioPlayerService audioPlayerService);
 
-    void onResetTrackDuration();
-
-
+  void onResetTrackDuration();
 }

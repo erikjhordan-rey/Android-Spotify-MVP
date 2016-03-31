@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.api.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Tracks {
-    @SerializedName("tracks") private List<Track> tracks;
-    public List<Track> getTracks() {return tracks;}
+  @SerializedName("tracks") private List<Track> tracks;
+
+  public List<Track> getTracks() {
+    return tracks;
+  }
 }

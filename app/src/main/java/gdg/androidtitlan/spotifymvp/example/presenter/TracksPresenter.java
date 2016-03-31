@@ -23,58 +23,49 @@ import gdg.androidtitlan.spotifymvp.example.model.TrackCallback;
 import gdg.androidtitlan.spotifymvp.example.model.TracksInteractor;
 import gdg.androidtitlan.spotifymvp.example.view.TracksMvpView;
 
-
 public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback {
 
-    private TracksMvpView tracksMvpView;
-    private TracksInteractor tracksInteractor;
+  private TracksMvpView tracksMvpView;
+  private TracksInteractor tracksInteractor;
 
-    public TracksPresenter() {
-    }
+  public TracksPresenter() {
+  }
 
-    @Override
-    public void setView(TracksMvpView view) {
+  @Override public void setView(TracksMvpView view) {
 
-        if (view == null)
-            throw new IllegalArgumentException("You can't set a null view");
+    if (view == null) throw new IllegalArgumentException("You can't set a null view");
 
-        tracksMvpView = view;
-        tracksInteractor = new TracksInteractor(tracksMvpView.getContext());
-    }
+    tracksMvpView = view;
+    tracksInteractor = new TracksInteractor(tracksMvpView.getContext());
+  }
 
-    @Override
-    public void detachView() {
-        tracksMvpView = null;
-    }
+  @Override public void detachView() {
+    tracksMvpView = null;
+  }
 
-    public void onSearchTracks(String string) {
-        tracksMvpView.showLoading();
-        tracksInteractor.loadData(string, this);
-    }
+  public void onSearchTracks(String string) {
+    tracksMvpView.showLoading();
+    tracksInteractor.loadData(string, this);
+  }
 
-    public void launchArtistDetail(List<Track> tracks, Track track, int position) {
-        tracksMvpView.launchTrackDetail(tracks, track, position);
-    }
+  public void launchArtistDetail(List<Track> tracks, Track track, int position) {
+    tracksMvpView.launchTrackDetail(tracks, track, position);
+  }
 
-    @Override
-    public void onResponse(List<Track> tracks) {
-        tracksMvpView.hideLoading();
-        tracksMvpView.renderTracks(tracks);
+  @Override public void onResponse(List<Track> tracks) {
+    tracksMvpView.hideLoading();
+    tracksMvpView.renderTracks(tracks);
+  }
 
-    }
+  @Override public void onTrackNotFound() {
+    tracksMvpView.showTracksNotFoundMessage();
+  }
 
-    @Override
-    public void onTrackNotFound() {
-        tracksMvpView.showTracksNotFoundMessage();
-    }
+  @Override public void onNetworkConnectionError() {
+    tracksMvpView.showConnectionErrorMessage();
+  }
 
-    @Override
-    public void onNetworkConnectionError() {
-        tracksMvpView.showConnectionErrorMessage();
-    }
-
-    @Override
-    public void onServerError() {
-        tracksMvpView.showConnectionErrorMessage();
-    }
+  @Override public void onServerError() {
+    tracksMvpView.showConnectionErrorMessage();
+  }
 }

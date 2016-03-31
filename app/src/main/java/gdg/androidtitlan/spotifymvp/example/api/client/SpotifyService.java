@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.api.client;
 
 import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
@@ -24,12 +23,11 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
-
 public interface SpotifyService {
 
-    @GET(Constants.ARTIST_SEARCH)
-    Observable<ArtistsSearch> searchArtist(@Query(Constants.QUERY_SEARCH)String artist);
+  @GET(Constants.ARTIST_SEARCH) Observable<ArtistsSearch> searchArtist(
+      @Query(Constants.QUERY_SEARCH) String artist);
 
-    @GET(Constants.ARTIST_TRACKS)
-    Observable<Tracks> searchTrackList(@Path(Constants.PATH_ARTIST_TRACKS)String artistId);
+  @GET(Constants.ARTIST_TRACKS) Observable<Tracks> searchTrackList(
+      @Path(Constants.PATH_ARTIST_TRACKS) String artistId);
 }

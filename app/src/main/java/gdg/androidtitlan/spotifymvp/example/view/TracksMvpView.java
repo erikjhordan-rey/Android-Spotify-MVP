@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.view;
 
 import java.util.List;
@@ -23,17 +22,17 @@ import gdg.androidtitlan.spotifymvp.example.api.model.Track;
 
 public interface TracksMvpView extends MvpView {
 
-    void showLoading();
+  void showLoading();
 
-    void hideLoading();
+  void hideLoading();
 
-    void showTracksNotFoundMessage();
+  void showTracksNotFoundMessage();
 
-    void showConnectionErrorMessage();
+  void showConnectionErrorMessage();
 
-    void renderTracks(List<Track> tracks);
+  void renderTracks(List<Track> tracks);
 
-    void launchTrackDetail(List<Track> tracks, Track track, int position);
+  void launchTrackDetail(List<Track> tracks, Track track, int position);
 }
 
 

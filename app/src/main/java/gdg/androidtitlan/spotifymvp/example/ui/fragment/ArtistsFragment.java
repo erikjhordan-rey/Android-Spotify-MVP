@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.ui.fragment;
 
 import android.app.SearchManager;
@@ -49,159 +48,139 @@ import gdg.androidtitlan.spotifymvp.example.ui.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.ui.adapter.ArtistsAdapter;
 import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
 
-public class ArtistsFragment extends Fragment implements ArtistsMvpView, SearchView.OnQueryTextListener {
+public class ArtistsFragment extends Fragment
+    implements ArtistsMvpView, SearchView.OnQueryTextListener {
 
-    public ArtistsFragment() {
-        setHasOptionsMenu(true);
+  public ArtistsFragment() {
+    setHasOptionsMenu(true);
+  }
+
+  @Bind(R.id.toolbar) Toolbar toolbar;
+  @Bind(R.id.rv_artists) RecyclerView rv_artist;
+  @Bind(R.id.pv_artists) ProgressBar pv_artists;
+  @Bind(R.id.iv_artists) ImageView iv_artists;
+  @Bind(R.id.txt_line_artists) TextView txt_line_artists;
+  @Bind(R.id.txt_subline_artists) TextView txt_sub_line_artists;
+
+  private SearchView searchView;
+  private ArtistsPresenter artistsPresenter;
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    artistsPresenter = new ArtistsPresenter();
+    artistsPresenter.setView(this);
+  }
+
+  @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_artists, container, false);
+  }
+
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    ButterKnife.bind(this, view);
+    setupToolbar();
+    setupRecyclerView();
+  }
+
+  @Override public void onDestroy() {
+    artistsPresenter.detachView();
+    super.onDestroy();
+  }
+
+  @Override public Context getContext() {
+    return getActivity();
+  }
+
+  @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.menu_music, menu);
+    setupSearchView(menu);
+  }
+
+  @Override public boolean onQueryTextSubmit(String query) {
+    artistsPresenter.onSearchArtist(query);
+    return true;
+  }
+
+  @Override public boolean onQueryTextChange(String newText) {
+    // you can look artists according to the letters you write
+    // using artistsPresenter.onSearchArtist(newText);
+    return true;
+  }
+
+  @Override public void showLoading() {
+    pv_artists.setVisibility(View.VISIBLE);
+    iv_artists.setVisibility(View.GONE);
+    txt_line_artists.setVisibility(View.GONE);
+    txt_sub_line_artists.setVisibility(View.GONE);
+    rv_artist.setVisibility(View.GONE);
+  }
+
+  @Override public void hideLoading() {
+    pv_artists.setVisibility(View.GONE);
+    rv_artist.setVisibility(View.VISIBLE);
+  }
+
+  @Override public void showArtistNotFoundMessage() {
+    pv_artists.setVisibility(View.GONE);
+    txt_line_artists.setVisibility(View.VISIBLE);
+    iv_artists.setVisibility(View.VISIBLE);
+    txt_line_artists.setText(getString(R.string.error_artist_not_found));
+    iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
+  }
+
+  @Override public void showConnectionErrorMessage() {
+    pv_artists.setVisibility(View.GONE);
+    txt_line_artists.setVisibility(View.VISIBLE);
+    iv_artists.setVisibility(View.VISIBLE);
+    txt_line_artists.setText(getString(R.string.error_internet_connection));
+    iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_internet));
+  }
+
+  @Override public void showServerError() {
+    pv_artists.setVisibility(View.GONE);
+    txt_line_artists.setVisibility(View.VISIBLE);
+    iv_artists.setVisibility(View.VISIBLE);
+    txt_line_artists.setText(getString(R.string.error_server_internal));
+    iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
+  }
+
+  @Override public void renderArtist(List<Artist> artists) {
+    ArtistsAdapter adapter = (ArtistsAdapter) rv_artist.getAdapter();
+    adapter.setArtists(artists);
+    adapter.notifyDataSetChanged();
+  }
+
+  private void setupSearchView(Menu menu) {
+    SearchManager searchManager =
+        (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+    searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+    searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+    searchView.setQueryHint(getString(R.string.search_hint));
+    searchView.setMaxWidth(toolbar.getWidth());
+    searchView.setOnQueryTextListener(this);
+  }
+
+  private void setupToolbar() {
+    ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+    ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+    if (actionBar != null) {
+      actionBar.setDisplayShowTitleEnabled(true);
+      actionBar.setDisplayHomeAsUpEnabled(true);
+      actionBar.setHomeAsUpIndicator(R.mipmap.ic_action_navigation_menu);
     }
+  }
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.rv_artists)
-    RecyclerView rv_artist;
-    @Bind(R.id.pv_artists)
-    ProgressBar pv_artists;
-    @Bind(R.id.iv_artists)
-    ImageView iv_artists;
-    @Bind(R.id.txt_line_artists)
-    TextView txt_line_artists;
-    @Bind(R.id.txt_subline_artists)
-    TextView txt_sub_line_artists;
+  private void setupRecyclerView() {
+    ArtistsAdapter adapter = new ArtistsAdapter();
+    adapter.setItemClickListener(
+        (Artist artist, int position) -> artistsPresenter.launchArtistDetail(artist));
+    rv_artist.setAdapter(adapter);
+  }
 
-    private SearchView searchView;
-    private ArtistsPresenter artistsPresenter;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        artistsPresenter = new ArtistsPresenter();
-        artistsPresenter.setView(this);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_artists, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-        setupToolbar();
-        setupRecyclerView();
-    }
-
-    @Override
-    public void onDestroy() {
-        artistsPresenter.detachView();
-        super.onDestroy();
-    }
-
-    @Override
-    public Context getContext() {
-        return getActivity();
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_music, menu);
-        setupSearchView(menu);
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        artistsPresenter.onSearchArtist(query);
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        // you can look artists according to the letters you write
-        // using artistsPresenter.onSearchArtist(newText);
-        return true;
-    }
-
-    @Override
-    public void showLoading() {
-        pv_artists.setVisibility(View.VISIBLE);
-        iv_artists.setVisibility(View.GONE);
-        txt_line_artists.setVisibility(View.GONE);
-        txt_sub_line_artists.setVisibility(View.GONE);
-        rv_artist.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void hideLoading() {
-        pv_artists.setVisibility(View.GONE);
-        rv_artist.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void showArtistNotFoundMessage() {
-        pv_artists.setVisibility(View.GONE);
-        txt_line_artists.setVisibility(View.VISIBLE);
-        iv_artists.setVisibility(View.VISIBLE);
-        txt_line_artists.setText(getString(R.string.error_artist_not_found));
-        iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
-    }
-
-    @Override
-    public void showConnectionErrorMessage() {
-        pv_artists.setVisibility(View.GONE);
-        txt_line_artists.setVisibility(View.VISIBLE);
-        iv_artists.setVisibility(View.VISIBLE);
-        txt_line_artists.setText(getString(R.string.error_internet_connection));
-        iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_internet));
-    }
-
-    @Override
-    public void showServerError() {
-        pv_artists.setVisibility(View.GONE);
-        txt_line_artists.setVisibility(View.VISIBLE);
-        iv_artists.setVisibility(View.VISIBLE);
-        txt_line_artists.setText(getString(R.string.error_server_internal));
-        iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
-    }
-
-    @Override
-    public void renderArtist(List<Artist> artists) {
-        ArtistsAdapter adapter = (ArtistsAdapter) rv_artist.getAdapter();
-        adapter.setArtists(artists);
-        adapter.notifyDataSetChanged();
-
-    }
-
-    private void setupSearchView(Menu menu) {
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setQueryHint(getString(R.string.search_hint));
-        searchView.setMaxWidth(toolbar.getWidth());
-        searchView.setOnQueryTextListener(this);
-    }
-
-    private void setupToolbar() {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.ic_action_navigation_menu);
-        }
-    }
-
-    private void setupRecyclerView() {
-        ArtistsAdapter adapter = new ArtistsAdapter();
-        adapter.setItemClickListener((Artist artist, int position) -> artistsPresenter.launchArtistDetail(artist));
-        rv_artist.setAdapter(adapter);
-    }
-
-    @Override
-    public void launchArtistDetail(Artist artist) {
-        Intent intent = new Intent(getContext(), TracksActivity.class);
-        intent.putExtra(TracksActivity.EXTRA_REPOSITORY, artist);
-        startActivity(intent);
-    }
+  @Override public void launchArtistDetail(Artist artist) {
+    Intent intent = new Intent(getContext(), TracksActivity.class);
+    intent.putExtra(TracksActivity.EXTRA_REPOSITORY, artist);
+    startActivity(intent);
+  }
 }

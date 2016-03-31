@@ -24,50 +24,45 @@ import gdg.androidtitlan.spotifymvp.example.api.exception.HttpNotFound;
 import gdg.androidtitlan.spotifymvp.example.api.model.Tracks;
 import rx.android.schedulers.AndroidSchedulers;
 
+public class TracksInteractor {
 
-public class TracksInteractor{
+  SpotifyService mSpotifyService;
+  SpotifyApp mSpotifyApp;
 
-    SpotifyService mSpotifyService;
-    SpotifyApp mSpotifyApp;
+  public TracksInteractor(Context context) {
+    this.mSpotifyApp = SpotifyApp.get(context);
+    this.mSpotifyService = mSpotifyApp.getSpotifyService();
+  }
 
-    public TracksInteractor(Context context) {
-        this.mSpotifyApp = SpotifyApp.get(context);
-        this.mSpotifyService = mSpotifyApp.getSpotifyService();
+  //You could use RXAndroid instead of a callback to communicate
+  // but to keep it simple use a callback and RX only for api calls
+  public void loadData(String query, TrackCallback trackCallback) {
+    mSpotifyService.searchTrackList(query)
+        .subscribeOn(mSpotifyApp.SubscribeScheduler())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(Tracks -> onSuccess(Tracks, trackCallback),
+            throwable -> onError(throwable, trackCallback));
+  }
+
+  private void onSuccess(Tracks tracks, TrackCallback trackCallback) {
+    if (tracks.getTracks() != null) {
+      if (tracks.getTracks().size() > 0) {
+        trackCallback.onResponse(tracks.getTracks());
+      } else {
+        trackCallback.onTrackNotFound();
+      }
+    } else {
+      trackCallback.onTrackNotFound();
     }
+  }
 
-    //You could use RXAndroid instead of a callback to communicate
-    // but to keep it simple use a callback and RX only for api calls
-    public void loadData(String query, TrackCallback trackCallback) {
-        mSpotifyService.searchTrackList(query)
-                .subscribeOn(mSpotifyApp.SubscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Tracks -> onSuccess(Tracks, trackCallback),
-                        throwable -> onError(throwable, trackCallback));
+  private void onError(Throwable throwable, TrackCallback trackCallback) {
+    if (HttpNotFound.isHttp404(throwable)) {
+      trackCallback.onTrackNotFound();
+    } else if (throwable.getMessage().equals(HttpNotFound.SERVER_INTERNET_ERROR)) {
+      trackCallback.onNetworkConnectionError();
+    } else {
+      trackCallback.onServerError();
     }
-
-
-    private void onSuccess(Tracks tracks, TrackCallback trackCallback){
-        if (tracks.getTracks() != null){
-            if(tracks.getTracks().size() > 0)
-                trackCallback.onResponse(tracks.getTracks());
-            else
-                trackCallback.onTrackNotFound();
-        }else {
-            trackCallback.onTrackNotFound();
-        }
-
-    }
-
-    private void onError(Throwable throwable,TrackCallback trackCallback){
-        if (HttpNotFound.isHttp404(throwable))
-            trackCallback.onTrackNotFound();
-        else if (throwable.getMessage().equals(HttpNotFound.SERVER_INTERNET_ERROR))
-            trackCallback.onNetworkConnectionError();
-        else
-            trackCallback.onServerError();
-    }
-
-
-
-
+  }
 }

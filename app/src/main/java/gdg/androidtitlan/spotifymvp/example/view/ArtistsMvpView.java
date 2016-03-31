@@ -14,29 +14,27 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.view;
 
 import java.util.List;
 
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
 
-
 public interface ArtistsMvpView extends MvpView {
 
-    void showLoading();
+  void showLoading();
 
-    void hideLoading();
+  void hideLoading();
 
-    void showArtistNotFoundMessage();
+  void showArtistNotFoundMessage();
 
-    void showConnectionErrorMessage();
+  void showConnectionErrorMessage();
 
-    void showServerError();
+  void showServerError();
 
-    void renderArtist(List<Artist> artists);
+  void renderArtist(List<Artist> artists);
 
-    void launchArtistDetail(Artist artist);
+  void launchArtistDetail(Artist artist);
 }
 
 

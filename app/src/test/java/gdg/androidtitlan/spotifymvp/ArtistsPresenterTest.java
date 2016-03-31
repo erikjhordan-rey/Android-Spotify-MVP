@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp;
 
 import org.junit.After;
@@ -46,85 +45,72 @@ import static org.mockito.Mockito.when;
 //These tests are a clear example of bad
 // architecture not allow create real test, this test are only simulation
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(RobolectricGradleTestRunner.class) @Config(constants = BuildConfig.class, sdk = 21)
 public class ArtistsPresenterTest {
 
-    @Mock
-    private ArtistsMvpView mArtistsMvpView;
-    @Mock
-    private SpotifyService mSpotifyService;
+  @Mock private ArtistsMvpView mArtistsMvpView;
+  @Mock private SpotifyService mSpotifyService;
 
-    private ArtistsPresenter mArtistsPresenter;
+  private ArtistsPresenter mArtistsPresenter;
 
+  @Before public void setUpArtistsPresenter() {
 
-    @Before
-    public void setUpArtistsPresenter() {
+    MockitoAnnotations.initMocks(this);
 
-        MockitoAnnotations.initMocks(this);
+    // Mock and simulate the retrofit service we don't call the API
+    SpotifyApp application = (SpotifyApp) RuntimeEnvironment.application;
+    application.setSpotifyService(mSpotifyService);
+    application.setScheduler(Schedulers.immediate());
 
-        // Mock and simulate the retrofit service we don't call the API
-        SpotifyApp application = (SpotifyApp) RuntimeEnvironment.application;
-        application.setSpotifyService(mSpotifyService);
-        application.setScheduler(Schedulers.immediate());
+    mArtistsPresenter = new ArtistsPresenter();
+    when(mArtistsMvpView.getContext()).thenReturn(application);
+    mArtistsPresenter.setView(mArtistsMvpView);
+  }
 
-        mArtistsPresenter = new ArtistsPresenter();
-        when(mArtistsMvpView.getContext()).thenReturn(application);
-        mArtistsPresenter.setView(mArtistsMvpView);
+  @Test public void loadArtistsFromApiCallSimulate() {
 
-    }
+    //we simulate a request to bring the artists
+    final String artist = "muse";
+    ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearch();
+    when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
+    List<Artist> artists = artistsSearch.getArtists();
 
-    @Test
-    public void loadArtistsFromApiCallSimulate() {
+    //if the answer was successful then we validate the correct behavior of the presenter
+    mArtistsPresenter.onResponse(artists);
+    verify(mArtistsMvpView).hideLoading();
+    verify(mArtistsMvpView).renderArtist(artists);
+  }
 
-        //we simulate a request to bring the artists
-        final String artist = "muse";
-        ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearch();
-        when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
-        List<Artist> artists = artistsSearch.getArtists();
+  @Test public void loadArtistsFromApiCallSimulate_notFoundArtists() {
+    //we simulate a request to bring the artists
+    final String artist = "msdfsfuse123adreddga";
+    ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearchEmpty();
+    when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
+    List<Artist> artists = Collections.emptyList();
 
-        //if the answer was successful then we validate the correct behavior of the presenter
-        mArtistsPresenter.onResponse(artists);
-        verify(mArtistsMvpView).hideLoading();
-        verify(mArtistsMvpView).renderArtist(artists);
+    //print this value if is "0" you should show NotFoundMessage
+    artists.size();
 
+    //This is a mistake because we are confirming on the
+    // Interactor the responses of api calls and should be the presenter who validate the use case but it is only one example.
 
-    }
+    //if the answer was artists not found
+    mArtistsPresenter.onArtistNotFound();
+    verify(mArtistsMvpView).showArtistNotFoundMessage();
+  }
 
-    @Test
-    public void loadArtistsFromApiCallSimulate_notFoundArtists() {
-        //we simulate a request to bring the artists
-        final String artist = "msdfsfuse123adreddga";
-        ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearchEmpty();
-        when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
-        List<Artist> artists = Collections.emptyList();
+  @Test public void loadArtistsFromApiCallSimulate_onNetworkConnectionError() {
+    //we simulate a request to bring the artists not NetworkConnectionError
+    final String artist = "muse";
+    when(mSpotifyService.searchArtist(artist)).thenReturn(
+        Observable.<ArtistsSearch>error(new RuntimeException("Error not connection")));
 
-        //print this value if is "0" you should show NotFoundMessage
-        artists.size();
+    //if the answer was Network Connection
+    mArtistsPresenter.onNetworkConnectionError();
+    verify(mArtistsMvpView).showConnectionErrorMessage();
+  }
 
-        //This is a mistake because we are confirming on the
-        // Interactor the responses of api calls and should be the presenter who validate the use case but it is only one example.
-
-        //if the answer was artists not found
-        mArtistsPresenter.onArtistNotFound();
-        verify(mArtistsMvpView).showArtistNotFoundMessage();
-    }
-
-    @Test
-    public void loadArtistsFromApiCallSimulate_onNetworkConnectionError() {
-        //we simulate a request to bring the artists not NetworkConnectionError
-        final String artist = "muse";
-        when(mSpotifyService.searchArtist(artist))
-                .thenReturn(Observable.<ArtistsSearch>error(new RuntimeException("Error not connection")));
-
-        //if the answer was Network Connection
-        mArtistsPresenter.onNetworkConnectionError();
-        verify(mArtistsMvpView).showConnectionErrorMessage();
-
-    }
-
-    @After
-    public void detach() {
-        mArtistsPresenter.detachView();
-    }
+  @After public void detach() {
+    mArtistsPresenter.detachView();
+  }
 }

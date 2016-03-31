@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-
 public class Album {
 
-    @SerializedName("name") public String albumName;
+  @SerializedName("name") public String albumName;
 
-    @SerializedName("images") public List<ArtistImages> trackImages;
+  @SerializedName("images") public List<ArtistImages> trackImages;
 }

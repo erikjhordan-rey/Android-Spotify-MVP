@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.model;
 
 import java.util.List;
@@ -23,11 +22,11 @@ import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
 
 public interface ArtistCallback {
 
-    void onResponse(List<Artist> artists);
+  void onResponse(List<Artist> artists);
 
-    void onArtistNotFound();
+  void onArtistNotFound();
 
-    void onNetworkConnectionError();
+  void onNetworkConnectionError();
 
-    void onServerError();
+  void onServerError();
 }

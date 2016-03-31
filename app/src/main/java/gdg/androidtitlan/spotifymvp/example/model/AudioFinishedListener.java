@@ -9,17 +9,17 @@ import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
  */
 public interface AudioFinishedListener {
 
-    void onPlay();
+  void onPlay();
 
-    void onPause();
+  void onPause();
 
-    void onSetTimeStart(int trackCurrentPosition);
+  void onSetTimeStart(int trackCurrentPosition);
 
-    void onSetTimeFinished(AudioPlayerService audioPlayerService);
+  void onSetTimeFinished(AudioPlayerService audioPlayerService);
 
-    void onResetTrackDuration();
+  void onResetTrackDuration();
 
-    void onSetInfoTrackPlayer(int trackPosition);
+  void onSetInfoTrackPlayer(int trackPosition);
 
-    void onServiceConnection(ServiceConnection serviceConnection);
+  void onServiceConnection(ServiceConnection serviceConnection);
 }

@@ -24,44 +24,42 @@ import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.api.model.Artists;
 import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
 
-
 public class FakeSpotifyAPI {
 
+  private static String ARTIST_ID_TEST = "12Chz98pHFMPJEknJQMWvI";
+  private static String ARTIST_IMAGE_TEST =
+      "https://i.scdn.co/image/0b3c04473aa6a2db8235e5092ec3413f35752b8d";
+  private static String ARTIST_NAME_TEST = "muse";
 
-    private static String ARTIST_ID_TEST = "12Chz98pHFMPJEknJQMWvI";
-    private static String ARTIST_IMAGE_TEST = "https://i.scdn.co/image/0b3c04473aa6a2db8235e5092ec3413f35752b8d";
-    private static String ARTIST_NAME_TEST = "muse";
+  public static List<Artist> getArtists() {
+    List<Artist> artistsList = new ArrayList<>();
 
+    for (int i = 0; i < 10; i++)
+      artistsList.add(getArtist());
 
-    public static List<Artist> getArtists() {
-        List<Artist> artistsList = new ArrayList<>();
+    return artistsList;
+  }
 
-        for (int i = 0; i < 10; i++)
-            artistsList.add(getArtist());
+  public static Artist getArtist() {
+    Artist artist = new Artist();
+    artist.id = ARTIST_ID_TEST;
+    artist.name = ARTIST_NAME_TEST;
+    return artist;
+  }
 
-        return artistsList;
-    }
+  public static ArtistsSearch getArtistSearch() {
+    ArtistsSearch search = new ArtistsSearch();
+    Artists artist = new Artists();
+    artist.setArtists(getArtists());
+    search.artistsSearch = artist;
+    return search;
+  }
 
-    public static Artist getArtist() {
-        Artist artist = new Artist();
-        artist.id = ARTIST_ID_TEST;
-        artist.name = ARTIST_NAME_TEST;
-        return artist;
-    }
-
-    public static ArtistsSearch getArtistSearch() {
-        ArtistsSearch search = new ArtistsSearch();
-        Artists artist = new Artists();
-        artist.setArtists(getArtists());
-        search.artistsSearch = artist;
-        return search;
-    }
-
-    public static ArtistsSearch getArtistSearchEmpty() {
-        ArtistsSearch search = new ArtistsSearch();
-        Artists artist = new Artists();
-        artist.setArtists(Collections.emptyList());
-        search.artistsSearch = artist;
-        return search;
-    }
+  public static ArtistsSearch getArtistSearchEmpty() {
+    ArtistsSearch search = new ArtistsSearch();
+    Artists artist = new Artists();
+    artist.setArtists(Collections.emptyList());
+    search.artistsSearch = artist;
+    return search;
+  }
 }

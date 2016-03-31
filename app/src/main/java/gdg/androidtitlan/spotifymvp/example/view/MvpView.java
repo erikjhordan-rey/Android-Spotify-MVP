@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.view;
 
 import android.content.Context;
 
 public interface MvpView {
 
-    Context getContext();
+  Context getContext();
 }

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package gdg.androidtitlan.spotifymvp.example.api.model;
 
 import android.os.Parcel;
@@ -24,33 +23,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class Followers implements Parcelable {
 
-    @SerializedName("href") public String href;
-    @SerializedName("total") public int totalFollowers;
+  @SerializedName("href") public String href;
+  @SerializedName("total") public int totalFollowers;
 
-    @Override public int describeContents() {
-        return 0;
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(this.href);
+    parcel.writeInt(this.totalFollowers);
+  }
+
+  protected Followers(Parcel in) {
+    this.href = in.readString();
+    this.totalFollowers = in.readInt();
+  }
+
+  public static final Creator<Followers> CREATOR = new Creator<Followers>() {
+
+    public Followers createFromParcel(Parcel source) {
+      return new Followers(source);
     }
 
-    @Override public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(this.href);
-        parcel.writeInt(this.totalFollowers);
+    public Followers[] newArray(int size) {
+      return new Followers[size];
     }
-
-    protected Followers(Parcel in) {
-        this.href= in.readString();
-        this.totalFollowers = in.readInt();
-    }
-
-    public static final Creator<Followers> CREATOR = new Creator<Followers>() {
-
-        public Followers createFromParcel(Parcel source) {
-            return new Followers(source);
-        }
-
-        public Followers[] newArray(int size) {
-            return new Followers[size];
-        }
-    };
-
-
+  };
 }
