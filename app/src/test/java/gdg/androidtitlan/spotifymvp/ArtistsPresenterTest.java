@@ -78,7 +78,7 @@ public class ArtistsPresenterTest {
     //if the answer was successful then we validate the correct behavior of the presenter
     mArtistsPresenter.onResponse(artists);
     verify(mArtistsMvpView).hideLoading();
-    verify(mArtistsMvpView).renderArtist(artists);
+    verify(mArtistsMvpView).renderArtists(artists);
   }
 
   @Test public void loadArtistsFromApiCallSimulate_notFoundArtists() {

@@ -145,7 +145,7 @@ public class ArtistsFragment extends Fragment
     iv_artists.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
   }
 
-  @Override public void renderArtist(List<Artist> artists) {
+  @Override public void renderArtists(List<Artist> artists) {
     ArtistsAdapter adapter = (ArtistsAdapter) rv_artist.getAdapter();
     adapter.setArtists(artists);
     adapter.notifyDataSetChanged();

@@ -32,7 +32,7 @@ public interface ArtistsMvpView extends MvpView {
 
   void showServerError();
 
-  void renderArtist(List<Artist> artists);
+  void renderArtists(List<Artist> artists);
 
   void launchArtistDetail(Artist artist);
 }

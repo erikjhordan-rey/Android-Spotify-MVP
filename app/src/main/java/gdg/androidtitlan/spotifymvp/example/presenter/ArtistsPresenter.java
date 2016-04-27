@@ -53,7 +53,7 @@ public class ArtistsPresenter implements Presenter<ArtistsMvpView>, ArtistCallba
 
   @Override public void onResponse(List<Artist> artists) {
     artistsMvpView.hideLoading();
-    artistsMvpView.renderArtist(artists);
+    artistsMvpView.renderArtists(artists);
   }
 
   @Override public void onArtistNotFound() {
