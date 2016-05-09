@@ -40,7 +40,7 @@ public class ArtistsInteractor {
     mSpotifyService.searchArtist(query)
         .subscribeOn(mSpotifyApp.SubscribeScheduler())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(ArtistsSearch -> onSuccess(ArtistsSearch, artistCallback),
+        .subscribe(artistsSearch -> onSuccess(artistsSearch, artistCallback),
             throwable -> onError(throwable, artistCallback));
   }
 

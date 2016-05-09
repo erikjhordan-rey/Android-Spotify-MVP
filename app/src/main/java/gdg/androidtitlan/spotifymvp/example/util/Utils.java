@@ -21,6 +21,8 @@ import android.content.Context;
 
 public class Utils {
 
+  private Utils() {}
+
   public static boolean isAudioPlayerServiceRunning(Class<?> serviceClass, Context context) {
     boolean serviceState = false;
     ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

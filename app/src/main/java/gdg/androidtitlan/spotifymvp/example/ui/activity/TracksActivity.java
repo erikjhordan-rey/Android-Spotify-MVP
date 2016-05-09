@@ -210,11 +210,11 @@ public class TracksActivity extends AppCompatActivity
           .into(iv_collapsing_artist);
       Picasso.with(this).load(artist.artistImages.get(0).url).into(civ_artist);
     } else {
-      final String IMAGE_HOLDER =
+      final String imageHolder =
           "http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png";
       civ_artist.setVisibility(View.GONE);
       Picasso.with(this)
-          .load(IMAGE_HOLDER)
+          .load(imageHolder)
           .transform(new BlurEffect(this, 20))
           .into(iv_collapsing_artist);
     }

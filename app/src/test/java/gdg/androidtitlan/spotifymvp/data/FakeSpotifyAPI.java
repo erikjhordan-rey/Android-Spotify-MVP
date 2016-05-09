@@ -27,9 +27,9 @@ import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
 public class FakeSpotifyAPI {
 
   private static String ARTIST_ID_TEST = "12Chz98pHFMPJEknJQMWvI";
-  private static String ARTIST_IMAGE_TEST =
-      "https://i.scdn.co/image/0b3c04473aa6a2db8235e5092ec3413f35752b8d";
   private static String ARTIST_NAME_TEST = "muse";
+
+  private FakeSpotifyAPI() {}
 
   public static List<Artist> getArtists() {
     List<Artist> artistsList = new ArrayList<>();

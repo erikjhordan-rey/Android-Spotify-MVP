@@ -24,4 +24,6 @@ public class Constants {
   public static final String PATH_ARTIST_TRACKS = "artistId";
   public static final String ARTIST_TRACKS =
       "v1/artists/{" + PATH_ARTIST_TRACKS + "}/top-tracks?country=SE";
+
+  private Constants() {}
 }
