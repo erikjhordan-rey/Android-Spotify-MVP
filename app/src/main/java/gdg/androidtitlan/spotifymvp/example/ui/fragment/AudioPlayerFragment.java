@@ -55,21 +55,6 @@ import gdg.androidtitlan.spotifymvp.example.view.PlayerMVPView;
 public class AudioPlayerFragment extends DialogFragment
     implements PlayerMVPView, SeekBar.OnSeekBarChangeListener {
 
-  public static AudioPlayerFragment newInstance(String tracks, int position) {
-    AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment();
-    Bundle bundle = new Bundle();
-    bundle.putString(TracksActivity.EXTRA_TRACKS, tracks);
-    bundle.putInt(TracksActivity.EXTRA_TRACK_POSITION, position);
-    audioPlayerFragment.setArguments(bundle);
-    return audioPlayerFragment;
-  }
-
-  @NonNull @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
-    Dialog dialog = super.onCreateDialog(savedInstanceState);
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    return dialog;
-  }
-
   @Bind(R.id.iv_album_player) ImageView iv_album_player;
   @Bind(R.id.txt_track_title_player) TextView txt_track_title_player;
   @Bind(R.id.txt_album_title_player) TextView txt_album_title_player;
@@ -86,6 +71,21 @@ public class AudioPlayerFragment extends DialogFragment
   private List<Track> trackList;
   private int trackPosition;
   private AudioPlayerPresenter audioPlayerPresenter;
+
+  public static AudioPlayerFragment newInstance(String tracks, int position) {
+    AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment();
+    Bundle bundle = new Bundle();
+    bundle.putString(TracksActivity.EXTRA_TRACKS, tracks);
+    bundle.putInt(TracksActivity.EXTRA_TRACK_POSITION, position);
+    audioPlayerFragment.setArguments(bundle);
+    return audioPlayerFragment;
+  }
+
+  @NonNull @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
+    Dialog dialog = super.onCreateDialog(savedInstanceState);
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    return dialog;
+  }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {

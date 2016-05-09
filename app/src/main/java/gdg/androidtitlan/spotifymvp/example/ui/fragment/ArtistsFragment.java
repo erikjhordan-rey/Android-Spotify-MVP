@@ -51,10 +51,6 @@ import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
 public class ArtistsFragment extends Fragment
     implements ArtistsMvpView, SearchView.OnQueryTextListener {
 
-  public ArtistsFragment() {
-    setHasOptionsMenu(true);
-  }
-
   @Bind(R.id.toolbar) Toolbar toolbar;
   @Bind(R.id.rv_artists) RecyclerView rv_artist;
   @Bind(R.id.pv_artists) ProgressBar pv_artists;
@@ -64,6 +60,10 @@ public class ArtistsFragment extends Fragment
 
   private SearchView searchView;
   private ArtistsPresenter artistsPresenter;
+
+  public ArtistsFragment() {
+    setHasOptionsMenu(true);
+  }
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

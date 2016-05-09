@@ -140,10 +140,9 @@ public class TracksActivity extends AppCompatActivity
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        onBackPressed();
-        return true;
+    if (item.getItemId() == android.R.id.home) {
+      onBackPressed();
+      return true;
     }
     return super.onOptionsItemSelected(item);
   }
@@ -153,16 +152,10 @@ public class TracksActivity extends AppCompatActivity
 
     if (verticalOffset == 0) {
       if (state != State.EXPANDED) hideAndShowTitleToolbar(View.GONE);
-
-      state = State.EXPANDED;
     } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
       if (state != State.COLLAPSED) hideAndShowTitleToolbar(View.VISIBLE);
-
-      state = State.COLLAPSED;
     } else {
       if (state != State.IDLE) hideAndShowTitleToolbar(View.GONE);
-
-      state = State.IDLE;
     }
   }
 
