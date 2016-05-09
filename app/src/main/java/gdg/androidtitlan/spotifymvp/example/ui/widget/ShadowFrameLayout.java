@@ -14,6 +14,17 @@ import android.widget.FrameLayout;
 import gdg.androidtitlan.spotifymvp.R;
 
 public class ShadowFrameLayout extends FrameLayout {
+  private static Property<ShadowFrameLayout, Float> SHADOW_ALPHA =
+          new Property<ShadowFrameLayout, Float>(Float.class, "shadowAlpha") {
+            @Override public Float get(ShadowFrameLayout dsfl) {
+              return dsfl.mAlpha;
+            }
+
+            @Override public void set(ShadowFrameLayout dsfl, Float value) {
+              dsfl.mAlpha = value;
+              ViewCompat.postInvalidateOnAnimation(dsfl);
+            }
+          };
   private Drawable mShadowDrawable;
   private NinePatchDrawable mShadowNinePatchDrawable;
   private int mShadowTopOffset;
@@ -94,16 +105,4 @@ public class ShadowFrameLayout extends FrameLayout {
     ViewCompat.postInvalidateOnAnimation(this);
     setWillNotDraw(!mShadowVisible || mShadowDrawable == null);
   }
-
-  private static Property<ShadowFrameLayout, Float> SHADOW_ALPHA =
-      new Property<ShadowFrameLayout, Float>(Float.class, "shadowAlpha") {
-        @Override public Float get(ShadowFrameLayout dsfl) {
-          return dsfl.mAlpha;
-        }
-
-        @Override public void set(ShadowFrameLayout dsfl, Float value) {
-          dsfl.mAlpha = value;
-          ViewCompat.postInvalidateOnAnimation(dsfl);
-        }
-      };
 }

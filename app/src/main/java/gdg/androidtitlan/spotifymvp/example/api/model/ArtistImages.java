@@ -23,26 +23,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class ArtistImages implements Parcelable {
 
-  @SerializedName("height") public int heigth;
-  @SerializedName("url") public String url;
-  @SerializedName("width") public int width;
-
-  @Override public int describeContents() {
-    return 0;
-  }
-
-  @Override public void writeToParcel(Parcel parcel, int i) {
-    parcel.writeInt(this.heigth);
-    parcel.writeString(this.url);
-    parcel.writeInt(this.width);
-  }
-
-  protected ArtistImages(Parcel in) {
-    this.heigth = in.readInt();
-    this.url = in.readString();
-    this.width = in.readInt();
-  }
-
   public static final Creator<ArtistImages> CREATOR = new Creator<ArtistImages>() {
 
     public ArtistImages createFromParcel(Parcel source) {
@@ -53,4 +33,24 @@ public class ArtistImages implements Parcelable {
       return new ArtistImages[size];
     }
   };
+
+  @SerializedName("height") public int heigth;
+  @SerializedName("url") public String url;
+  @SerializedName("width") public int width;
+
+  protected ArtistImages(Parcel in) {
+    this.heigth = in.readInt();
+    this.url = in.readString();
+    this.width = in.readInt();
+  }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeInt(this.heigth);
+    parcel.writeString(this.url);
+    parcel.writeInt(this.width);
+  }
 }
