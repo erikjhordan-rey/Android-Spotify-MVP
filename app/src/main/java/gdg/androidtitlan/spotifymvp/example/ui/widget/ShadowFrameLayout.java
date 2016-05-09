@@ -18,7 +18,8 @@ public class ShadowFrameLayout extends FrameLayout {
   private NinePatchDrawable mShadowNinePatchDrawable;
   private int mShadowTopOffset;
   private boolean mShadowVisible;
-  private int mWidth, mHeight;
+  private int mWidth;
+  private int mHeight;
   private ObjectAnimator mAnimator;
   private float mAlpha = 1f;
 

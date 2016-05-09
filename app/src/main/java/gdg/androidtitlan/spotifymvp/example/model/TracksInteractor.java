@@ -40,7 +40,7 @@ public class TracksInteractor {
     mSpotifyService.searchTrackList(query)
         .subscribeOn(mSpotifyApp.SubscribeScheduler())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(Tracks -> onSuccess(Tracks, trackCallback),
+        .subscribe(tracks -> onSuccess(tracks, trackCallback),
             throwable -> onError(throwable, trackCallback));
   }
 

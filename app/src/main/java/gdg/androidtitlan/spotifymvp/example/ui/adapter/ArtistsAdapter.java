@@ -63,9 +63,9 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
         }
       }
     } else {
-      final String IMAGE_HOLDER =
+      final String imageHolder =
           "http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png";
-      Picasso.with(holder.imageView.getContext()).load(IMAGE_HOLDER).into(holder.imageView);
+      Picasso.with(holder.imageView.getContext()).load(imageHolder).into(holder.imageView);
     }
 
     holder.itemView.setOnClickListener((View view) -> {

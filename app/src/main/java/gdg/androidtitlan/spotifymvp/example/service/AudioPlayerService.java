@@ -234,7 +234,7 @@ public class AudioPlayerService extends Service
 
   public int getTrackDuration() {
     if (mediaPlayer != null && (isPlayerPaused || mediaPlayer.isPlaying())) {
-      return (mediaPlayer.getDuration() / 1000);
+      return mediaPlayer.getDuration() / 1000;
     } else {
       return 0;
     }
