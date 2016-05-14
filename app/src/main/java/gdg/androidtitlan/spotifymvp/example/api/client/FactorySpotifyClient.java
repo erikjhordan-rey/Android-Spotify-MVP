@@ -22,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FactorySpotifyClient {
 
+  private FactorySpotifyClient(){}
+
   public static SpotifyService create() {
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.SPOTIFY_API)

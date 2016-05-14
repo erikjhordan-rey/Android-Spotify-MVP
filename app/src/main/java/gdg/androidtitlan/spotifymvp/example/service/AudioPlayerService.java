@@ -64,11 +64,10 @@ public class AudioPlayerService extends Service
 
   @Override public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (intent != null && intent.hasExtra(EXTRA_TRACK_PREVIEW_URL)) {
-      if (intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL) != null) {
-        setTrackPreviewUrl(intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL));
-        onPlayAudio(0);
-      }
+    if (intent != null && intent.hasExtra(EXTRA_TRACK_PREVIEW_URL)
+        && intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL) != null) {
+      setTrackPreviewUrl(intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL));
+      onPlayAudio(0);
     }
     return START_STICKY;
   }
@@ -234,7 +233,7 @@ public class AudioPlayerService extends Service
 
   public int getTrackDuration() {
     if (mediaPlayer != null && (isPlayerPaused || mediaPlayer.isPlaying())) {
-      return (mediaPlayer.getDuration() / 1000);
+      return mediaPlayer.getDuration() / 1000;
     } else {
       return 0;
     }

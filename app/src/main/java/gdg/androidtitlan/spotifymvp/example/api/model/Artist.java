@@ -56,6 +56,16 @@ import java.util.List;
 
 public class Artist implements Parcelable {
 
+  public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+
+    public Artist createFromParcel(Parcel source) {
+      return new Artist(source);
+    }
+
+    public Artist[] newArray(int size) {
+      return new Artist[size];
+    }
+  };
   @SerializedName("followers") public Followers followers;
   @SerializedName("href") public String href;
   @SerializedName("id") public String id;
@@ -64,19 +74,6 @@ public class Artist implements Parcelable {
   @SerializedName("popularity") public int popularity;
 
   public Artist() {
-  }
-
-  @Override public int describeContents() {
-    return 0;
-  }
-
-  @Override public void writeToParcel(Parcel parcel, int i) {
-    parcel.writeString(this.href);
-    parcel.writeString(this.id);
-    parcel.writeString(this.name);
-    parcel.writeParcelable(this.followers, 0);
-    parcel.writeInt(this.popularity);
-    parcel.writeTypedList(this.artistImages);
   }
 
   protected Artist(Parcel in) {
@@ -92,14 +89,16 @@ public class Artist implements Parcelable {
     in.readTypedList(this.artistImages, ArtistImages.CREATOR);
   }
 
-  public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+  @Override public int describeContents() {
+    return 0;
+  }
 
-    public Artist createFromParcel(Parcel source) {
-      return new Artist(source);
-    }
-
-    public Artist[] newArray(int size) {
-      return new Artist[size];
-    }
-  };
+  @Override public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(this.href);
+    parcel.writeString(this.id);
+    parcel.writeString(this.name);
+    parcel.writeParcelable(this.followers, 0);
+    parcel.writeInt(this.popularity);
+    parcel.writeTypedList(this.artistImages);
+  }
 }
