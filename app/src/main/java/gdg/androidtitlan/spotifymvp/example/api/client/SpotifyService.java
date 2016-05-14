@@ -18,9 +18,10 @@ package gdg.androidtitlan.spotifymvp.example.api.client;
 
 import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
 import gdg.androidtitlan.spotifymvp.example.api.model.Tracks;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface SpotifyService {

@@ -16,7 +16,7 @@
 
 package gdg.androidtitlan.spotifymvp.example.api.exception;
 
-import retrofit.HttpException;
+import retrofit2.adapter.rxjava.HttpException;
 
 public class HttpNotFound {
 
