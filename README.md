@@ -32,6 +32,12 @@ Libraries used on the sample project
 [1]: http://erikcaffrey.github.io/2015/11/03/mvp/
 
 
+Do you want to contribute?
+--------------------------
+
+Feel free to report or add any useful feature, I will be glad to improve it with your help, before submitting your code please check the [codestyle](https://github.com/square/java-code-styles).
+
+
 Developed By
 ------------
 
