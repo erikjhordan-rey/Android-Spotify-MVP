@@ -2,7 +2,7 @@ ext {
 
     //Support Library Version
 
-    supportLibrayVersion = '23.4.0'
+    supportLibrayVersion = '24.1.0'
 
     //Support Libraries dependencies
 
