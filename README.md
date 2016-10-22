@@ -15,12 +15,12 @@ Libraries used on the sample project
 
 # Demo
 
-![](./art/ApplicationScreencast.gif/spotify_mvp.png)
+![](./art/spotify_mvp.png)
 
 
 # how does it work?
 
-![](./art/ApplicationScreencast.gif/Telecine_2015-11-25-17-19-04.gif)
+![](./art/Telecine_2015-11-25-17-19-04.gif)
 
 [8]: http://mockito.org/
 [7]: http://robolectric.org/
