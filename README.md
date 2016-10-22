@@ -15,7 +15,7 @@ Libraries used on the sample project
 
 # Demo
 
-![](./art/spotify_mvp.png)
+![](./art/spotify-mvp.png)
 
 
 # how does it work?
