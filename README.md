@@ -15,12 +15,12 @@ Libraries used on the sample project
 
 # Demo
 
-![](https://drive.google.com/drive/u/1/folders/0B9hNKr5AY4xXTXktOS11VlBaemM/spotify_mvp.png)
+![](./art/ApplicationScreencast.gif/spotify_mvp.png)
 
 
 # how does it work?
 
-![](https://aa1a5cf3c6e3569b77b29843c3f5b6ba8b369090.googledrive.com/host/0B9hNKr5AY4xXTXktOS11VlBaemM/Telecine_2015-11-25-17-19-04.gif)
+![](./art/ApplicationScreencast.gif/Telecine_2015-11-25-17-19-04.gif)
 
 [8]: http://mockito.org/
 [7]: http://robolectric.org/
