@@ -29,7 +29,7 @@ Libraries used on the sample project
 [4]: http://square.github.io/retrofit/
 [3]: http://jakewharton.github.io/butterknife/
 [2]: http://developer.android.com/intl/es/tools/support-library/index.html
-[1]: http://erikcaffrey.github.io/2015/11/03/mvp/
+[1]: https://erikcaffrey.github.io/ANDROID-mvp/
 
 
 Do you want to contribute?
