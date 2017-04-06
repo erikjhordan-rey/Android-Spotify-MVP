@@ -22,7 +22,6 @@ import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
-
 import com.squareup.picasso.Transformation;
 
 public class BlurEffect implements Transformation {

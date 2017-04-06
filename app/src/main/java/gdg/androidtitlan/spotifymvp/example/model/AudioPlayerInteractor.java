@@ -24,11 +24,9 @@ import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Track;
 import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
+import java.util.List;
 
 public class AudioPlayerInteractor {
 
@@ -39,27 +37,6 @@ public class AudioPlayerInteractor {
   private boolean isPlayerPaused = false;
   private int trackDuration = 0;
   private int trackCurrentPosition;
-  private Context context;
-  private List<Track> trackList;
-  private int trackPosition;
-
-  private ServiceConnection serviceConnection = new ServiceConnection() {
-    @Override public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-      AudioPlayerService.PlayerBinder playerBinder = (AudioPlayerService.PlayerBinder) iBinder;
-      audioPlayerService = playerBinder.getService();
-      isServiceBounded = true;
-      if (!isPlayerPlaying) {
-        isPlayerPlaying = true;
-      }
-      setTrackDuration();
-      audioPlayerService.setAudioPlayerHandler(playerHandler);
-    }
-
-    @Override public void onServiceDisconnected(ComponentName componentName) {
-      isServiceBounded = false;
-    }
-  };
-
   @SuppressLint("HandlerLeak") private final Handler playerHandler = new Handler() {
     @Override public void handleMessage(Message msg) {
       super.handleMessage(msg);
@@ -79,6 +56,25 @@ public class AudioPlayerInteractor {
       } else {
         audioFinishedListener.onPlay();
       }
+    }
+  };
+  private Context context;
+  private List<Track> trackList;
+  private int trackPosition;
+  private ServiceConnection serviceConnection = new ServiceConnection() {
+    @Override public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+      AudioPlayerService.PlayerBinder playerBinder = (AudioPlayerService.PlayerBinder) iBinder;
+      audioPlayerService = playerBinder.getService();
+      isServiceBounded = true;
+      if (!isPlayerPlaying) {
+        isPlayerPlaying = true;
+      }
+      setTrackDuration();
+      audioPlayerService.setAudioPlayerHandler(playerHandler);
+    }
+
+    @Override public void onServiceDisconnected(ComponentName componentName) {
+      isServiceBounded = false;
     }
   };
 

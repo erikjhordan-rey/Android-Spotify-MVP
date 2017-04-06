@@ -16,26 +16,27 @@
 
 package gdg.androidtitlan.spotifymvp.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.api.model.Artists;
 import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FakeSpotifyAPI {
 
   private static String ARTIST_ID_TEST = "12Chz98pHFMPJEknJQMWvI";
   private static String ARTIST_NAME_TEST = "muse";
 
-  private FakeSpotifyAPI() {}
+  private FakeSpotifyAPI() {
+  }
 
   public static List<Artist> getArtists() {
     List<Artist> artistsList = new ArrayList<>();
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++) {
       artistsList.add(getArtist());
+    }
 
     return artistsList;
   }

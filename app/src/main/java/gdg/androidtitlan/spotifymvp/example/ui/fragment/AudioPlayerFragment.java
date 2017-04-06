@@ -32,18 +32,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
-
-import java.lang.reflect.Type;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.api.model.Track;
 import gdg.androidtitlan.spotifymvp.example.presenter.AudioPlayerPresenter;
@@ -51,17 +46,19 @@ import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.ui.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.util.Utils;
 import gdg.androidtitlan.spotifymvp.example.view.PlayerMVPView;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class AudioPlayerFragment extends DialogFragment
     implements PlayerMVPView, SeekBar.OnSeekBarChangeListener {
 
-  @Bind(R.id.iv_album_player) ImageView iv_album_player;
-  @Bind(R.id.txt_track_title_player) TextView txt_track_title_player;
-  @Bind(R.id.txt_album_title_player) TextView txt_album_title_player;
-  @Bind(R.id.sb_time_progress_player) SeekBar sb_time_progress_player;
-  @Bind(R.id.txt_time_start) TextView txt_time_start;
-  @Bind(R.id.txt_time_end) TextView txt_time_end;
-  @Bind(R.id.ib_play_player) ImageButton ib_play_player;
+  @BindView(R.id.iv_album_player) ImageView iv_album_player;
+  @BindView(R.id.txt_track_title_player) TextView txt_track_title_player;
+  @BindView(R.id.txt_album_title_player) TextView txt_album_title_player;
+  @BindView(R.id.sb_time_progress_player) SeekBar sb_time_progress_player;
+  @BindView(R.id.txt_time_start) TextView txt_time_start;
+  @BindView(R.id.txt_time_end) TextView txt_time_end;
+  @BindView(R.id.ib_play_player) ImageButton ib_play_player;
 
   private AudioPlayerService audioPlayerService;
   private boolean isPlayerPlaying = false;
@@ -104,7 +101,9 @@ public class AudioPlayerFragment extends DialogFragment
   }
 
   @Override public void onDestroyView() {
-    if (getDialog() != null && getRetainInstance()) getDialog().setDismissMessage(null);
+    if (getDialog() != null && getRetainInstance()) {
+      getDialog().setDismissMessage(null);
+    }
     audioPlayerPresenter.detachView();
     super.onDestroyView();
   }

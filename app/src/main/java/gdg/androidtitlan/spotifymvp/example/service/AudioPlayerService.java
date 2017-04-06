@@ -26,7 +26,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -64,7 +63,8 @@ public class AudioPlayerService extends Service
 
   @Override public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (intent != null && intent.hasExtra(EXTRA_TRACK_PREVIEW_URL)
+    if (intent != null
+        && intent.hasExtra(EXTRA_TRACK_PREVIEW_URL)
         && intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL) != null) {
       setTrackPreviewUrl(intent.getStringExtra(EXTRA_TRACK_PREVIEW_URL));
       onPlayAudio(0);
@@ -90,7 +90,9 @@ public class AudioPlayerService extends Service
 
   @Override public void onPrepared(MediaPlayer mediaPlayer) {
     mediaPlayer.start();
-    if (currentTrackPosition != 0) mediaPlayer.seekTo(currentTrackPosition * 1000);
+    if (currentTrackPosition != 0) {
+      mediaPlayer.seekTo(currentTrackPosition * 1000);
+    }
 
     updateUI();
   }
@@ -107,7 +109,9 @@ public class AudioPlayerService extends Service
     Bundle completionBundle = new Bundle();
     completionBundle.putBoolean(EXTRA_IS_PLAYER, false);
     completionMessage.setData(completionBundle);
-    if (mediaPlayerHandler != null) mediaPlayerHandler.sendMessage(completionMessage);
+    if (mediaPlayerHandler != null) {
+      mediaPlayerHandler.sendMessage(completionMessage);
+    }
 
     noUpdateUI();
   }
@@ -131,7 +135,9 @@ public class AudioPlayerService extends Service
   public void onPlayAudio(int trackPosition) {
     currentTrackPosition = trackPosition;
     if (mediaPlayer != null) {
-      if (mediaPlayer.isPlaying()) mediaPlayer.stop();
+      if (mediaPlayer.isPlaying()) {
+        mediaPlayer.stop();
+      }
 
       mediaPlayer.reset();
     }
@@ -157,7 +163,9 @@ public class AudioPlayerService extends Service
 
   public void setupAudioPlayer() {
 
-    if (mediaPlayer == null) mediaPlayer = new MediaPlayer();
+    if (mediaPlayer == null) {
+      mediaPlayer = new MediaPlayer();
+    }
 
     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     try {
@@ -204,7 +212,9 @@ public class AudioPlayerService extends Service
   private void sendCurrentTrackPosition() {
     Message message = new Message();
     message.setData(getCurrentTrackPosition());
-    if (mediaPlayerHandler != null) mediaPlayerHandler.sendMessage(message);
+    if (mediaPlayerHandler != null) {
+      mediaPlayerHandler.sendMessage(message);
+    }
   }
 
   private Bundle getCurrentTrackPosition() {

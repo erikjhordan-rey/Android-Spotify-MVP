@@ -10,21 +10,20 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.widget.FrameLayout;
-
 import gdg.androidtitlan.spotifymvp.R;
 
 public class ShadowFrameLayout extends FrameLayout {
   private static Property<ShadowFrameLayout, Float> SHADOW_ALPHA =
-          new Property<ShadowFrameLayout, Float>(Float.class, "shadowAlpha") {
-            @Override public Float get(ShadowFrameLayout dsfl) {
-              return dsfl.mAlpha;
-            }
+      new Property<ShadowFrameLayout, Float>(Float.class, "shadowAlpha") {
+        @Override public Float get(ShadowFrameLayout dsfl) {
+          return dsfl.mAlpha;
+        }
 
-            @Override public void set(ShadowFrameLayout dsfl, Float value) {
-              dsfl.mAlpha = value;
-              ViewCompat.postInvalidateOnAnimation(dsfl);
-            }
-          };
+        @Override public void set(ShadowFrameLayout dsfl, Float value) {
+          dsfl.mAlpha = value;
+          ViewCompat.postInvalidateOnAnimation(dsfl);
+        }
+      };
   private Drawable mShadowDrawable;
   private NinePatchDrawable mShadowNinePatchDrawable;
   private int mShadowTopOffset;

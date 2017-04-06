@@ -17,14 +17,12 @@
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import android.content.ServiceConnection;
-
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Track;
 import gdg.androidtitlan.spotifymvp.example.model.AudioFinishedListener;
 import gdg.androidtitlan.spotifymvp.example.model.AudioPlayerInteractor;
 import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.view.PlayerMVPView;
+import java.util.List;
 
 public class AudioPlayerPresenter implements Presenter<PlayerMVPView>, AudioFinishedListener {
 
@@ -38,7 +36,9 @@ public class AudioPlayerPresenter implements Presenter<PlayerMVPView>, AudioFini
   }
 
   @Override public void setView(PlayerMVPView view) {
-    if (view == null) throw new IllegalArgumentException("You can't set a null view");
+    if (view == null) {
+      throw new IllegalArgumentException("You can't set a null view");
+    }
 
     playerMVPView = view;
     audioPlayerInteractor = new AudioPlayerInteractor(trackList, playerMVPView.getContext(), this);

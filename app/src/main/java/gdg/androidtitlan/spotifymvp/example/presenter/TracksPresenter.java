@@ -16,12 +16,11 @@
 
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Track;
 import gdg.androidtitlan.spotifymvp.example.model.TrackCallback;
 import gdg.androidtitlan.spotifymvp.example.model.TracksInteractor;
 import gdg.androidtitlan.spotifymvp.example.view.TracksMvpView;
+import java.util.List;
 
 public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback {
 
@@ -33,7 +32,9 @@ public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback 
 
   @Override public void setView(TracksMvpView view) {
 
-    if (view == null) throw new IllegalArgumentException("You can't set a null view");
+    if (view == null) {
+      throw new IllegalArgumentException("You can't set a null view");
+    }
 
     tracksMvpView = view;
     tracksInteractor = new TracksInteractor(tracksMvpView.getContext());

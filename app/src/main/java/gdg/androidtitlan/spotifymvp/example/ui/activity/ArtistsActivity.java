@@ -18,7 +18,6 @@ package gdg.androidtitlan.spotifymvp.example.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import gdg.androidtitlan.spotifymvp.R;
 
 public class ArtistsActivity extends AppCompatActivity {

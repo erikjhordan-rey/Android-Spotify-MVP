@@ -16,9 +16,9 @@
 
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
-public interface Presenter <V>{
+public interface Presenter<V> {
 
-    void setView(V view);
+  void setView(V view);
 
-    void detachView();
+  void detachView();
 }

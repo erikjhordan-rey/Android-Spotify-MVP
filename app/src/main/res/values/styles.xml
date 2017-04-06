@@ -1,76 +1,76 @@
 <resources>
 
-    <!-- fragment_artists.xml -->
+  <!-- fragment_artists.xml -->
 
-    <style name="Theme.AppTheme.Music.HeaderBar">
-        <item name="android:background">?colorPrimary</item>
-        <item name="android:elevation">@dimen/headerbar_elevation</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:clickable">true</item>
-        <item name="android:orientation">vertical</item>
-    </style>
+  <style name="Theme.AppTheme.Music.HeaderBar">
+    <item name="android:background">?colorPrimary</item>
+    <item name="android:elevation">@dimen/headerbar_elevation</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:clickable">true</item>
+    <item name="android:orientation">vertical</item>
+  </style>
 
-    <style name="Theme.AppTheme.Music.RecyclerView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:scrollbars">vertical</item>
-        <item name="android:visibility">gone</item>
-        <item name="android:columnWidth">@dimen/recycler_column_width</item>
-    </style>
+  <style name="Theme.AppTheme.Music.RecyclerView">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:scrollbars">vertical</item>
+    <item name="android:visibility">gone</item>
+    <item name="android:columnWidth">@dimen/recycler_column_width</item>
+  </style>
 
-    <style name="Theme.AppTheme.Music.ProgressBar">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:visibility">gone</item>
-    </style>
+  <style name="Theme.AppTheme.Music.ProgressBar">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:visibility">gone</item>
+  </style>
 
-    <style name="Theme.AppTheme.Music.ImageView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/space_default</item>
-        <item name="android:src">@mipmap/ic_search</item>
-        <item name="android:visibility">visible</item>
-    </style>
+  <style name="Theme.AppTheme.Music.ImageView">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/space_default</item>
+    <item name="android:src">@mipmap/ic_search</item>
+    <item name="android:visibility">visible</item>
+  </style>
 
-    <style name="Theme.AppTheme.Music.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/space_default</item>
-        <item name="android:layout_marginRight">@dimen/space_default</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/secondary_text</item>
-        <item name="android:visibility">visible</item>
-    </style>
+  <style name="Theme.AppTheme.Music.TextView">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">@dimen/space_default</item>
+    <item name="android:layout_marginRight">@dimen/space_default</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">@color/secondary_text</item>
+    <item name="android:visibility">visible</item>
+  </style>
 
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">18sp</item>
-    </style>
+  <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <item name="android:textSize">18sp</item>
+  </style>
 
-    <style name="Toolbar.SubTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">14sp</item>
-    </style>
-
-
-<!-- activity_tracks.xml -->
-
-    <style name="Theme.AppTheme.Music.CircularImageView">
-        <item name="android:layout_width">@dimen/image_width</item>
-        <item name="android:layout_height">@dimen/image_width</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:src">@mipmap/ic_launcher</item>
-    </style>
+  <style name="Toolbar.SubTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+    <item name="android:textSize">14sp</item>
+  </style>
 
 
-    <style name="Theme.AppTheme.Music.ImageView.Collapsing">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/appbar_height</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:src">@mipmap/ic_launcher</item>
-    </style>
+  <!-- activity_tracks.xml -->
+
+  <style name="Theme.AppTheme.Music.CircularImageView">
+    <item name="android:layout_width">@dimen/image_width</item>
+    <item name="android:layout_height">@dimen/image_width</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:src">@mipmap/ic_launcher</item>
+  </style>
+
+
+  <style name="Theme.AppTheme.Music.ImageView.Collapsing">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/appbar_height</item>
+    <item name="android:scaleType">centerCrop</item>
+    <item name="android:src">@mipmap/ic_launcher</item>
+  </style>
 
 
 </resources>

@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
 
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/space_default"
+      android:layout_marginTop="@dimen/space_default"
+      android:gravity="center"
+      android:orientation="horizontal"
+      >
+
+    <ImageView
+        android:id="@+id/iv_track"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="@dimen/space_default"
+        android:tintMode="src_in"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_default"
-        android:layout_marginTop="@dimen/space_default"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/space_default"
+        android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/iv_track"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="@dimen/space_default"
-            android:tintMode="src_in"/>
+      <TextView
+          android:id="@+id/txt_track_title"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/track_name_item"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textColor="?android:attr/textColorPrimary"
+          />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space_default"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_track_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/track_name_item"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?android:attr/textColorPrimary"/>
-
-            <TextView
-                android:id="@+id/txt_track_album"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/track_album_item"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"/>
-
-
-        </LinearLayout>
+      <TextView
+          android:id="@+id/txt_track_album"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/track_album_item"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:textColor="?android:attr/textColorSecondary"
+          />
 
 
     </LinearLayout>
+
+
+  </LinearLayout>
 
 
 </LinearLayout>

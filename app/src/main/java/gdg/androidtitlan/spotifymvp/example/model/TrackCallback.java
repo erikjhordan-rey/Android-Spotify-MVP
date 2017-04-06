@@ -16,17 +16,16 @@
 
 package gdg.androidtitlan.spotifymvp.example.model;
 
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Track;
+import java.util.List;
 
 public interface TrackCallback {
 
-    void onResponse(List<Track> tracks);
+  void onResponse(List<Track> tracks);
 
-    void onTrackNotFound();
+  void onTrackNotFound();
 
-    void onNetworkConnectionError();
+  void onNetworkConnectionError();
 
-    void onServerError();
+  void onServerError();
 }

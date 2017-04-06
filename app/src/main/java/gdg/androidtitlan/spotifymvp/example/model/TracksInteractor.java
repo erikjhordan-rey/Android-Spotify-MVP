@@ -17,7 +17,6 @@
 package gdg.androidtitlan.spotifymvp.example.model;
 
 import android.content.Context;
-
 import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyApp;
 import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyService;
 import gdg.androidtitlan.spotifymvp.example.api.exception.HttpNotFound;
@@ -38,7 +37,7 @@ public class TracksInteractor {
   // but to keep it simple use a callback and RX only for api calls
   public void loadData(String query, TrackCallback trackCallback) {
     mSpotifyService.searchTrackList(query)
-        .subscribeOn(mSpotifyApp.SubscribeScheduler())
+        .subscribeOn(mSpotifyApp.subscribeScheduler())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(tracks -> onSuccess(tracks, trackCallback),
             throwable -> onError(throwable, trackCallback));

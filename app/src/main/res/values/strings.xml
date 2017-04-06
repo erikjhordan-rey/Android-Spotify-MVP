@@ -1,39 +1,38 @@
 <resources>
-    <string name="app_name">Spotify</string>
+  <string name="app_name">Spotify</string>
 
-    <!-- Menu -->
-    <string name="action_search">Search</string>
-    <string name="action_github">Github</string>
-
-
-    <!-- fragment_artists.xml -->
-    <string name="search_hint">Search Artist</string>
-    <string name="search_music_hint">Find your favorite music</string>
-    <string name="search_artist_hint">Search artists.</string>
-
-    <string name="img_default">http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png</string>
-
-    <!-- activity tracks.xml  -->
-
-    <string name="detail_top_tracks">Top 10 Tracks</string>
-    <string name="detail_title">Artist</string>
-    <string name="detail_subtitle">followers</string>
-    <string name="detail_hint_followers">%d Followers</string>
-    <string name="detail_hint_popularity">Popularity</string>
-    <string name="detail_hint_artist">Artist</string>
-    <string name="track_name_item">Track Name</string>
-    <string name="track_album_item">Album Track</string>
-
-    <plurals name="numberOfFollowers">
-        <item quantity="other">%d Followers</item>
-    </plurals>
+  <!-- Menu -->
+  <string name="action_search">Search</string>
+  <string name="action_github">Github</string>
 
 
+  <!-- fragment_artists.xml -->
+  <string name="search_hint">Search Artist</string>
+  <string name="search_music_hint">Find your favorite music</string>
+  <string name="search_artist_hint">Search artists.</string>
 
-    <!-- exceptions -->
-    <string name="error_artist_not_found">Artist not found, please check that the name is written in the right way</string>
-    <string name="error_tracks_not_found">Tracks not found, please check that the name is written in the right way</string>
-    <string name="error_internet_connection">Please check your Internet connection!</string>
-    <string name="error_server_internal">Something went wrong with the server.</string>
+  <string name="img_default">http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png</string>
+
+  <!-- activity tracks.xml  -->
+
+  <string name="detail_top_tracks">Top 10 Tracks</string>
+  <string name="detail_title">Artist</string>
+  <string name="detail_subtitle">followers</string>
+  <string name="detail_hint_followers">%d Followers</string>
+  <string name="detail_hint_popularity">Popularity</string>
+  <string name="detail_hint_artist">Artist</string>
+  <string name="track_name_item">Track Name</string>
+  <string name="track_album_item">Album Track</string>
+
+  <plurals name="numberOfFollowers">
+    <item quantity="other">%d Followers</item>
+  </plurals>
+
+
+  <!-- exceptions -->
+  <string name="error_artist_not_found">Artist not found, please check that the name is written in the right way</string>
+  <string name="error_tracks_not_found">Tracks not found, please check that the name is written in the right way</string>
+  <string name="error_internet_connection">Please check your Internet connection!</string>
+  <string name="error_server_internal">Something went wrong with the server.</string>
 
 </resources>

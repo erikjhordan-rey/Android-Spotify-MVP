@@ -18,7 +18,6 @@ package gdg.androidtitlan.spotifymvp.example.api.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 public class Track implements Parcelable {

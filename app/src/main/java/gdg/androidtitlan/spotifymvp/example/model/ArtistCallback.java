@@ -16,9 +16,8 @@
 
 package gdg.androidtitlan.spotifymvp.example.model;
 
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
+import java.util.List;
 
 public interface ArtistCallback {
 

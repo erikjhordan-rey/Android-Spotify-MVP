@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <fragment
-        android:id="@+id/music_fragment"
-        class="gdg.androidtitlan.spotifymvp.example.ui.fragment.ArtistsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_artists"/>
+  <fragment
+      class="gdg.androidtitlan.spotifymvp.example.ui.fragment.ArtistsFragment"
+      android:id="@+id/music_fragment"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:layout="@layout/fragment_artists"
+      />
 
 </LinearLayout>
