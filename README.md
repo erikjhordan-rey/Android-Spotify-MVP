@@ -1,4 +1,4 @@
-# Android - Spotify + Model View Presenter (MVP)
+# Android - Spotify + Model View Presenter (MVP) [![Build Status](https://travis-ci.org/erikcaffrey/Android-Spotify-MVP.svg?branch=master)](https://travis-ci.org/erikcaffrey/Android-Spotify-MVP)
 Example android Model View Presenter used to explain how to use this pattern in our android applications.
 
 This example was created to support an article explanation [Model View Presenter en Android][1] (spanish).
