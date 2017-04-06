@@ -17,7 +17,6 @@
 package gdg.androidtitlan.spotifymvp.example.view;
 
 import android.content.ServiceConnection;
-
 import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
 
 public interface PlayerMVPView extends MvpView {

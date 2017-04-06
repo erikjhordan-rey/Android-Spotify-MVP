@@ -1,7 +1,6 @@
 package gdg.androidtitlan.spotifymvp.example.model;
 
 import android.content.ServiceConnection;
-
 import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
 
 /**

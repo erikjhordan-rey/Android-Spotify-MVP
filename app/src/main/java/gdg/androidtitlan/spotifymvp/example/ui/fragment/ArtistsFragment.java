@@ -36,10 +36,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
@@ -47,16 +44,17 @@ import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsPresenter;
 import gdg.androidtitlan.spotifymvp.example.ui.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.ui.adapter.ArtistsAdapter;
 import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
+import java.util.List;
 
 public class ArtistsFragment extends Fragment
     implements ArtistsMvpView, SearchView.OnQueryTextListener {
 
-  @Bind(R.id.toolbar) Toolbar toolbar;
-  @Bind(R.id.rv_artists) RecyclerView rv_artist;
-  @Bind(R.id.pv_artists) ProgressBar pv_artists;
-  @Bind(R.id.iv_artists) ImageView iv_artists;
-  @Bind(R.id.txt_line_artists) TextView txt_line_artists;
-  @Bind(R.id.txt_subline_artists) TextView txt_sub_line_artists;
+  @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.rv_artists) RecyclerView rv_artist;
+  @BindView(R.id.pv_artists) ProgressBar pv_artists;
+  @BindView(R.id.iv_artists) ImageView iv_artists;
+  @BindView(R.id.txt_line_artists) TextView txt_line_artists;
+  @BindView(R.id.txt_subline_artists) TextView txt_sub_line_artists;
 
   private SearchView searchView;
   private ArtistsPresenter artistsPresenter;

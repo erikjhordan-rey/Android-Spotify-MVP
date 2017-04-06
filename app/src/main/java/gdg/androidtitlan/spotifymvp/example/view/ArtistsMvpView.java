@@ -16,9 +16,8 @@
 
 package gdg.androidtitlan.spotifymvp.example.view;
 
-import java.util.List;
-
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
+import java.util.List;
 
 public interface ArtistsMvpView extends MvpView {
 

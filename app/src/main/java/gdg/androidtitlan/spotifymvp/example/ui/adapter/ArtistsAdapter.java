@@ -22,16 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-
-import java.util.Collections;
-import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.squareup.picasso.Picasso;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
+import java.util.Collections;
+import java.util.List;
 
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsViewHolder> {
 
@@ -69,27 +66,14 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
     }
 
     holder.itemView.setOnClickListener((View view) -> {
-      if (itemClickListener != null) itemClickListener.onItemClick(artist, position);
+      if (itemClickListener != null) {
+        itemClickListener.onItemClick(artist, position);
+      }
     });
   }
 
   @Override public int getItemCount() {
     return artists.size();
-  }
-
-  public static class ArtistsViewHolder extends RecyclerView.ViewHolder {
-
-    @Bind(R.id.img_view_artist_image) ImageView imageView;
-    @Bind(R.id.txt_artist_name) TextView textView;
-
-    Artist artist;
-    View itemView;
-
-    public ArtistsViewHolder(View itemView) {
-      super(itemView);
-      ButterKnife.bind(this, itemView);
-      this.itemView = itemView;
-    }
   }
 
   public void setArtists(List<Artist> artists) {
@@ -102,5 +86,20 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
 
   public interface ItemClickListener {
     void onItemClick(Artist artist, int position);
+  }
+
+  public static class ArtistsViewHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.img_view_artist_image) ImageView imageView;
+    @BindView(R.id.txt_artist_name) TextView textView;
+
+    Artist artist;
+    View itemView;
+
+    public ArtistsViewHolder(View itemView) {
+      super(itemView);
+      ButterKnife.bind(this, itemView);
+      this.itemView = itemView;
+    }
   }
 }

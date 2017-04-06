@@ -16,6 +16,15 @@
 
 package gdg.androidtitlan.spotifymvp;
 
+import gdg.androidtitlan.spotifymvp.data.FakeSpotifyAPI;
+import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyApp;
+import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyService;
+import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
+import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
+import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsPresenter;
+import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
+import java.util.Collections;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,17 +34,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.Collections;
-import java.util.List;
-
-import gdg.androidtitlan.spotifymvp.data.FakeSpotifyAPI;
-import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyApp;
-import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyService;
-import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
-import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
-import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsPresenter;
-import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -67,7 +65,7 @@ public class ArtistsPresenterTest {
     mArtistsPresenter.setView(mArtistsMvpView);
   }
 
-  @Test public void loadArtistsFromApiCallSimulate() {
+  @Test public void shouldReturnArtists() {
 
     //we simulate a request to bring the artists
     final String artist = "muse";
@@ -81,7 +79,7 @@ public class ArtistsPresenterTest {
     verify(mArtistsMvpView).renderArtists(artists);
   }
 
-  @Test public void loadArtistsFromApiCallSimulate_notFoundArtists() {
+  @Test public void shouldReturnNotFoundArtists() {
     //we simulate a request to bring the artists
     final String artist = "msdfsfuse123adreddga";
     ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearchEmpty();
@@ -92,14 +90,15 @@ public class ArtistsPresenterTest {
     artists.size();
 
     //This is a mistake because we are confirming on the
-    // Interactor the responses of api calls and should be the presenter who validate the use case but it is only one example.
+    // Interactor the responses of api calls and should be the
+    // presenter who validate the use case but it is only one example.
 
     //if the answer was artists not found
     mArtistsPresenter.onArtistNotFound();
     verify(mArtistsMvpView).showArtistNotFoundMessage();
   }
 
-  @Test public void loadArtistsFromApiCallSimulate_onNetworkConnectionError() {
+  @Test public void shouldReturnNetworkConnectionError() {
     //we simulate a request to bring the artists not NetworkConnectionError
     final String artist = "muse";
     when(mSpotifyService.searchArtist(artist)).thenReturn(

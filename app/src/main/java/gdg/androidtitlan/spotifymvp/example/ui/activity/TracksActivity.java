@@ -17,12 +17,24 @@ package gdg.androidtitlan.spotifymvp.example.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
-import butterknife.Bind;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
@@ -32,24 +44,6 @@ import gdg.androidtitlan.spotifymvp.example.ui.adapter.TracksAdapter;
 import gdg.androidtitlan.spotifymvp.example.ui.fragment.AudioPlayerFragment;
 import gdg.androidtitlan.spotifymvp.example.util.BlurEffect;
 import gdg.androidtitlan.spotifymvp.example.view.TracksMvpView;
-
-import android.support.design.widget.AppBarLayout;
-
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
-
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -60,18 +54,18 @@ public class TracksActivity extends AppCompatActivity
   public static final String EXTRA_TRACK_POSITION = "EXTRA_TRACK_POSITION";
   public static final String EXTRA_TRACKS = "EXTRA_TRACKS";
 
-  @Bind(R.id.toolbar) Toolbar toolbar;
-  @Bind(R.id.appbar_artist) AppBarLayout appbar_artist;
-  @Bind(R.id.iv_collapsing_artist) ImageView iv_collapsing_artist;
-  @Bind(R.id.civ_artist) CircleImageView civ_artist;
-  @Bind(R.id.txt_title_artist) TextView txt_title_artist;
-  @Bind(R.id.txt_title_tracks) TextView txt_title_tracks;
-  @Bind(R.id.txt_followers_artist) TextView txt_followers_artist;
-  @Bind(R.id.txt_subtitle_artist) TextView txt_subtitle_artist;
-  @Bind(R.id.rv_tracks) RecyclerView rv_tracks;
-  @Bind(R.id.pv_tracks) ProgressBar pv_tracks;
-  @Bind(R.id.iv_tracks) ImageView iv_tracks;
-  @Bind(R.id.txt_line_tracks) TextView txt_line_tracks;
+  @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.appbar_artist) AppBarLayout appbar_artist;
+  @BindView(R.id.iv_collapsing_artist) ImageView iv_collapsing_artist;
+  @BindView(R.id.civ_artist) CircleImageView civ_artist;
+  @BindView(R.id.txt_title_artist) TextView txt_title_artist;
+  @BindView(R.id.txt_title_tracks) TextView txt_title_tracks;
+  @BindView(R.id.txt_followers_artist) TextView txt_followers_artist;
+  @BindView(R.id.txt_subtitle_artist) TextView txt_subtitle_artist;
+  @BindView(R.id.rv_tracks) RecyclerView rv_tracks;
+  @BindView(R.id.pv_tracks) ProgressBar pv_tracks;
+  @BindView(R.id.iv_tracks) ImageView iv_tracks;
+  @BindView(R.id.txt_line_tracks) TextView txt_line_tracks;
 
   private TracksPresenter tracksPresenter;
 
@@ -148,21 +142,13 @@ public class TracksActivity extends AppCompatActivity
   }
 
   private void onOffsetChangedState(AppBarLayout appBarLayout, int verticalOffset) {
-    State state = null;
-
     if (verticalOffset == 0) {
-      if (state != State.EXPANDED) hideAndShowTitleToolbar(View.GONE);
+      hideAndShowTitleToolbar(View.GONE);
     } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-      if (state != State.COLLAPSED) hideAndShowTitleToolbar(View.VISIBLE);
+      hideAndShowTitleToolbar(View.VISIBLE);
     } else {
-      if (state != State.IDLE) hideAndShowTitleToolbar(View.GONE);
+      hideAndShowTitleToolbar(View.GONE);
     }
-  }
-
-  private enum State {
-    EXPANDED,
-    COLLAPSED,
-    IDLE
   }
 
   private void hideAndShowTitleToolbar(int visibility) {
@@ -179,7 +165,6 @@ public class TracksActivity extends AppCompatActivity
         (tracks, track, position) -> tracksPresenter.launchArtistDetail(tracks, track, position));
     rv_tracks.setAdapter(adapter);
 
-    //initialize listener for app bar
     appbar_artist.addOnOffsetChangedListener(this);
   }
 

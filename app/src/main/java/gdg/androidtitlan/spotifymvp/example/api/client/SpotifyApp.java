@@ -18,7 +18,7 @@ package gdg.androidtitlan.spotifymvp.example.api.client;
 
 import android.app.Application;
 import android.content.Context;
-
+import android.support.annotation.VisibleForTesting;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
@@ -32,24 +32,26 @@ public class SpotifyApp extends Application {
   }
 
   public SpotifyService getSpotifyService() {
-    if (mSpotifyService == null) mSpotifyService = FactorySpotifyClient.create();
+    if (mSpotifyService == null) {
+      mSpotifyService = FactorySpotifyClient.create();
+    }
 
     return mSpotifyService;
   }
 
-  //For setting mocks during testing
-  public void setSpotifyService(SpotifyService spotifyService) {
-    this.mSpotifyService = spotifyService;
-  }
-
-  public Scheduler SubscribeScheduler() {
-    if (mScheduler == null) mScheduler = Schedulers.io();
+  public Scheduler subscribeScheduler() {
+    if (mScheduler == null) {
+      mScheduler = Schedulers.io();
+    }
 
     return mScheduler;
   }
 
-  //User to change scheduler from tests
-  public void setScheduler(Scheduler scheduler) {
+  @VisibleForTesting public void setSpotifyService(SpotifyService spotifyService) {
+    this.mSpotifyService = spotifyService;
+  }
+
+  @VisibleForTesting public void setScheduler(Scheduler scheduler) {
     this.mScheduler = scheduler;
   }
 }

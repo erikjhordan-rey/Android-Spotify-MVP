@@ -1,35 +1,33 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+  <!-- Default screen margins, per the Android Design guidelines. -->
 
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="space_default">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="item_decoration">6dp</dimen>
-
-
-    <!-- fragment_artists -->
-    <dimen name="recycler_column_width">200dp</dimen>
-    <dimen name="headerbar_elevation">4dp</dimen>
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="space_default">16dp</dimen>
+  <dimen name="fab_margin">16dp</dimen>
+  <dimen name="item_decoration">6dp</dimen>
 
 
-
-    <dimen name="image_width">120dp</dimen>
-    <dimen name="image_final_width">32dp</dimen>
-    <dimen name="spacing_normal">16dp</dimen>
-
-
-    <!-- font size -->
-    <dimen name="size_title">22sp</dimen>
-    <dimen name="size_subtitle">16sp</dimen>
+  <!-- fragment_artists -->
+  <dimen name="recycler_column_width">200dp</dimen>
+  <dimen name="headerbar_elevation">4dp</dimen>
 
 
-    <!-- activity_tracks -->
-    <dimen name="appbar_height">300dp</dimen>
+  <dimen name="image_width">120dp</dimen>
+  <dimen name="image_final_width">32dp</dimen>
+  <dimen name="spacing_normal">16dp</dimen>
 
 
+  <!-- font size -->
+  <dimen name="size_title">22sp</dimen>
+  <dimen name="size_subtitle">16sp</dimen>
 
-    <dimen name="audio_player_btn_size">60dp</dimen>
-    <dimen name="audio_player_btn_margin">5dp</dimen>
+
+  <!-- activity_tracks -->
+  <dimen name="appbar_height">300dp</dimen>
+
+
+  <dimen name="audio_player_btn_size">60dp</dimen>
+  <dimen name="audio_player_btn_margin">5dp</dimen>
 
 
 </resources>
