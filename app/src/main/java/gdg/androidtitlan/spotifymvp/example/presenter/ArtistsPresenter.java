@@ -16,27 +16,25 @@
 
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
-import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
-import gdg.androidtitlan.spotifymvp.example.model.ArtistCallback;
-import gdg.androidtitlan.spotifymvp.example.model.ArtistsInteractor;
-import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
+import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
+import gdg.androidtitlan.spotifymvp.example.interactor.ArtistsInteractor;
+import io.reactivex.functions.Consumer;
 import java.util.List;
 
-public class ArtistsPresenter implements Presenter<ArtistsMvpView>, ArtistCallback {
+public class ArtistsPresenter implements Presenter<ArtistsMvpView> {
 
   private ArtistsMvpView artistsMvpView;
   private ArtistsInteractor artistsInteractor;
 
-  public ArtistsPresenter() {
+  public ArtistsPresenter(ArtistsInteractor artistsInteractor) {
+    this.artistsInteractor = artistsInteractor;
   }
 
   @Override public void setView(ArtistsMvpView view) {
     if (view == null) {
       throw new IllegalArgumentException("You can't set a null view");
     }
-
     artistsMvpView = view;
-    artistsInteractor = new ArtistsInteractor(artistsMvpView.getContext());
   }
 
   @Override public void detachView() {
@@ -45,27 +43,19 @@ public class ArtistsPresenter implements Presenter<ArtistsMvpView>, ArtistCallba
 
   public void onSearchArtist(String string) {
     artistsMvpView.showLoading();
-    artistsInteractor.loadDataFromApi(string, this);
+    artistsInteractor.loadDataFromApi(string).subscribe(new Consumer<List<Artist>>() {
+      @Override public void accept(List<Artist> artists) throws Exception {
+        artistsMvpView.hideLoading();
+        artistsMvpView.renderArtists(artists);
+      }
+    }, new Consumer<Throwable>() {
+      @Override public void accept(Throwable throwable) throws Exception {
+        throwable.printStackTrace();
+      }
+    });
   }
 
   public void launchArtistDetail(Artist artist) {
     artistsMvpView.launchArtistDetail(artist);
-  }
-
-  @Override public void onResponse(List<Artist> artists) {
-    artistsMvpView.hideLoading();
-    artistsMvpView.renderArtists(artists);
-  }
-
-  @Override public void onArtistNotFound() {
-    artistsMvpView.showArtistNotFoundMessage();
-  }
-
-  @Override public void onNetworkConnectionError() {
-    artistsMvpView.showConnectionErrorMessage();
-  }
-
-  @Override public void onServerError() {
-    artistsMvpView.showServerError();
   }
 }

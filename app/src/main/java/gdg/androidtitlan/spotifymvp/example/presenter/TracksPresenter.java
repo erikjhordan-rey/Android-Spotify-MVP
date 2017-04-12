@@ -16,18 +16,18 @@
 
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
-import gdg.androidtitlan.spotifymvp.example.api.model.Track;
-import gdg.androidtitlan.spotifymvp.example.model.TrackCallback;
-import gdg.androidtitlan.spotifymvp.example.model.TracksInteractor;
-import gdg.androidtitlan.spotifymvp.example.view.TracksMvpView;
+import gdg.androidtitlan.spotifymvp.example.data.model.Track;
+import gdg.androidtitlan.spotifymvp.example.interactor.TracksInteractor;
+import io.reactivex.functions.Consumer;
 import java.util.List;
 
-public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback {
+public class TracksPresenter implements Presenter<TracksMvpView> {
 
   private TracksMvpView tracksMvpView;
   private TracksInteractor tracksInteractor;
 
-  public TracksPresenter() {
+  public TracksPresenter(TracksInteractor tracksInteractor) {
+    this.tracksInteractor = tracksInteractor;
   }
 
   @Override public void setView(TracksMvpView view) {
@@ -37,7 +37,6 @@ public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback 
     }
 
     tracksMvpView = view;
-    tracksInteractor = new TracksInteractor(tracksMvpView.getContext());
   }
 
   @Override public void detachView() {
@@ -46,27 +45,19 @@ public class TracksPresenter implements Presenter<TracksMvpView>, TrackCallback 
 
   public void onSearchTracks(String string) {
     tracksMvpView.showLoading();
-    tracksInteractor.loadData(string, this);
+    tracksInteractor.loadData(string).subscribe(new Consumer<List<Track>>() {
+      @Override public void accept(List<Track> tracks) throws Exception {
+        tracksMvpView.hideLoading();
+        tracksMvpView.renderTracks(tracks);
+      }
+    }, new Consumer<Throwable>() {
+      @Override public void accept(Throwable throwable) throws Exception {
+        throwable.printStackTrace();
+      }
+    });
   }
 
   public void launchArtistDetail(List<Track> tracks, Track track, int position) {
     tracksMvpView.launchTrackDetail(tracks, track, position);
-  }
-
-  @Override public void onResponse(List<Track> tracks) {
-    tracksMvpView.hideLoading();
-    tracksMvpView.renderTracks(tracks);
-  }
-
-  @Override public void onTrackNotFound() {
-    tracksMvpView.showTracksNotFoundMessage();
-  }
-
-  @Override public void onNetworkConnectionError() {
-    tracksMvpView.showConnectionErrorMessage();
-  }
-
-  @Override public void onServerError() {
-    tracksMvpView.showConnectionErrorMessage();
   }
 }

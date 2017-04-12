@@ -4,7 +4,7 @@
     package="gdg.androidtitlan.spotifymvp">
 
   <application
-      android:name=".example.api.client.SpotifyApp"
+      android:name=".example.SpotifyApp"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -12,7 +12,7 @@
       android:theme="@style/Theme.AppTheme.Music">
 
     <activity
-        android:name=".example.ui.activity.ArtistsActivity"
+        android:name=".example.view.activity.ArtistsActivity"
         android:configChanges="orientation"
         android:label="@string/app_name"
         android:screenOrientation="portrait">
@@ -24,13 +24,13 @@
     </activity>
 
     <activity
-        android:name=".example.ui.activity.TracksActivity"
+        android:name=".example.view.activity.TracksActivity"
         android:configChanges="orientation"
         android:label="@string/app_name"
         android:screenOrientation="portrait"/>
 
 
-    <service android:name=".example.service.AudioPlayerService"/>
+    <service android:name=".example.view.service.AudioPlayerService"/>
   </application>
 
   <uses-permission android:name="android.permission.INTERNET"/>

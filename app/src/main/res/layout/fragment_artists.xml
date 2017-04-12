@@ -6,7 +6,7 @@
     android:orientation="vertical"
     >
 
-  <gdg.androidtitlan.spotifymvp.example.ui.widget.ShadowFrameLayout
+  <gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@color/light_grey"
@@ -29,7 +29,7 @@
         android:orientation="vertical"
         >
 
-      <gdg.androidtitlan.spotifymvp.example.view.AutoRecyclerView
+      <gdg.androidtitlan.spotifymvp.example.presenter.AutoRecyclerView
           android:id="@+id/rv_artists"
           style="@style/Theme.AppTheme.Music.RecyclerView"
           />
@@ -61,6 +61,6 @@
 
     </LinearLayout>
 
-  </gdg.androidtitlan.spotifymvp.example.ui.widget.ShadowFrameLayout>
+  </gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout>
 
 </LinearLayout>

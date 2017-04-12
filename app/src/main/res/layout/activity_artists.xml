@@ -8,7 +8,7 @@
     >
 
   <fragment
-      class="gdg.androidtitlan.spotifymvp.example.ui.fragment.ArtistsFragment"
+      class="gdg.androidtitlan.spotifymvp.example.view.fragment.ArtistsFragment"
       android:id="@+id/music_fragment"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

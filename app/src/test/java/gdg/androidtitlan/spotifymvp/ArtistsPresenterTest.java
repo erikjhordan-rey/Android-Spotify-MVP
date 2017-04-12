@@ -17,12 +17,11 @@
 package gdg.androidtitlan.spotifymvp;
 
 import gdg.androidtitlan.spotifymvp.data.FakeSpotifyAPI;
-import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyApp;
-import gdg.androidtitlan.spotifymvp.example.api.client.SpotifyService;
-import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
-import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
+import gdg.androidtitlan.spotifymvp.example.SpotifyApp;
+import gdg.androidtitlan.spotifymvp.example.data.api.retrofit.SpotifyRetrofitService;
+import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsPresenter;
-import gdg.androidtitlan.spotifymvp.example.view.ArtistsMvpView;
+import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsMvpView;
 import java.util.Collections;
 import java.util.List;
 import org.junit.After;
@@ -47,7 +46,7 @@ import static org.mockito.Mockito.when;
 public class ArtistsPresenterTest {
 
   @Mock private ArtistsMvpView mArtistsMvpView;
-  @Mock private SpotifyService mSpotifyService;
+  @Mock private SpotifyRetrofitService mSpotifyRetrofitService;
 
   private ArtistsPresenter mArtistsPresenter;
 
@@ -57,7 +56,7 @@ public class ArtistsPresenterTest {
 
     // Mock and simulate the retrofit service we don't call the API
     SpotifyApp application = (SpotifyApp) RuntimeEnvironment.application;
-    application.setSpotifyService(mSpotifyService);
+    application.setSpotifyService(mSpotifyRetrofitService);
     application.setScheduler(Schedulers.immediate());
 
     mArtistsPresenter = new ArtistsPresenter();
@@ -70,7 +69,7 @@ public class ArtistsPresenterTest {
     //we simulate a request to bring the artists
     final String artist = "muse";
     ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearch();
-    when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
+    when(mSpotifyRetrofitService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
     List<Artist> artists = artistsSearch.getArtists();
 
     //if the answer was successful then we validate the correct behavior of the presenter
@@ -83,7 +82,7 @@ public class ArtistsPresenterTest {
     //we simulate a request to bring the artists
     final String artist = "msdfsfuse123adreddga";
     ArtistsSearch artistsSearch = FakeSpotifyAPI.getArtistSearchEmpty();
-    when(mSpotifyService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
+    when(mSpotifyRetrofitService.searchArtist(artist)).thenReturn(Observable.just(artistsSearch));
     List<Artist> artists = Collections.emptyList();
 
     //print this value if is "0" you should show NotFoundMessage
@@ -101,7 +100,7 @@ public class ArtistsPresenterTest {
   @Test public void shouldReturnNetworkConnectionError() {
     //we simulate a request to bring the artists not NetworkConnectionError
     final String artist = "muse";
-    when(mSpotifyService.searchArtist(artist)).thenReturn(
+    when(mSpotifyRetrofitService.searchArtist(artist)).thenReturn(
         Observable.<ArtistsSearch>error(new RuntimeException("Error not connection")));
 
     //if the answer was Network Connection

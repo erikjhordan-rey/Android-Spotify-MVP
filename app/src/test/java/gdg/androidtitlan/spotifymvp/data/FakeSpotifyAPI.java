@@ -16,9 +16,7 @@
 
 package gdg.androidtitlan.spotifymvp.data;
 
-import gdg.androidtitlan.spotifymvp.example.api.model.Artist;
-import gdg.androidtitlan.spotifymvp.example.api.model.Artists;
-import gdg.androidtitlan.spotifymvp.example.api.model.ArtistsSearch;
+import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

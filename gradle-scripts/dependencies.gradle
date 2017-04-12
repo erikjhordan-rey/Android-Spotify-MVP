@@ -15,23 +15,23 @@ ext {
 
   ]
 
-  squareVersion = '2.0.1'
+  squareVersion = '2.2.0'
   picassoVersion = '2.5.2'
 
   squareDependencies = [
 
       retrofit       : "com.squareup.retrofit2:retrofit:${squareVersion}",
-      adapter_rx_java: "com.squareup.retrofit2:adapter-rxjava:${squareVersion}",
+      adapter_rx_java: "com.squareup.retrofit2:adapter-rxjava2:${squareVersion}",
       converter_gson : "com.squareup.retrofit2:converter-gson:${squareVersion}",
       picasso        : "com.squareup.picasso:picasso:${picassoVersion}"
   ]
 
-  rxandroidVersion = '1.0.1'
-  rxjavaVersion = '1.0.16'
+  rxandroidVersion = '2.0.1'
+  rxjavaVersion = '2.0.2'
 
   reactiveDependencies = [
-      rxandroid: "io.reactivex:rxandroid:${rxandroidVersion}",
-      rxjava   : "io.reactivex:rxjava:${rxjavaVersion}"]
+      rxandroid: "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
+      rxjava   : "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"]
 
   butterknifeVersion = '8.4.0'
   circleimageviewVersion = '1.3.0'

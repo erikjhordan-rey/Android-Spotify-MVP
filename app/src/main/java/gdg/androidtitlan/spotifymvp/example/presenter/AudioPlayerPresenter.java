@@ -17,11 +17,10 @@
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import android.content.ServiceConnection;
-import gdg.androidtitlan.spotifymvp.example.api.model.Track;
-import gdg.androidtitlan.spotifymvp.example.model.AudioFinishedListener;
-import gdg.androidtitlan.spotifymvp.example.model.AudioPlayerInteractor;
-import gdg.androidtitlan.spotifymvp.example.service.AudioPlayerService;
-import gdg.androidtitlan.spotifymvp.example.view.PlayerMVPView;
+import gdg.androidtitlan.spotifymvp.example.data.model.Track;
+import gdg.androidtitlan.spotifymvp.example.interactor.AudioFinishedListener;
+import gdg.androidtitlan.spotifymvp.example.interactor.AudioPlayerInteractor;
+import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import java.util.List;
 
 public class AudioPlayerPresenter implements Presenter<PlayerMVPView>, AudioFinishedListener {
