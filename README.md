@@ -10,8 +10,7 @@ Libraries used on the sample project
 * [Retrofit 2][4]
 * [RxJava & RxAndroid][5]
 * [Gradle Retrolambda Plugin][6]
-* [robolectric][7]
-* [junit, mockito][8]
+
 
 # Demo
 
@@ -41,7 +40,7 @@ Feel free to report or add any useful feature, I will be glad to improve it with
 Developed By
 ------------
 
-* Erik González  - <erikcaffrey10@gmail.com>
+* Erik Jhordan Rey  - <erikcaffrey10@gmail.com> or <erik.gonzalez@schibsted.com.mx>
 
 License
 -------
