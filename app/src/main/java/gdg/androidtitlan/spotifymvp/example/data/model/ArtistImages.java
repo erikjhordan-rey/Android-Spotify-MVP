@@ -20,6 +20,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.HEIGHT;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.URL;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.WIDTH;
+
 public class ArtistImages implements Parcelable {
 
   public static final Creator<ArtistImages> CREATOR = new Creator<ArtistImages>() {
@@ -33,11 +37,11 @@ public class ArtistImages implements Parcelable {
     }
   };
 
-  @SerializedName("height") public int heigth;
-  @SerializedName("url") public String url;
-  @SerializedName("width") public int width;
+  @SerializedName(HEIGHT) private int heigth;
+  @SerializedName(URL) public String url;
+  @SerializedName(WIDTH) private int width;
 
-  protected ArtistImages(Parcel in) {
+  private ArtistImages(Parcel in) {
     this.heigth = in.readInt();
     this.url = in.readString();
     this.width = in.readInt();

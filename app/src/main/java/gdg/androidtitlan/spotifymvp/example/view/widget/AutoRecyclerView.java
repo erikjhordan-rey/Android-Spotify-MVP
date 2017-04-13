@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package gdg.androidtitlan.spotifymvp.example.presenter;
+package gdg.androidtitlan.spotifymvp.example.view.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -29,7 +29,7 @@
         android:orientation="vertical"
         >
 
-      <gdg.androidtitlan.spotifymvp.example.presenter.AutoRecyclerView
+      <gdg.androidtitlan.spotifymvp.example.view.widget.AutoRecyclerView
           android:id="@+id/rv_artists"
           style="@style/Theme.AppTheme.Music.RecyclerView"
           />

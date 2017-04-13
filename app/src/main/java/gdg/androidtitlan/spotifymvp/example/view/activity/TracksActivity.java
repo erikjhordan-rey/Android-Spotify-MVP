@@ -41,16 +41,15 @@ import gdg.androidtitlan.spotifymvp.example.data.api.client.SpotifyClient;
 import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.TracksInteractor;
-import gdg.androidtitlan.spotifymvp.example.presenter.TracksMvpView;
 import gdg.androidtitlan.spotifymvp.example.presenter.TracksPresenter;
 import gdg.androidtitlan.spotifymvp.example.view.adapter.TracksAdapter;
-import gdg.androidtitlan.spotifymvp.example.view.fragment.AudioPlayerFragment;
+import gdg.androidtitlan.spotifymvp.example.view.fragment.PlayerFragment;
 import gdg.androidtitlan.spotifymvp.example.view.utils.BlurEffectUtils;
 import java.lang.reflect.Type;
 import java.util.List;
 
 public class TracksActivity extends AppCompatActivity
-    implements TracksMvpView, AppBarLayout.OnOffsetChangedListener {
+    implements TracksPresenter.View, AppBarLayout.OnOffsetChangedListener {
 
   public static final String EXTRA_REPOSITORY = "EXTRA_ARTIST";
   public static final String EXTRA_TRACK_POSITION = "EXTRA_TRACK_POSITION";
@@ -105,7 +104,7 @@ public class TracksActivity extends AppCompatActivity
     txt_line_tracks.setVisibility(View.VISIBLE);
     iv_tracks.setVisibility(View.VISIBLE);
     txt_line_tracks.setText(getString(R.string.error_tracks_not_found));
-    iv_tracks.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_found));
+    iv_tracks.setImageDrawable(ContextCompat.getDrawable(context(), R.mipmap.ic_not_found));
   }
 
   @Override public void showConnectionErrorMessage() {
@@ -113,7 +112,7 @@ public class TracksActivity extends AppCompatActivity
     txt_line_tracks.setVisibility(View.VISIBLE);
     iv_tracks.setVisibility(View.VISIBLE);
     txt_line_tracks.setText(getString(R.string.error_internet_connection));
-    iv_tracks.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_not_internet));
+    iv_tracks.setImageDrawable(ContextCompat.getDrawable(context(), R.mipmap.ic_not_internet));
   }
 
   @Override public void renderTracks(List<Track> tracks) {
@@ -123,12 +122,8 @@ public class TracksActivity extends AppCompatActivity
   }
 
   @Override public void launchTrackDetail(List<Track> tracks, Track track, int position) {
-    AudioPlayerFragment.newInstance(setTracks(tracks), position)
+    PlayerFragment.newInstance(setTracks(tracks), position)
         .show(getSupportFragmentManager(), "");
-  }
-
-  @Override public Context getContext() {
-    return this;
   }
 
   @Override public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -175,7 +170,6 @@ public class TracksActivity extends AppCompatActivity
     ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
       actionBar.setDisplayUseLogoEnabled(false);
-      actionBar.setShowHideAnimationEnabled(true);
       actionBar.setDisplayHomeAsUpEnabled(true);
       actionBar.setDisplayShowTitleEnabled(false);
     }
@@ -211,5 +205,9 @@ public class TracksActivity extends AppCompatActivity
     Type trackType = new TypeToken<List<Track>>() {
     }.getType();
     return gson.toJson(tracks, trackType);
+  }
+
+  @Override public Context context() {
+    return TracksActivity.this;
   }
 }

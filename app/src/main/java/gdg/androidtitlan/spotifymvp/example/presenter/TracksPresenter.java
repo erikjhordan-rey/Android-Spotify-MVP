@@ -18,46 +18,49 @@ package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.TracksInteractor;
-import io.reactivex.functions.Consumer;
 import java.util.List;
 
-public class TracksPresenter implements Presenter<TracksMvpView> {
+public class TracksPresenter extends Presenter<TracksPresenter.View> {
 
-  private TracksMvpView tracksMvpView;
-  private TracksInteractor tracksInteractor;
+  private TracksInteractor interactor;
 
-  public TracksPresenter(TracksInteractor tracksInteractor) {
-    this.tracksInteractor = tracksInteractor;
+  public TracksPresenter(TracksInteractor interactor) {
+    this.interactor = interactor;
   }
 
-  @Override public void setView(TracksMvpView view) {
-
-    if (view == null) {
-      throw new IllegalArgumentException("You can't set a null view");
-    }
-
-    tracksMvpView = view;
-  }
-
-  @Override public void detachView() {
-    tracksMvpView = null;
+  @Override public void terminate() {
+    super.terminate();
+    setView(null);
   }
 
   public void onSearchTracks(String string) {
-    tracksMvpView.showLoading();
-    tracksInteractor.loadData(string).subscribe(new Consumer<List<Track>>() {
-      @Override public void accept(List<Track> tracks) throws Exception {
-        tracksMvpView.hideLoading();
-        tracksMvpView.renderTracks(tracks);
+    getView().showLoading();
+    interactor.loadData(string).subscribe(tracks -> {
+      if (!tracks.isEmpty() && tracks.size() > 0) {
+        getView().hideLoading();
+        getView().renderTracks(tracks);
+      } else {
+        getView().showTracksNotFoundMessage();
       }
-    }, new Consumer<Throwable>() {
-      @Override public void accept(Throwable throwable) throws Exception {
-        throwable.printStackTrace();
-      }
-    });
+    }, Throwable::printStackTrace);
   }
 
   public void launchArtistDetail(List<Track> tracks, Track track, int position) {
-    tracksMvpView.launchTrackDetail(tracks, track, position);
+    getView().launchTrackDetail(tracks, track, position);
+  }
+
+  public interface View extends Presenter.View {
+
+    void showLoading();
+
+    void hideLoading();
+
+    void showTracksNotFoundMessage();
+
+    void showConnectionErrorMessage();
+
+    void renderTracks(List<Track> tracks);
+
+    void launchTrackDetail(List<Track> tracks, Track track, int position);
   }
 }

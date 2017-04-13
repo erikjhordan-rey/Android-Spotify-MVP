@@ -41,16 +41,16 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
+import gdg.androidtitlan.spotifymvp.example.interactor.PlayerInteractor;
 import gdg.androidtitlan.spotifymvp.example.presenter.AudioPlayerPresenter;
-import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.view.activity.TracksActivity;
+import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.view.utils.ServiceUtils;
-import gdg.androidtitlan.spotifymvp.example.presenter.PlayerMVPView;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class AudioPlayerFragment extends DialogFragment
-    implements PlayerMVPView, SeekBar.OnSeekBarChangeListener {
+public class PlayerFragment extends DialogFragment
+    implements AudioPlayerPresenter.View, SeekBar.OnSeekBarChangeListener {
 
   @BindView(R.id.iv_album_player) ImageView iv_album_player;
   @BindView(R.id.txt_track_title_player) TextView txt_track_title_player;
@@ -69,13 +69,13 @@ public class AudioPlayerFragment extends DialogFragment
   private int trackPosition;
   private AudioPlayerPresenter audioPlayerPresenter;
 
-  public static AudioPlayerFragment newInstance(String tracks, int position) {
-    AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment();
+  public static PlayerFragment newInstance(String tracks, int position) {
+    PlayerFragment playerFragment = new PlayerFragment();
     Bundle bundle = new Bundle();
     bundle.putString(TracksActivity.EXTRA_TRACKS, tracks);
     bundle.putInt(TracksActivity.EXTRA_TRACK_POSITION, position);
-    audioPlayerFragment.setArguments(bundle);
-    return audioPlayerFragment;
+    playerFragment.setArguments(bundle);
+    return playerFragment;
   }
 
   @NonNull @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -91,7 +91,8 @@ public class AudioPlayerFragment extends DialogFragment
 
     trackList = getTrackList(getArguments().getString(TracksActivity.EXTRA_TRACKS));
     trackPosition = getArguments().getInt(TracksActivity.EXTRA_TRACK_POSITION);
-    audioPlayerPresenter = new AudioPlayerPresenter(trackList);
+    audioPlayerPresenter =
+        new AudioPlayerPresenter(new PlayerInteractor(trackList, getContext()));
     audioPlayerPresenter.setView(this);
 
     audioPlayerPresenter.setInfoMediaPlayer(trackPosition);
@@ -104,7 +105,7 @@ public class AudioPlayerFragment extends DialogFragment
     if (getDialog() != null && getRetainInstance()) {
       getDialog().setDismissMessage(null);
     }
-    audioPlayerPresenter.detachView();
+    audioPlayerPresenter.terminate();
     super.onDestroyView();
   }
 
@@ -141,7 +142,7 @@ public class AudioPlayerFragment extends DialogFragment
   }
 
   @Override public void onDestroy() {
-    audioPlayerPresenter.detachView();
+    audioPlayerPresenter.terminate();
     super.onDestroy();
   }
 
@@ -214,7 +215,7 @@ public class AudioPlayerFragment extends DialogFragment
     txt_time_end.setText("");
   }
 
-  @Override public Context getContext() {
+  @Override public Context context() {
     return getActivity();
   }
 }

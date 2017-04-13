@@ -20,6 +20,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.ALBUM;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.NAME;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.PREVIEW_URL;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.TRACK_NUMBER;
+
 public class Track implements Parcelable {
 
   public static final Creator<Track> CREATOR = new Creator<Track>() {
@@ -33,10 +38,10 @@ public class Track implements Parcelable {
     }
   };
 
-  @SerializedName("name") public String name;
-  @SerializedName("preview_url") public String preview_url;
-  @SerializedName("track_number") public int track_number;
-  @SerializedName("album") public Album album;
+  @SerializedName(NAME) public String name;
+  @SerializedName(PREVIEW_URL) public String preview_url;
+  @SerializedName(TRACK_NUMBER) private int track_number;
+  @SerializedName(ALBUM) public Album album;
 
   protected Track(Parcel in) {
     this.name = in.readString();

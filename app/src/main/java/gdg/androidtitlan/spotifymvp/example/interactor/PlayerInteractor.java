@@ -28,7 +28,7 @@ import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import java.util.List;
 
-public class AudioPlayerInteractor {
+public class PlayerInteractor {
 
   private AudioFinishedListener audioFinishedListener;
   private AudioPlayerService audioPlayerService;
@@ -78,16 +78,17 @@ public class AudioPlayerInteractor {
     }
   };
 
-  public AudioPlayerInteractor(List<Track> trackList, Context context,
-      AudioFinishedListener audioFinishedListener) {
+  public PlayerInteractor(List<Track> trackList, Context context) {
     this.trackList = trackList;
     this.context = context;
-    this.audioFinishedListener = audioFinishedListener;
+  }
 
+  public void setAudioFinishedListener(AudioFinishedListener audioFinishedListener) {
+    this.audioFinishedListener = audioFinishedListener;
     audioFinishedListener.onServiceConnection(serviceConnection);
   }
 
-  public void setTrackDuration() {
+  private void setTrackDuration() {
     if (audioPlayerService != null) {
       trackDuration = audioPlayerService.getTrackDuration();
       audioFinishedListener.onSetTimeFinished(audioPlayerService);

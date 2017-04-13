@@ -29,31 +29,7 @@ public class TracksInteractor {
     this.spotifyService = spotifyService;
   }
 
-  //You could use RXAndroid instead of a callback to communicate
-  // but to keep it simple use a callback and RX only for api calls
   public Observable<List<Track>> loadData(String artistId) {
     return spotifyService.getTracks(artistId);
   }
-
-  //private void onSuccess(Tracks tracks, TrackCallback trackCallback) {
-  //  if (tracks.getTracks() != null) {
-  //    if (tracks.getTracks().size() > 0) {
-  //      trackCallback.onResponse(tracks.getTracks());
-  //    } else {
-  //      trackCallback.onTrackNotFound();
-  //    }
-  //  } else {
-  //    trackCallback.onTrackNotFound();
-  //  }
-  //}
-  //
-  //private void onError(Throwable throwable, TrackCallback trackCallback) {
-  //  if (HttpNotFound.isHttp404(throwable)) {
-  //    trackCallback.onTrackNotFound();
-  //  } else if (throwable.getMessage().equals(HttpNotFound.SERVER_INTERNET_ERROR)) {
-  //    trackCallback.onNetworkConnectionError();
-  //  } else {
-  //    trackCallback.onServerError();
-  //  }
-  //}
 }
