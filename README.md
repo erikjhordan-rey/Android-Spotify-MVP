@@ -1,4 +1,4 @@
-# Android - Spotify + Model View Presenter (MVP)
+# Android - Spotify + Model View Presenter (MVP) [![Build Status](https://travis-ci.org/erikcaffrey/Android-Spotify-MVP.svg?branch=master)](https://travis-ci.org/erikcaffrey/Android-Spotify-MVP)
 Example android Model View Presenter used to explain how to use this pattern in our android applications.
 
 This example was created to support an article explanation [Model View Presenter en Android][1] (spanish).
@@ -10,8 +10,7 @@ Libraries used on the sample project
 * [Retrofit 2][4]
 * [RxJava & RxAndroid][5]
 * [Gradle Retrolambda Plugin][6]
-* [robolectric][7]
-* [junit, mockito][8]
+
 
 # Demo
 
@@ -41,7 +40,7 @@ Feel free to report or add any useful feature, I will be glad to improve it with
 Developed By
 ------------
 
-* Erik González  - <erikcaffrey10@gmail.com>
+* Erik Jhordan Rey  - <erikcaffrey10@gmail.com> or <erik.gonzalez@schibsted.com.mx>
 
 License
 -------
