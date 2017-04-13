@@ -29,29 +29,8 @@ public class ArtistsInteractor {
     this.spotifyService = spotifyService;
   }
 
-  public Observable<List<Artist>> loadDataFromApi(String query) {
+  public Observable<List<Artist>> searchArtists(String query) {
     return spotifyService.search(query);
   }
 
-  //private void onSuccess(ArtistsSearch artistsSearch, ArtistCallback artistCallback) {
-  //  if (artistsSearch.getArtists() != null) {
-  //    if (artistsSearch.getArtists().size() > 0) {
-  //      artistCallback.onResponse(artistsSearch.getArtists());
-  //    } else {
-  //      artistCallback.onArtistNotFound();
-  //    }
-  //  } else {
-  //    artistCallback.onArtistNotFound();
-  //  }
-  //}
-  //
-  //private void onError(Throwable throwable, ArtistCallback artistCallback) {
-  //  if (HttpNotFound.isHttp404(throwable)) {
-  //    artistCallback.onArtistNotFound();
-  //  } else if (throwable.getMessage().equals(HttpNotFound.SERVER_INTERNET_ERROR)) {
-  //    artistCallback.onNetworkConnectionError();
-  //  } else {
-  //    artistCallback.onServerError();
-  //  }
-  //}
 }

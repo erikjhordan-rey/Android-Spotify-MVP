@@ -17,82 +17,89 @@
 package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import android.content.ServiceConnection;
-import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.AudioFinishedListener;
-import gdg.androidtitlan.spotifymvp.example.interactor.AudioPlayerInteractor;
+import gdg.androidtitlan.spotifymvp.example.interactor.PlayerInteractor;
 import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
-import java.util.List;
 
-public class AudioPlayerPresenter implements Presenter<PlayerMVPView>, AudioFinishedListener {
+public class AudioPlayerPresenter extends Presenter<AudioPlayerPresenter.View>
+    implements AudioFinishedListener {
 
-  private PlayerMVPView playerMVPView;
-  private AudioPlayerInteractor audioPlayerInteractor;
-  private List<Track> trackList;
+  private PlayerInteractor playerInteractor;
   private ServiceConnection serviceConnection;
 
-  public AudioPlayerPresenter(List<Track> trackList) {
-    this.trackList = trackList;
-  }
-
-  @Override public void setView(PlayerMVPView view) {
-    if (view == null) {
-      throw new IllegalArgumentException("You can't set a null view");
-    }
-
-    playerMVPView = view;
-    audioPlayerInteractor = new AudioPlayerInteractor(trackList, playerMVPView.getContext(), this);
+  public AudioPlayerPresenter(PlayerInteractor playerInteractor) {
+    this.playerInteractor = playerInteractor;
+    this.playerInteractor.setAudioFinishedListener(this);
   }
 
   public void onPreviewTrack() {
-    audioPlayerInteractor.onPreview();
+    playerInteractor.onPreview();
   }
 
   public void onNextTrack() {
-    audioPlayerInteractor.onNext();
+    playerInteractor.onNext();
   }
 
   public void onPlayPauseTrack() {
-    audioPlayerInteractor.onPlayStop();
+    playerInteractor.onPlayStop();
   }
 
   public void onStartAudioService(String trackUrl) {
-    playerMVPView.onStartAudioService(trackUrl, serviceConnection);
+    getView().onStartAudioService(trackUrl, serviceConnection);
   }
 
   public void setInfoMediaPlayer(int trackPosition) {
-    playerMVPView.setInfoTrackPlayer(trackPosition);
+    getView().setInfoTrackPlayer(trackPosition);
   }
 
-  @Override public void detachView() {
-    audioPlayerInteractor.destroyAudioService();
-    playerMVPView = null;
+  @Override public void terminate() {
+    super.terminate();
+    playerInteractor.destroyAudioService();
+    setView(null);
   }
 
   @Override public void onPlay() {
-    playerMVPView.isPlay();
+    getView().isPlay();
   }
 
   @Override public void onPause() {
-    playerMVPView.isPause();
+    getView().isPause();
   }
 
   @Override public void onSetTimeStart(int trackCurrentPosition) {
-    playerMVPView.setTimeStart(trackCurrentPosition);
+    getView().setTimeStart(trackCurrentPosition);
   }
 
   @Override public void onSetTimeFinished(AudioPlayerService audioPlayerService) {
-    playerMVPView.setTimeFinished(audioPlayerService);
+    getView().setTimeFinished(audioPlayerService);
   }
 
   @Override public void onResetTrackDuration() {
-    playerMVPView.onResetTrackDuration();
+    getView().onResetTrackDuration();
   }
 
   @Override public void onSetInfoTrackPlayer(int trackPosition) {
-    playerMVPView.setInfoTrackPlayer(trackPosition);
+    getView().setInfoTrackPlayer(trackPosition);
   }
 
   @Override public void onServiceConnection(ServiceConnection serviceConnection) {
     this.serviceConnection = serviceConnection;
+  }
+
+  public interface View extends Presenter.View {
+
+    void onStartAudioService(String trackUrl, ServiceConnection serviceConnection);
+
+    void setInfoTrackPlayer(int trackPosition);
+
+    void isPlay();
+
+    void isPause();
+
+    void setTimeStart(int trackCurrentPosition);
+
+    void setTimeFinished(AudioPlayerService audioPlayerService);
+
+    void onResetTrackDuration();
   }
 }

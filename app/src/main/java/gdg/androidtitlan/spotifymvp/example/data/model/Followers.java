@@ -20,6 +20,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.HREF;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.TOTAL;
+
 public class Followers implements Parcelable {
 
   public static final Creator<Followers> CREATOR = new Creator<Followers>() {
@@ -33,10 +36,10 @@ public class Followers implements Parcelable {
     }
   };
 
-  @SerializedName("href") public String href;
-  @SerializedName("total") public int totalFollowers;
+  @SerializedName(HREF) private String href;
+  @SerializedName(TOTAL) public int totalFollowers;
 
-  protected Followers(Parcel in) {
+  private Followers(Parcel in) {
     this.href = in.readString();
     this.totalFollowers = in.readInt();
   }

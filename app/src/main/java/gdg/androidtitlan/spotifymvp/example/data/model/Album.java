@@ -19,9 +19,10 @@ package gdg.androidtitlan.spotifymvp.example.data.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.IMAGES;
+import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.NAME;
+
 public class Album {
-
-  @SerializedName("name") public String albumName;
-
-  @SerializedName("images") public List<ArtistImages> trackImages;
+  @SerializedName(NAME) public String albumName;
+  @SerializedName(IMAGES) public List<ArtistImages> trackImages;
 }

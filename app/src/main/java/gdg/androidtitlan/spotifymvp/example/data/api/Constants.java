@@ -36,6 +36,21 @@ public class Constants {
 
   public static final class Serialized {
 
+    public static final String NAME = "name";
+    public static final String IMAGES = "images";
+    public static final String FOLLOWERS = "followers";
+    public static final String HREF = "href";
+    public static final String ID = "id";
+    public static final String POPULARITY = "popularity";
+    public static final String HEIGHT = "height";
+    public static final String URL = "url";
+    public static final String WIDTH = "width";
+    public static final String TOTAL = "total";
+    public static final String PREVIEW_URL = "preview_url";
+    public static final String TRACK_NUMBER = "track_number";
+    public static final String ALBUM = "album";
+
+
   }
 
   public static final class Deserializer {

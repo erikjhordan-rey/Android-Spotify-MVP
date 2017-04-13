@@ -19,6 +19,7 @@ package gdg.androidtitlan.spotifymvp.example.view.fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,14 +44,13 @@ import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.data.api.client.SpotifyClient;
 import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.interactor.ArtistsInteractor;
-import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsMvpView;
 import gdg.androidtitlan.spotifymvp.example.presenter.ArtistsPresenter;
 import gdg.androidtitlan.spotifymvp.example.view.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.view.adapter.ArtistsAdapter;
 import java.util.List;
 
 public class ArtistsFragment extends Fragment
-    implements ArtistsMvpView, SearchView.OnQueryTextListener {
+    implements ArtistsPresenter.View, SearchView.OnQueryTextListener {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.rv_artists) RecyclerView rv_artist;
@@ -58,7 +59,6 @@ public class ArtistsFragment extends Fragment
   @BindView(R.id.txt_line_artists) TextView txt_line_artists;
   @BindView(R.id.txt_subline_artists) TextView txt_sub_line_artists;
 
-  private SearchView searchView;
   private ArtistsPresenter artistsPresenter;
 
   public ArtistsFragment() {
@@ -84,7 +84,7 @@ public class ArtistsFragment extends Fragment
   }
 
   @Override public void onDestroy() {
-    artistsPresenter.detachView();
+    artistsPresenter.terminate();
     super.onDestroy();
   }
 
@@ -97,14 +97,19 @@ public class ArtistsFragment extends Fragment
     setupSearchView(menu);
   }
 
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.menu_github) {
+      startActivityActionView();
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
   @Override public boolean onQueryTextSubmit(String query) {
     artistsPresenter.onSearchArtist(query);
     return true;
   }
 
   @Override public boolean onQueryTextChange(String newText) {
-    // you can look artists according to the letters you write
-    // using artistsPresenter.onSearchArtist(newText);
     return true;
   }
 
@@ -154,7 +159,7 @@ public class ArtistsFragment extends Fragment
   private void setupSearchView(Menu menu) {
     SearchManager searchManager =
         (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-    searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+    SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
     searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
     searchView.setQueryHint(getString(R.string.search_hint));
     searchView.setMaxWidth(toolbar.getWidth());
@@ -182,5 +187,14 @@ public class ArtistsFragment extends Fragment
     Intent intent = new Intent(getContext(), TracksActivity.class);
     intent.putExtra(TracksActivity.EXTRA_REPOSITORY, artist);
     startActivity(intent);
+  }
+
+  private void startActivityActionView() {
+    startActivity(new Intent(Intent.ACTION_VIEW,
+        Uri.parse("https://github.com/erikcaffrey/Android-Spotify-MVP")));
+  }
+
+  @Override public Context context() {
+    return null;
   }
 }

@@ -18,44 +18,54 @@ package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.interactor.ArtistsInteractor;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 import java.util.List;
 
-public class ArtistsPresenter implements Presenter<ArtistsMvpView> {
+public class ArtistsPresenter extends Presenter<ArtistsPresenter.View> {
 
-  private ArtistsMvpView artistsMvpView;
-  private ArtistsInteractor artistsInteractor;
+  private ArtistsInteractor interactor;
 
-  public ArtistsPresenter(ArtistsInteractor artistsInteractor) {
-    this.artistsInteractor = artistsInteractor;
+  public ArtistsPresenter(ArtistsInteractor interactor) {
+    this.interactor = interactor;
   }
 
-  @Override public void setView(ArtistsMvpView view) {
-    if (view == null) {
-      throw new IllegalArgumentException("You can't set a null view");
-    }
-    artistsMvpView = view;
-  }
-
-  @Override public void detachView() {
-    artistsMvpView = null;
-  }
-
-  public void onSearchArtist(String string) {
-    artistsMvpView.showLoading();
-    artistsInteractor.loadDataFromApi(string).subscribe(new Consumer<List<Artist>>() {
-      @Override public void accept(List<Artist> artists) throws Exception {
-        artistsMvpView.hideLoading();
-        artistsMvpView.renderArtists(artists);
+  public void onSearchArtist(String name) {
+    getView().showLoading();
+    Disposable disposable = interactor.searchArtists(name).subscribe(artists -> {
+      if (!artists.isEmpty() && artists.size() > 0) {
+        getView().hideLoading();
+        getView().renderArtists(artists);
+      } else {
+        getView().showArtistNotFoundMessage();
       }
-    }, new Consumer<Throwable>() {
-      @Override public void accept(Throwable throwable) throws Exception {
-        throwable.printStackTrace();
-      }
-    });
+    }, Throwable::printStackTrace);
+
+    addDisposableObserver(disposable);
   }
 
   public void launchArtistDetail(Artist artist) {
-    artistsMvpView.launchArtistDetail(artist);
+    getView().launchArtistDetail(artist);
+  }
+
+  @Override public void terminate() {
+    super.terminate();
+    setView(null);
+  }
+
+  public interface View extends Presenter.View {
+
+    void showLoading();
+
+    void hideLoading();
+
+    void showArtistNotFoundMessage();
+
+    void showConnectionErrorMessage();
+
+    void showServerError();
+
+    void renderArtists(List<Artist> artists);
+
+    void launchArtistDetail(Artist artist);
   }
 }
