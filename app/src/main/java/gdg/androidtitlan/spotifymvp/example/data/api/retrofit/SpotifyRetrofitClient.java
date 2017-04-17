@@ -38,11 +38,10 @@ public abstract class SpotifyRetrofitClient {
   }
 
   private Gson getSpotifyDeserializer() {
-    return new GsonBuilder()
-        .registerTypeAdapter(new TypeToken<List<Artist>>() {}.getType(),
-            new ArtistsDeserializer<Artist>())
-        .registerTypeAdapter(new TypeToken<List<Track>>() {}.getType(),
-            new TracksDeserializer<Track>())
+    return new GsonBuilder().registerTypeAdapter(new TypeToken<List<Artist>>() {
+    }.getType(), new ArtistsDeserializer<Artist>())
+        .registerTypeAdapter(new TypeToken<List<Track>>() {
+        }.getType(), new TracksDeserializer<Track>())
         .create();
   }
 
