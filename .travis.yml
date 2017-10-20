@@ -3,16 +3,16 @@ jdk: oraclejdk8
 
 env:
   global:
-    - ADB_INSTALL_TIMEOUT=8
+    - ADB_INSTALL_TIMEOUT=8 # 8 minutes (2 minutes by default)
 
 android:
   components:
      - tools
-     - build-tools-25.0.2
+     - build-tools-26.0.2
      - platform-tools
      - extra-android-m2repository
      - extra-google-android-support
-     - android-25
+     - android-26
 
 licenses:
     - 'android-sdk-preview-license-.+'
