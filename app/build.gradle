@@ -3,13 +3,13 @@ apply plugin: 'me.tatarka.retrolambda'
 
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion 26
+  buildToolsVersion '26.0.2'
 
   defaultConfig {
     applicationId "gdg.androidtitlan.musicmvp"
     minSdkVersion 17
-    targetSdkVersion 25
+    targetSdkVersion 26
     versionCode 1
     versionName "1.0"
     renderscriptTargetApi 19

@@ -21,6 +21,10 @@ import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Params.ART
 public class Constants {
 
   public static final String SPOTIFY_API = "https://api.spotify.com";
+  public static final String API_KEY = "Authorization";
+
+  //This access token shouldn't be exposed, use it like a professional developer
+  public static final String ACCESS_TOKEN = "Bearer BQA7baqjgds6Z2vn_nWe4E8FCMqzsturlVeauK4az0l-AK8t0BZUc5hyGJ-p7R-FJxPmXv8_8m1wPYkyKSB7eL6Wjtn2xe9eQmtDS83GtOADrrXaJ0Z-jZ1vugpSsz42v11lz1NZ1HxT0B2B";
 
   public static final class Endpoint {
 
