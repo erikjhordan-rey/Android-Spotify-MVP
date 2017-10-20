@@ -9,6 +9,7 @@ import gdg.androidtitlan.spotifymvp.example.data.api.retrofit.deserializer.Track
 import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import java.util.List;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -30,8 +31,17 @@ public abstract class SpotifyRetrofitClient {
     return new Retrofit.Builder().baseUrl(Constants.SPOTIFY_API)
         .addConverterFactory(GsonConverterFactory.create(getSpotifyDeserializer()))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(getOkHttpClient())
         .build();
   }
+
+  private OkHttpClient getOkHttpClient() {
+    OkHttpClient.Builder client = new OkHttpClient.Builder();
+    ApiInterceptor apiInterceptor = new ApiInterceptor();
+    client.addInterceptor(apiInterceptor);
+    return client.build();
+  }
+
 
   private Class<SpotifyRetrofitService> getSpotifyServiceClass() {
     return SpotifyRetrofitService.class;

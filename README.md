@@ -17,6 +17,16 @@ Libraries used on the sample project
 ![](./art/spotify-mvp.png)
 
 
+# Access Token 
+
+The Spotify Api has been changed so now is required an Access Token.
+
+The class `Constans` has a variable `ACCESS_TOKEN` replace with your auth token if Spotify Api
+response `401 unauthorized code`.
+
+* Get Your Access Token from [Spotify Api Doc](https://developer.spotify.com/web-api/console/get-search-item/)
+
+
 # how does it work?
 
 ![](./art/Telecine_2015-11-25-17-19-04.gif)

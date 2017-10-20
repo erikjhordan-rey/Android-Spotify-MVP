@@ -93,10 +93,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/retrolambda" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="support-fragment-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-commons-5.0.1" level="project" />
-    <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="shadows-core-3.0" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-2.0.1" level="project" />
@@ -104,39 +104,39 @@
     <orderEntry type="library" exported="" name="reactive-streams-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="guava-18.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="icu4j-53.1" level="project" />
+    <orderEntry type="library" exported="" name="support-core-utils-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="auto-service-1.0-rc2" level="project" />
+    <orderEntry type="library" exported="" name="support-vector-drawable-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="retrofit-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="adapter-rxjava2-2.2.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-resources-3.0" level="project" />
     <orderEntry type="library" exported="" name="converter-gson-2.2.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="sqlite4java-0.282" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-tree-5.0.1" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="circleimageview-1.3.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="butterknife-annotations-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="butterknife-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-3.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-ui-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-ant-tasks-2.1.3" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="ant-1.8.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="accessibility-test-framework-1.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-26.0.0-alpha1" level="project" />
+    <orderEntry type="library" exported="" name="support-media-compat-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="ant-launcher-1.8.0" level="project" />
-    <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="cardview-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="auto-common-0.6" level="project" />
     <orderEntry type="library" exported="" name="renderscript-v8" level="project" />
+    <orderEntry type="library" exported="" name="cardview-v7-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-util-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="bcprov-jdk16-1.46" level="project" />
+    <orderEntry type="library" exported="" name="design-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="butterknife-compiler-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="objenesis-2.1" level="project" />
     <orderEntry type="library" exported="" name="rxjava-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="transition-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-annotations-3.0" level="project" />
     <orderEntry type="library" exported="" name="gson-2.7" level="project" />
     <orderEntry type="library" exported="" name="okio-1.11.0" level="project" />
@@ -147,8 +147,8 @@
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="vtd-xml-2.11" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-26.0.0-alpha1" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-26.0.0-alpha1" level="project" />
+    <orderEntry type="library" exported="" name="animated-vector-drawable-26.0.0-alpha1" level="project" />
   </component>
 </module>
