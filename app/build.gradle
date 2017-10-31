@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion '26.0.2'
+  compileSdkVersion 27
+  buildToolsVersion '27.0.0'
 
   defaultConfig {
     applicationId "gdg.androidtitlan.musicmvp"
     minSdkVersion 17
-    targetSdkVersion 26
+    targetSdkVersion 27
     versionCode 1
     versionName "1.0"
     renderscriptTargetApi 19
@@ -26,30 +25,34 @@ android {
     exclude 'META-INF/rxjava.properties'
   }
 
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 
 
 dependencies {
 
-  compile supportDependencies.design
-  compile supportDependencies.appcompat
-  compile supportDependencies.cardview
-  compile supportDependencies.recyclerview
+  implementation supportDependencies.design
+  implementation supportDependencies.appcompat
+  implementation supportDependencies.cardview
+  implementation supportDependencies.recyclerview
 
-  compile squareDependencies.retrofit
-  compile squareDependencies.adapter_rx_java
-  compile squareDependencies.converter_gson
-  compile squareDependencies.picasso
+  implementation squareDependencies.retrofit
+  implementation squareDependencies.adapter_rx_java
+  implementation squareDependencies.converter_gson
+  implementation squareDependencies.picasso
 
-  compile reactiveDependencies.rxandroid
-  compile reactiveDependencies.rxjava
+  implementation reactiveDependencies.rxandroid
+  implementation reactiveDependencies.rxjava
 
-  compile elementalDependencies.butterknife
-  compile elementalDependencies.butterknifeProcessor
-  compile elementalDependencies.circleimageview
+  implementation elementalDependencies.butterknife
+  annotationProcessor elementalDependencies.butterknifeProcessor
+  implementation elementalDependencies.circleimageview
 
-  testCompile testingDependencies.junit
-  testCompile testingDependencies.mockito
-  testCompile testingDependencies.robolectric
+  testImplementation testingDependencies.junit
+  testImplementation testingDependencies.mockito
+  testImplementation testingDependencies.robolectric
 }
