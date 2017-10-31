@@ -52,7 +52,7 @@ dependencies {
   annotationProcessor elementalDependencies.butterknifeProcessor
   implementation elementalDependencies.circleimageview
 
-  testCompile testingDependencies.junit
-  testCompile testingDependencies.mockito
-  testCompile testingDependencies.robolectric
+  testImplementation testingDependencies.junit
+  testImplementation testingDependencies.mockito
+  testImplementation testingDependencies.robolectric
 }
