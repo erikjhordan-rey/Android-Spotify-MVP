@@ -13,7 +13,8 @@ class ApiInterceptor implements Interceptor {
     @Override public Response intercept(Chain chain) throws IOException {
 
         Request original = chain.request();
-        Request request = original.newBuilder().header(API_KEY, ACCESS_TOKEN).method(original.method(), original.body()).build();
+        Request request = original.newBuilder().header(API_KEY, ACCESS_TOKEN)
+            .method(original.method(), original.body()).build();
         return chain.proceed(request);
     }
 }

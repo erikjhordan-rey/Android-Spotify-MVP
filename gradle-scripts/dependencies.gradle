@@ -1,6 +1,6 @@
 ext {
 
-  supportLibrayVersion = '27.0.0'
+  supportLibrayVersion = '27.0.1'
 
   supportDependencies = [
 
@@ -11,7 +11,7 @@ ext {
 
   ]
 
-  squareVersion = '2.2.0'
+  squareVersion = '2.3.0'
   picassoVersion = '2.5.2'
 
   squareDependencies = [
@@ -23,13 +23,13 @@ ext {
   ]
 
   rxandroidVersion = '2.0.1'
-  rxjavaVersion = '2.0.2'
+  rxjavaVersion = '2.1.5'
 
   reactiveDependencies = [
       rxandroid: "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
       rxjava   : "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"]
 
-  butterknifeVersion = '8.4.0'
+  butterknifeVersion = '8.8.1'
   circleimageviewVersion = '1.3.0'
 
   elementalDependencies = [
