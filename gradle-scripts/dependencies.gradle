@@ -1,6 +1,6 @@
 ext {
 
-  supportLibrayVersion = '27.0.2'
+  supportLibrayVersion = '27.1.1'
 
   supportDependencies = [
 
@@ -22,8 +22,8 @@ ext {
       picasso        : "com.squareup.picasso:picasso:${picassoVersion}"
   ]
 
-  rxandroidVersion = '2.0.1'
-  rxjavaVersion = '2.1.5'
+  rxandroidVersion = '2.0.2'
+  rxjavaVersion = '2.1.7'
 
   reactiveDependencies = [
       rxandroid: "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
