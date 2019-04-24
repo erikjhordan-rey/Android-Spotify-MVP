@@ -37,10 +37,10 @@ android {
 
 dependencies {
 
-  implementation supportDependencies.design
-  implementation supportDependencies.appcompat
-  implementation supportDependencies.cardview
-  implementation supportDependencies.recyclerview
+  implementation androidXdependencies.appCompat
+  implementation androidXdependencies.material
+  implementation androidXdependencies.recyclerView
+  implementation androidXdependencies.cardView
 
   implementation squareDependencies.retrofit
   implementation squareDependencies.adapter_rx_java

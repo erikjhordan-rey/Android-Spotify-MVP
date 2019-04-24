@@ -25,7 +25,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,7 +80,8 @@ public class AudioPlayerService extends Service
    * interface that clients can use to interact with the service
    **/
 
-  @Nullable @Override public IBinder onBind(Intent intent) {
+  @Nullable
+  @Override public IBinder onBind(Intent intent) {
     return mediaPlayerBinder;
   }
 

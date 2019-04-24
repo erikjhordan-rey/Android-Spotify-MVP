@@ -17,24 +17,30 @@ package gdg.androidtitlan.spotifymvp.example.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.data.api.client.SpotifyClient;
@@ -45,8 +51,6 @@ import gdg.androidtitlan.spotifymvp.example.presenter.TracksPresenter;
 import gdg.androidtitlan.spotifymvp.example.view.adapter.TracksAdapter;
 import gdg.androidtitlan.spotifymvp.example.view.fragment.PlayerFragment;
 import gdg.androidtitlan.spotifymvp.example.view.utils.BlurEffectUtils;
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class TracksActivity extends AppCompatActivity
     implements TracksPresenter.View, AppBarLayout.OnOffsetChangedListener {
@@ -155,7 +159,7 @@ public class TracksActivity extends AppCompatActivity
 
   private void setupRecyclerView() {
     LinearLayoutManager linearLayoutManager =
-        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
     rv_tracks.setLayoutManager(linearLayoutManager);
     TracksAdapter adapter = new TracksAdapter();
     adapter.setItemClickListener(

@@ -16,19 +16,24 @@
 
 package gdg.androidtitlan.spotifymvp.example.view.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
-import gdg.androidtitlan.spotifymvp.R;
-import gdg.androidtitlan.spotifymvp.example.data.model.Track;
+
 import java.util.Collections;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import gdg.androidtitlan.spotifymvp.R;
+import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 
 public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksViewHolder> {
 
@@ -39,7 +44,8 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
     tracks = Collections.emptyList();
   }
 
-  @Override public TracksViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @NonNull
+  @Override public TracksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     final View itemView =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_track, parent, false);
     return new TracksViewHolder(itemView);
@@ -90,7 +96,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
     void onItemClick(List<Track> tracks, Track track, int position);
   }
 
-  public static class TracksViewHolder extends RecyclerView.ViewHolder {
+  static class TracksViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.iv_track) ImageView imageView;
     @BindView(R.id.txt_track_title) TextView txt_title_tracks;
@@ -98,7 +104,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
 
     View itemView;
 
-    public TracksViewHolder(View itemView) {
+    TracksViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
       this.itemView = itemView;

@@ -16,19 +16,24 @@ package gdg.androidtitlan.spotifymvp.example.view.adapter;
  * limitations under the License.
  */
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
-import gdg.androidtitlan.spotifymvp.R;
-import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
+
 import java.util.Collections;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import gdg.androidtitlan.spotifymvp.R;
+import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsViewHolder> {
 
@@ -39,13 +44,14 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
     artists = Collections.emptyList();
   }
 
-  @Override public ArtistsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @NonNull
+  @Override public ArtistsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     final View itemView =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_artist, parent, false);
     return new ArtistsViewHolder(itemView);
   }
 
-  @Override public void onBindViewHolder(ArtistsViewHolder holder, int position) {
+  @Override public void onBindViewHolder(@NonNull ArtistsViewHolder holder, int position) {
     Artist artist = artists.get(position);
     holder.artist = artist;
     holder.textView.setText(artist.name);
@@ -53,10 +59,11 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
     if (artist.artistImages.size() > 0) {
 
       for (int i = 0; i < artist.artistImages.size(); i++) {
-        if (artist.artistImages.get(i) != null && artist.artistImages.size() > 0) {
+        if (artist.artistImages.get(i) != null) {
+          artist.artistImages.size();
           Picasso.with(holder.imageView.getContext())
-              .load(artist.artistImages.get(0).url)
-              .into(holder.imageView);
+                  .load(artist.artistImages.get(0).url)
+                  .into(holder.imageView);
         }
       }
     } else {
@@ -88,7 +95,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
     void onItemClick(Artist artist, int position);
   }
 
-  public static class ArtistsViewHolder extends RecyclerView.ViewHolder {
+  static class ArtistsViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.img_view_artist_image) ImageView imageView;
     @BindView(R.id.txt_artist_name) TextView textView;
@@ -96,7 +103,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsV
     Artist artist;
     View itemView;
 
-    public ArtistsViewHolder(View itemView) {
+    ArtistsViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
       this.itemView = itemView;

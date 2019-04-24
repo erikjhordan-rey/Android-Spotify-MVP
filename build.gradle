@@ -2,35 +2,35 @@
 apply from: 'gradle-scripts/dependencies.gradle'
 
 buildscript {
-  repositories {
-    jcenter()
-    google()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.4.0'
-  }
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+    }
 }
 
 allprojects {
-  repositories {
-    jcenter()
-    google()
-  }
+    repositories {
+        jcenter()
+        google()
+    }
 
 
-  apply plugin: 'checkstyle'
+    apply plugin: 'checkstyle'
 
-  task checkstyle(type: Checkstyle) {
-    configFile file("${project.rootDir}/config/checkstyle.xml")
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
+    task checkstyle(type: Checkstyle) {
+        configFile file("${project.rootDir}/config/checkstyle.xml")
+        source 'src'
+        include '**/*.java'
+        exclude '**/gen/**'
 
-    classpath = files()
-  }
+        classpath = files()
+    }
 }
 
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }

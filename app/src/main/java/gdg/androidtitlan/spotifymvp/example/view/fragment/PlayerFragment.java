@@ -21,9 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +29,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import gdg.androidtitlan.spotifymvp.R;
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.PlayerInteractor;
@@ -46,8 +52,6 @@ import gdg.androidtitlan.spotifymvp.example.presenter.AudioPlayerPresenter;
 import gdg.androidtitlan.spotifymvp.example.view.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.view.utils.ServiceUtils;
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class PlayerFragment extends DialogFragment
     implements AudioPlayerPresenter.View, SeekBar.OnSeekBarChangeListener {
@@ -78,14 +82,16 @@ public class PlayerFragment extends DialogFragment
     return playerFragment;
   }
 
-  @NonNull @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
+  @NonNull
+  @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
     Dialog dialog = super.onCreateDialog(savedInstanceState);
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     return dialog;
   }
 
-  @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Nullable
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_audio_player, container, false);
     ButterKnife.bind(this, rootView);
 
@@ -109,15 +115,18 @@ public class PlayerFragment extends DialogFragment
     super.onDestroyView();
   }
 
-  @OnClick(R.id.ib_preview_player) public void previewTrack() {
+  @OnClick(R.id.ib_preview_player)
+  void previewTrack() {
     audioPlayerPresenter.onPreviewTrack();
   }
 
-  @OnClick(R.id.ib_next_player) public void nextTrack() {
+  @OnClick(R.id.ib_next_player)
+  void nextTrack() {
     audioPlayerPresenter.onNextTrack();
   }
 
-  @OnClick(R.id.ib_play_player) public void playTrack() {
+  @OnClick(R.id.ib_play_player)
+  void playTrack() {
     audioPlayerPresenter.onPlayPauseTrack();
   }
 

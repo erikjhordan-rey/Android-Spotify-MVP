@@ -19,12 +19,19 @@ Libraries used on the sample project
 
 # Access Token 
 
-The Spotify Api has been changed so now is required an Access Token.
+The Spotify Api has been changed an Access Token is required. The app sample probably will response `401 unauthorized code`.
 
-The class `Constans` has a variable `ACCESS_TOKEN` replace with your auth token if Spotify Api
-response `401 unauthorized code`.
+(Don't be afraid it's very easy get an access token)
 
-* Get Your Access Token from [Spotify Api Doc](https://developer.spotify.com/web-api/console/get-search-item/)
+
+1- * Get Your Access Token from [Spotify Api Doc](https://developer.spotify.com/web-api/console/get-search-item/)
+
+![](./art/token_spotify.png)
+
+2- The class `Constans` has a constant variable called `ACCESS_TOKEN` replace with your access token  
+
+
+3- Run the app, it should work!!
 
 
 # how does it work?

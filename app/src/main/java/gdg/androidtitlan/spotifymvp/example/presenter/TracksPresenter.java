@@ -18,6 +18,8 @@ package gdg.androidtitlan.spotifymvp.example.presenter;
 
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.TracksInteractor;
+import io.reactivex.disposables.Disposable;
+
 import java.util.List;
 
 public class TracksPresenter extends Presenter<TracksPresenter.View> {
@@ -35,14 +37,15 @@ public class TracksPresenter extends Presenter<TracksPresenter.View> {
 
   public void onSearchTracks(String string) {
     getView().showLoading();
-    interactor.loadData(string).subscribe(tracks -> {
-      if (!tracks.isEmpty() && tracks.size() > 0) {
+    Disposable disposable = interactor.loadData(string).subscribe(tracks -> {
+      if (!tracks.isEmpty()) {
         getView().hideLoading();
         getView().renderTracks(tracks);
       } else {
         getView().showTracksNotFoundMessage();
       }
     }, Throwable::printStackTrace);
+    addDisposableObserver(disposable);
   }
 
   public void launchArtistDetail(List<Track> tracks, Track track, int position) {

@@ -6,10 +6,12 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.widget.FrameLayout;
+
+import androidx.core.view.ViewCompat;
+
 import gdg.androidtitlan.spotifymvp.R;
 
 public class ShadowFrameLayout extends FrameLayout {
