@@ -23,16 +23,16 @@ import java.util.List;
 
 public class ArtistsPresenter extends Presenter<ArtistsPresenter.View> {
 
-  private ArtistsInteractor interactor;
+  private ArtistsInteractor artistsInteractor;
 
-  public ArtistsPresenter(ArtistsInteractor interactor) {
-    this.interactor = interactor;
+  public ArtistsPresenter(ArtistsInteractor artistsInteractor) {
+    this.artistsInteractor = artistsInteractor;
   }
 
   public void onSearchArtist(String name) {
     getView().showLoading();
-    Disposable disposable = interactor.searchArtists(name).subscribe(artists -> {
-      if (!artists.isEmpty() && artists.size() > 0) {
+    Disposable disposable = artistsInteractor.searchArtists(name).subscribe(artists -> {
+      if (!artists.isEmpty()) {
         getView().hideLoading();
         getView().renderArtists(artists);
       } else {
