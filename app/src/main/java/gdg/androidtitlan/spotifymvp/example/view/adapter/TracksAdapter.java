@@ -46,8 +46,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
 
   @NonNull
   @Override public TracksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    final View itemView =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_track, parent, false);
+    final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_track, parent, false);
     return new TracksViewHolder(itemView);
   }
 
@@ -60,10 +59,11 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
     if (track.album.trackImages.size() > 0) {
       holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
       for (int i = 0; i < track.album.trackImages.size(); i++) {
-        if (track.album.trackImages.get(i) != null && track.album.trackImages.size() > 0) {
+        if (track.album.trackImages.get(i) != null) {
+          track.album.trackImages.size();
           Picasso.with(holder.imageView.getContext())
-              .load(track.album.trackImages.get(0).url)
-              .into(holder.imageView);
+                  .load(track.album.trackImages.get(0).url)
+                  .into(holder.imageView);
         }
       }
     } else {
