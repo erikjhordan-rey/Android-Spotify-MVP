@@ -21,9 +21,6 @@ Libraries used on the sample project
 
 The Spotify Api has been changed an Access Token is required. The app sample probably will response `401 unauthorized code`.
 
-(Don't be afraid it's very easy get an access token)
-
-
 1- * Get Your Access Token from [Spotify Api Doc](https://developer.spotify.com/web-api/console/get-search-item/)
 
 ![](./art/token_spotify.png)
@@ -45,7 +42,7 @@ The Spotify Api has been changed an Access Token is required. The app sample pro
 [4]: http://square.github.io/retrofit/
 [3]: http://jakewharton.github.io/butterknife/
 [2]: http://developer.android.com/intl/es/tools/support-library/index.html
-[1]: https://erikcaffrey.github.io/ANDROID-mvp/
+[1]: https://erikjhordan-rey.github.io/blog/2015/11/02/ANDROID-mvp.html
 
 
 Do you want to contribute?
@@ -57,7 +54,7 @@ Feel free to report or add any useful feature, I will be glad to improve it with
 Developed By
 ------------
 
-* Erik Jhordan Rey  - <erikjhordan.rey@gmail.com> or <erik.gonzalez@schibsted.com.mx>
+* Erik Jhordan Rey  - <erikjhordan.rey@gmail.com>
 
 License
 -------
