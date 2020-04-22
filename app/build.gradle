@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "gdg.androidtitlan.musicmvp"
+        applicationId "io.github.erikjhordanrey.mvp"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1

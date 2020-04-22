@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="gdg.androidtitlan.spotifymvp">
+    package="io.github.erikjhordanrey.mvp">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name=".example.view.activity.ArtistsActivity"
+            android:name=".view.activity.ArtistsActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -26,13 +26,13 @@
         </activity>
 
         <activity
-            android:name=".example.view.activity.TracksActivity"
+            android:name=".view.activity.TracksActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
 
-        <service android:name=".example.view.service.AudioPlayerService" />
+        <service android:name=".view.service.AudioPlayerService" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
