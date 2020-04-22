@@ -27,9 +27,9 @@ import retrofit2.http.Query;
 
 public interface SpotifyRetrofitService {
 
-  @GET(Constants.Endpoint.ARTIST_SEARCH) Observable<List<Artist>> searchArtist(
-      @Query(Constants.Params.QUERY_SEARCH) String artist);
+    @GET(Constants.Endpoint.ARTIST_SEARCH)
+    Observable<List<Artist>> searchArtist(@Query(Constants.Params.QUERY_SEARCH) String artist);
 
-  @GET(Constants.Endpoint.ARTIST_TRACKS) Observable<List<Track>> getTracks(
-      @Path(Constants.Params.ARTIST_ID) String artistId);
+    @GET(Constants.Endpoint.ARTIST_TRACKS)
+    Observable<List<Track>> getTracks(@Path(Constants.Params.ARTIST_ID) String artistId);
 }

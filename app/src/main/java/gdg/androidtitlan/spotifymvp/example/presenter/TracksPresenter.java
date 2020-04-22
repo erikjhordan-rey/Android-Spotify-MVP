@@ -24,46 +24,47 @@ import java.util.List;
 
 public class TracksPresenter extends Presenter<TracksPresenter.View> {
 
-  private TracksInteractor interactor;
+    private final TracksInteractor tracksInteractor;
 
-  public TracksPresenter(TracksInteractor interactor) {
-    this.interactor = interactor;
-  }
+    public TracksPresenter(TracksInteractor tracksInteractor) {
+        this.tracksInteractor = tracksInteractor;
+    }
 
-  @Override public void terminate() {
-    super.terminate();
-    setView(null);
-  }
+    @Override
+    public void terminate() {
+        super.terminate();
+        setView(null);
+    }
 
-  public void onSearchTracks(String string) {
-    getView().showLoading();
-    Disposable disposable = interactor.loadData(string).subscribe(tracks -> {
-      if (!tracks.isEmpty()) {
-        getView().hideLoading();
-        getView().renderTracks(tracks);
-      } else {
-        getView().showTracksNotFoundMessage();
-      }
-    }, Throwable::printStackTrace);
-    addDisposableObserver(disposable);
-  }
+    public void onSearchTracks(String string) {
+        getView().showLoading();
+        Disposable disposable = tracksInteractor.loadData(string).subscribe(tracks -> {
+            if (!tracks.isEmpty()) {
+                getView().hideLoading();
+                getView().renderTracks(tracks);
+            } else {
+                getView().showTracksNotFoundMessage();
+            }
+        }, Throwable::printStackTrace);
+        addDisposableObserver(disposable);
+    }
 
-  public void launchArtistDetail(List<Track> tracks, Track track, int position) {
-    getView().launchTrackDetail(tracks, track, position);
-  }
+    public void launchArtistDetail(List<Track> tracks, Track track, int position) {
+        getView().launchTrackDetail(tracks, track, position);
+    }
 
-  public interface View extends Presenter.View {
+    public interface View extends Presenter.View {
 
-    void showLoading();
+        void showLoading();
 
-    void hideLoading();
+        void hideLoading();
 
-    void showTracksNotFoundMessage();
+        void showTracksNotFoundMessage();
 
-    void showConnectionErrorMessage();
+        void showConnectionErrorMessage();
 
-    void renderTracks(List<Track> tracks);
+        void renderTracks(List<Track> tracks);
 
-    void launchTrackDetail(List<Track> tracks, Track track, int position);
-  }
+        void launchTrackDetail(List<Track> tracks, Track track, int position);
+    }
 }

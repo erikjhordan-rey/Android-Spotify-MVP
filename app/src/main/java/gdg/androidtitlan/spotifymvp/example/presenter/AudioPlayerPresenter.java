@@ -22,84 +22,92 @@ import gdg.androidtitlan.spotifymvp.example.interactor.PlayerInteractor;
 import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 
 public class AudioPlayerPresenter extends Presenter<AudioPlayerPresenter.View>
-    implements AudioFinishedListener {
+        implements AudioFinishedListener {
 
-  private PlayerInteractor playerInteractor;
-  private ServiceConnection serviceConnection;
+    private final PlayerInteractor playerInteractor;
+    private ServiceConnection serviceConnection;
 
-  public AudioPlayerPresenter(PlayerInteractor playerInteractor) {
-    this.playerInteractor = playerInteractor;
-    this.playerInteractor.setAudioFinishedListener(this);
-  }
+    public AudioPlayerPresenter(PlayerInteractor playerInteractor) {
+        this.playerInteractor = playerInteractor;
+        this.playerInteractor.setAudioFinishedListener(this);
+    }
 
-  public void onPreviewTrack() {
-    playerInteractor.onPreview();
-  }
+    public void onPreviewTrack() {
+        playerInteractor.onPreview();
+    }
 
-  public void onNextTrack() {
-    playerInteractor.onNext();
-  }
+    public void onNextTrack() {
+        playerInteractor.onNext();
+    }
 
-  public void onPlayPauseTrack() {
-    playerInteractor.onPlayStop();
-  }
+    public void onPlayPauseTrack() {
+        playerInteractor.onPlayStop();
+    }
 
-  public void onStartAudioService(String trackUrl) {
-    getView().onStartAudioService(trackUrl, serviceConnection);
-  }
+    public void onStartAudioService(String trackUrl) {
+        getView().onStartAudioService(trackUrl, serviceConnection);
+    }
 
-  public void setInfoMediaPlayer(int trackPosition) {
-    getView().setInfoTrackPlayer(trackPosition);
-  }
+    public void setInfoMediaPlayer(int trackPosition) {
+        getView().setInfoTrackPlayer(trackPosition);
+    }
 
-  @Override public void terminate() {
-    super.terminate();
-    playerInteractor.destroyAudioService();
-    setView(null);
-  }
+    @Override
+    public void terminate() {
+        super.terminate();
+        playerInteractor.destroyAudioService();
+        setView(null);
+    }
 
-  @Override public void onPlay() {
-    getView().isPlay();
-  }
+    @Override
+    public void onPlay() {
+        getView().isPlay();
+    }
 
-  @Override public void onPause() {
-    getView().isPause();
-  }
+    @Override
+    public void onPause() {
+        getView().isPause();
+    }
 
-  @Override public void onSetTimeStart(int trackCurrentPosition) {
-    getView().setTimeStart(trackCurrentPosition);
-  }
+    @Override
+    public void onSetTimeStart(int trackCurrentPosition) {
+        getView().setTimeStart(trackCurrentPosition);
+    }
 
-  @Override public void onSetTimeFinished(AudioPlayerService audioPlayerService) {
-    getView().setTimeFinished(audioPlayerService);
-  }
+    @Override
+    public void onSetTimeFinished(AudioPlayerService audioPlayerService) {
+        getView().setTimeFinished(audioPlayerService);
+    }
 
-  @Override public void onResetTrackDuration() {
-    getView().onResetTrackDuration();
-  }
+    @Override
+    public void onResetTrackDuration() {
+        getView().onResetTrackDuration();
+    }
 
-  @Override public void onSetInfoTrackPlayer(int trackPosition) {
-    getView().setInfoTrackPlayer(trackPosition);
-  }
+    @Override
+    public void onSetInfoTrackPlayer(int trackPosition) {
+        getView().setInfoTrackPlayer(trackPosition);
+    }
 
-  @Override public void onServiceConnection(ServiceConnection serviceConnection) {
-    this.serviceConnection = serviceConnection;
-  }
+    @Override
+    public void onServiceConnection(ServiceConnection serviceConnection) {
+        this.serviceConnection = serviceConnection;
+    }
 
-  public interface View extends Presenter.View {
+    public interface View extends Presenter.View {
 
-    void onStartAudioService(String trackUrl, ServiceConnection serviceConnection);
+        void onStartAudioService(String trackUrl, ServiceConnection serviceConnection);
 
-    void setInfoTrackPlayer(int trackPosition);
+        void setInfoTrackPlayer(int trackPosition);
 
-    void isPlay();
+        void isPlay();
 
-    void isPause();
+        void isPause();
 
-    void setTimeStart(int trackCurrentPosition);
+        void setTimeStart(int trackCurrentPosition);
 
-    void setTimeFinished(AudioPlayerService audioPlayerService);
+        void setTimeFinished(AudioPlayerService audioPlayerService);
 
-    void onResetTrackDuration();
-  }
+        void onResetTrackDuration();
+    }
 }

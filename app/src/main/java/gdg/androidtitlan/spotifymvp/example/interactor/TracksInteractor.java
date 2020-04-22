@@ -23,13 +23,13 @@ import java.util.List;
 
 public class TracksInteractor {
 
-  private SpotifyService spotifyService;
+    private final SpotifyService spotifyService;
 
-  public TracksInteractor(SpotifyService spotifyService) {
-    this.spotifyService = spotifyService;
-  }
+    public TracksInteractor(SpotifyService spotifyService) {
+        this.spotifyService = spotifyService;
+    }
 
-  public Observable<List<Track>> loadData(String artistId) {
-    return spotifyService.getTracks(artistId);
-  }
+    public Observable<List<Track>> loadData(String artistId) {
+        return spotifyService.getTracks(artistId);
+    }
 }

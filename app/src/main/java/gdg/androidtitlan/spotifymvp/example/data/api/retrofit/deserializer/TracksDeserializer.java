@@ -10,10 +10,9 @@ import java.util.List;
 
 public class TracksDeserializer<T> implements ListDeserializer<T> {
 
-  @Override
-  public List<T> deserialize(JsonElement je, Type typeOfT, JsonDeserializationContext context)
-      throws JsonParseException {
-    JsonElement trackJsonArray = je.getAsJsonObject().get(Constants.Deserializer.TRACKS);
-    return new Gson().fromJson(trackJsonArray, typeOfT);
-  }
+    @Override
+    public List<T> deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        JsonElement trackJsonArray = jsonElement.getAsJsonObject().get(Constants.Deserializer.TRACKS);
+        return new Gson().fromJson(trackJsonArray, typeOfT);
+    }
 }

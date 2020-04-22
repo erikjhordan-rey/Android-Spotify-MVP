@@ -10,15 +10,17 @@ import java.util.List;
 
 public class SpotifyClient extends SpotifyRetrofitClient implements SpotifyService {
 
-  @Override public Observable<List<Artist>> search(String query) {
-    return getSpotifyService().searchArtist(query)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread());
-  }
+    @Override
+    public Observable<List<Artist>> search(String query) {
+        return getSpotifyService().searchArtist(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
-  @Override public Observable<List<Track>> getTracks(String artistId) {
-    return getSpotifyService().getTracks(artistId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread());
-  }
+    @Override
+    public Observable<List<Track>> getTracks(String artistId) {
+        return getSpotifyService().getTracks(artistId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

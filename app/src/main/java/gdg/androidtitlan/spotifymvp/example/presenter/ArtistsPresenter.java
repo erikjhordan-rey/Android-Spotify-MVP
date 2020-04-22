@@ -23,49 +23,50 @@ import java.util.List;
 
 public class ArtistsPresenter extends Presenter<ArtistsPresenter.View> {
 
-  private ArtistsInteractor artistsInteractor;
+    private final ArtistsInteractor artistsInteractor;
 
-  public ArtistsPresenter(ArtistsInteractor artistsInteractor) {
-    this.artistsInteractor = artistsInteractor;
-  }
+    public ArtistsPresenter(ArtistsInteractor artistsInteractor) {
+        this.artistsInteractor = artistsInteractor;
+    }
 
-  public void onSearchArtist(String name) {
-    getView().showLoading();
-    Disposable disposable = artistsInteractor.searchArtists(name).subscribe(artists -> {
-      if (!artists.isEmpty()) {
-        getView().hideLoading();
-        getView().renderArtists(artists);
-      } else {
-        getView().showArtistNotFoundMessage();
-      }
-    }, Throwable::printStackTrace);
+    public void onSearchArtist(String name) {
+        getView().showLoading();
+        Disposable disposable = artistsInteractor.searchArtists(name).subscribe(artists -> {
+            if (!artists.isEmpty()) {
+                getView().hideLoading();
+                getView().renderArtists(artists);
+            } else {
+                getView().showArtistNotFoundMessage();
+            }
+        }, Throwable::printStackTrace);
 
-    addDisposableObserver(disposable);
-  }
+        addDisposableObserver(disposable);
+    }
 
-  public void launchArtistDetail(Artist artist) {
-    getView().launchArtistDetail(artist);
-  }
+    public void launchArtistDetail(Artist artist) {
+        getView().launchArtistDetail(artist);
+    }
 
-  @Override public void terminate() {
-    super.terminate();
-    setView(null);
-  }
+    @Override
+    public void terminate() {
+        super.terminate();
+        setView(null);
+    }
 
-  public interface View extends Presenter.View {
+    public interface View extends Presenter.View {
 
-    void showLoading();
+        void showLoading();
 
-    void hideLoading();
+        void hideLoading();
 
-    void showArtistNotFoundMessage();
+        void showArtistNotFoundMessage();
 
-    void showConnectionErrorMessage();
+        void showConnectionErrorMessage();
 
-    void showServerError();
+        void showServerError();
 
-    void renderArtists(List<Artist> artists);
+        void renderArtists(List<Artist> artists);
 
-    void launchArtistDetail(Artist artist);
-  }
+        void launchArtistDetail(Artist artist);
+    }
 }

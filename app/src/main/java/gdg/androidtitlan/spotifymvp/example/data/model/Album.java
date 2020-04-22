@@ -23,6 +23,8 @@ import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized
 import static gdg.androidtitlan.spotifymvp.example.data.api.Constants.Serialized.NAME;
 
 public class Album {
-  @SerializedName(NAME) public String albumName;
-  @SerializedName(IMAGES) public List<ArtistImages> trackImages;
+    @SerializedName(NAME)
+    public String albumName;
+    @SerializedName(IMAGES)
+    public List<ArtistImages> trackImages;
 }
