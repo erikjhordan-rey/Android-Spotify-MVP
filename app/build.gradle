@@ -52,8 +52,6 @@ dependencies {
     implementation reactiveDependencies.rxandroid
     implementation reactiveDependencies.rxjava
 
-    implementation elementalDependencies.butterknife
-    annotationProcessor elementalDependencies.butterknifeProcessor
     implementation elementalDependencies.circleimageview
 
     testImplementation testingDependencies.junit

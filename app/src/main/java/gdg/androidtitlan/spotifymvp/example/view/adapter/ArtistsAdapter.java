@@ -19,94 +19,88 @@ package gdg.androidtitlan.spotifymvp.example.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
-
+import gdg.androidtitlan.spotifymvp.databinding.ItemArtistBinding;
+import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import gdg.androidtitlan.spotifymvp.R;
-import gdg.androidtitlan.spotifymvp.example.data.model.Artist;
-
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistsViewHolder> {
 
-  private List<Artist> artists;
-  private ItemClickListener itemClickListener;
+    private List<Artist> artists;
+    private ItemClickListener itemClickListener;
 
-  public ArtistsAdapter() {
-    artists = Collections.emptyList();
-  }
+    public ArtistsAdapter() {
+        artists = Collections.emptyList();
+    }
 
-  @NonNull
-  @Override public ArtistsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    final View itemView =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_artist, parent, false);
-    return new ArtistsViewHolder(itemView);
-  }
+    @NonNull
+    @Override
+    public ArtistsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ArtistsViewHolder(ItemArtistBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    }
 
-  @Override public void onBindViewHolder(@NonNull ArtistsViewHolder holder, int position) {
-    Artist artist = artists.get(position);
-    holder.artist = artist;
-    holder.textView.setText(artist.name);
+    @Override
+    public void onBindViewHolder(@NonNull ArtistsViewHolder holder, int position) {
+        Artist artist = artists.get(position);
+        holder.render(artist);
+        holder.itemView.setOnClickListener((View view) -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(artist, position);
+            }
+        });
+    }
 
-    if (artist.artistImages.size() > 0) {
+    @Override
+    public int getItemCount() {
+        return artists.size();
+    }
 
-      for (int i = 0; i < artist.artistImages.size(); i++) {
-        if (artist.artistImages.get(i) != null) {
-          artist.artistImages.size();
-          Picasso.with(holder.imageView.getContext())
-                  .load(artist.artistImages.get(0).url)
-                  .into(holder.imageView);
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(Artist artist, int position);
+    }
+
+    static class ArtistsViewHolder extends RecyclerView.ViewHolder {
+
+        private ItemArtistBinding binding;
+
+        ArtistsViewHolder(ItemArtistBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
-      }
-    } else {
-      final String imageHolder =
-          "http://www.iphonemode.com/wp-content/uploads/2016/07/Spotify-new-logo.jpg";
-      Picasso.with(holder.imageView.getContext()).load(imageHolder).into(holder.imageView);
+
+        private void render(Artist artist) {
+            binding.txtArtistName.setText(artist.name);
+
+            if (artist.artistImages.size() > 0) {
+
+                for (int i = 0; i < artist.artistImages.size(); i++) {
+                    if (artist.artistImages.get(i) != null) {
+                        artist.artistImages.size();
+                        renderImage(artist.artistImages.get(0).url);
+                    }
+                }
+            } else {
+                final String imageHolder =
+                        "http://www.iphonemode.com/wp-content/uploads/2016/07/Spotify-new-logo.jpg";
+                renderImage(imageHolder);
+            }
+        }
+
+        private void renderImage(String url) {
+            Picasso.with(binding.imgViewArtistImage.getContext())
+                    .load(url)
+                    .into(binding.imgViewArtistImage);
+        }
     }
-
-    holder.itemView.setOnClickListener((View view) -> {
-      if (itemClickListener != null) {
-        itemClickListener.onItemClick(artist, position);
-      }
-    });
-  }
-
-  @Override public int getItemCount() {
-    return artists.size();
-  }
-
-  public void setArtists(List<Artist> artists) {
-    this.artists = artists;
-  }
-
-  public void setItemClickListener(ItemClickListener itemClickListener) {
-    this.itemClickListener = itemClickListener;
-  }
-
-  public interface ItemClickListener {
-    void onItemClick(Artist artist, int position);
-  }
-
-  static class ArtistsViewHolder extends RecyclerView.ViewHolder {
-
-    @BindView(R.id.img_view_artist_image) ImageView imageView;
-    @BindView(R.id.txt_artist_name) TextView textView;
-
-    Artist artist;
-    View itemView;
-
-    ArtistsViewHolder(View itemView) {
-      super(itemView);
-      ButterKnife.bind(this, itemView);
-      this.itemView = itemView;
-    }
-  }
 }

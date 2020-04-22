@@ -25,206 +25,197 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
-
-import java.lang.reflect.Type;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import gdg.androidtitlan.spotifymvp.R;
+import gdg.androidtitlan.spotifymvp.databinding.FragmentAudioPlayerBinding;
 import gdg.androidtitlan.spotifymvp.example.data.model.Track;
 import gdg.androidtitlan.spotifymvp.example.interactor.PlayerInteractor;
 import gdg.androidtitlan.spotifymvp.example.presenter.AudioPlayerPresenter;
 import gdg.androidtitlan.spotifymvp.example.view.activity.TracksActivity;
 import gdg.androidtitlan.spotifymvp.example.view.service.AudioPlayerService;
 import gdg.androidtitlan.spotifymvp.example.view.utils.ServiceUtils;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class PlayerFragment extends DialogFragment
-    implements AudioPlayerPresenter.View, SeekBar.OnSeekBarChangeListener {
+        implements AudioPlayerPresenter.View, SeekBar.OnSeekBarChangeListener {
 
-  @BindView(R.id.iv_album_player) ImageView iv_album_player;
-  @BindView(R.id.txt_track_title_player) TextView txt_track_title_player;
-  @BindView(R.id.txt_album_title_player) TextView txt_album_title_player;
-  @BindView(R.id.sb_time_progress_player) SeekBar sb_time_progress_player;
-  @BindView(R.id.txt_time_start) TextView txt_time_start;
-  @BindView(R.id.txt_time_end) TextView txt_time_end;
-  @BindView(R.id.ib_play_player) ImageButton ib_play_player;
+    private AudioPlayerService audioPlayerService;
+    private boolean isPlayerPlaying = false;
+    private boolean isPlayerPaused = false;
+    private int trackCurrentPosition;
 
-  private AudioPlayerService audioPlayerService;
-  private boolean isPlayerPlaying = false;
-  private boolean isPlayerPaused = false;
-  private int trackCurrentPosition;
+    private List<Track> trackList;
+    private int trackPosition;
+    private AudioPlayerPresenter audioPlayerPresenter;
 
-  private List<Track> trackList;
-  private int trackPosition;
-  private AudioPlayerPresenter audioPlayerPresenter;
-
-  public static PlayerFragment newInstance(String tracks, int position) {
-    PlayerFragment playerFragment = new PlayerFragment();
-    Bundle bundle = new Bundle();
-    bundle.putString(TracksActivity.EXTRA_TRACKS, tracks);
-    bundle.putInt(TracksActivity.EXTRA_TRACK_POSITION, position);
-    playerFragment.setArguments(bundle);
-    return playerFragment;
-  }
-
-  @NonNull
-  @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
-    Dialog dialog = super.onCreateDialog(savedInstanceState);
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    return dialog;
-  }
-
-  @Nullable
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                     Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.fragment_audio_player, container, false);
-    ButterKnife.bind(this, rootView);
-
-    trackList = getTrackList(getArguments().getString(TracksActivity.EXTRA_TRACKS));
-    trackPosition = getArguments().getInt(TracksActivity.EXTRA_TRACK_POSITION);
-    audioPlayerPresenter =
-        new AudioPlayerPresenter(new PlayerInteractor(trackList, getContext()));
-    audioPlayerPresenter.setView(this);
-
-    audioPlayerPresenter.setInfoMediaPlayer(trackPosition);
-    audioPlayerPresenter.onStartAudioService(trackList.get(trackPosition).preview_url);
-
-    return rootView;
-  }
-
-  @Override public void onDestroyView() {
-    if (getDialog() != null && getRetainInstance()) {
-      getDialog().setDismissMessage(null);
+    public static PlayerFragment newInstance(String tracks, int position) {
+        PlayerFragment playerFragment = new PlayerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TracksActivity.EXTRA_TRACKS, tracks);
+        bundle.putInt(TracksActivity.EXTRA_TRACK_POSITION, position);
+        playerFragment.setArguments(bundle);
+        return playerFragment;
     }
-    audioPlayerPresenter.terminate();
-    super.onDestroyView();
-  }
 
-  @OnClick(R.id.ib_preview_player)
-  void previewTrack() {
-    audioPlayerPresenter.onPreviewTrack();
-  }
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
 
-  @OnClick(R.id.ib_next_player)
-  void nextTrack() {
-    audioPlayerPresenter.onNextTrack();
-  }
+    private FragmentAudioPlayerBinding binding;
 
-  @OnClick(R.id.ib_play_player)
-  void playTrack() {
-    audioPlayerPresenter.onPlayPauseTrack();
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentAudioPlayerBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
-  @Override public void setInfoTrackPlayer(int trackPosition) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        trackList = getTrackList(getArguments().getString(TracksActivity.EXTRA_TRACKS));
+        trackPosition = getArguments().getInt(TracksActivity.EXTRA_TRACK_POSITION);
+        setupPresenter();
+        setupUi();
+    }
 
-    txt_track_title_player.setText(trackList.get(trackPosition).name);
-    txt_album_title_player.setText(trackList.get(trackPosition).album.albumName);
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance()) getDialog().setDismissMessage(null);
+        audioPlayerPresenter.terminate();
+        super.onDestroyView();
+    }
 
-    if (trackList.get(trackPosition).album.trackImages.size() > 0) {
-      for (int i = 0; i < trackList.get(trackPosition).album.trackImages.size(); i++) {
-        if (trackList.get(i) != null && trackList.get(trackPosition).album.trackImages.size() > 0) {
-          Picasso.with(getActivity())
-              .load(trackList.get(trackPosition).album.trackImages.get(0).url)
-              .into(iv_album_player);
+    @Override
+    public void onDestroy() {
+        audioPlayerPresenter.terminate();
+        super.onDestroy();
+    }
+
+    private void setupPresenter() {
+        audioPlayerPresenter = new AudioPlayerPresenter(new PlayerInteractor(trackList, getContext()));
+        audioPlayerPresenter.setView(this);
+        audioPlayerPresenter.setInfoMediaPlayer(trackPosition);
+        audioPlayerPresenter.onStartAudioService(trackList.get(trackPosition).preview_url);
+    }
+
+    private void setupUi() {
+        binding.ibPreviewPlayer.setOnClickListener(v -> audioPlayerPresenter.onPreviewTrack());
+        binding.ibNextPlayer.setOnClickListener(v -> audioPlayerPresenter.onNextTrack());
+        binding.ibPlayPlayer.setOnClickListener(v -> audioPlayerPresenter.onPlayPauseTrack());
+    }
+
+    @Override
+    public void setInfoTrackPlayer(int trackPosition) {
+        binding.txtTrackTitlePlayer.setText(trackList.get(trackPosition).name);
+        binding.txtAlbumTitlePlayer.setText(trackList.get(trackPosition).album.albumName);
+
+        if (trackList.get(trackPosition).album.trackImages.size() > 0) {
+            for (int i = 0; i < trackList.get(trackPosition).album.trackImages.size(); i++) {
+                if (trackList.get(i) != null && trackList.get(trackPosition).album.trackImages.size() > 0) {
+                    Picasso.with(getActivity())
+                            .load(trackList.get(trackPosition).album.trackImages.get(0).url)
+                            .into(binding.ivAlbumPlayer);
+                }
+            }
+        } else {
+            Picasso.with(getActivity())
+                    .load("http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png")
+                    .into(binding.ivAlbumPlayer);
         }
-      }
-    } else {
-      Picasso.with(getActivity())
-          .load("http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png")
-          .into(iv_album_player);
     }
-  }
 
-  @Override public void onDestroy() {
-    audioPlayerPresenter.terminate();
-    super.onDestroy();
-  }
-
-  private List<Track> getTrackList(String tracks) {
-    Gson gson = new GsonBuilder().create();
-    Type trackType = new TypeToken<List<Track>>() {
-    }.getType();
-    return gson.fromJson(tracks, trackType);
-  }
-
-  @Override public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-    txt_time_start.setText("00:" + String.format("%02d", i));
-    trackCurrentPosition = i;
-  }
-
-  @Override public void onStartTrackingTouch(SeekBar seekBar) {
-    if (isPlayerPlaying) {
-      audioPlayerService.noUpdateUI();
+    private List<Track> getTrackList(String tracks) {
+        Gson gson = new GsonBuilder().create();
+        Type trackType = new TypeToken<List<Track>>() {
+        }.getType();
+        return gson.fromJson(tracks, trackType);
     }
-  }
 
-  @Override public void onStopTrackingTouch(SeekBar seekBar) {
-    trackCurrentPosition = seekBar.getProgress();
-    if (audioPlayerService != null) {
-      audioPlayerService.toSeekTrack(trackCurrentPosition, isPlayerPaused);
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        binding.txtTimeStart.setText("00:" + String.format("%02d", i));
+        trackCurrentPosition = i;
     }
-  }
 
-  @Override public void onStartAudioService(String trackUrl, ServiceConnection serviceConnection) {
-
-    Intent serviceIntent = new Intent(getActivity(), AudioPlayerService.class);
-    serviceIntent.putExtra(AudioPlayerService.EXTRA_TRACK_PREVIEW_URL, trackUrl);
-
-    if (ServiceUtils.isAudioPlayerServiceRunning(AudioPlayerService.class, getActivity())
-        && !isPlayerPlaying) {
-      trackCurrentPosition = 0;
-      getActivity().getApplicationContext().stopService(serviceIntent);
-      getActivity().getApplicationContext().startService(serviceIntent);
-    } else if (!ServiceUtils.isAudioPlayerServiceRunning(AudioPlayerService.class, getActivity())) {
-      trackCurrentPosition = 0;
-      getActivity().getApplicationContext().startService(serviceIntent);
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        if (isPlayerPlaying) {
+            audioPlayerService.noUpdateUI();
+        }
     }
-    if (audioPlayerService == null) {
-      getActivity().getApplicationContext()
-          .bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        trackCurrentPosition = seekBar.getProgress();
+        if (audioPlayerService != null) {
+            audioPlayerService.toSeekTrack(trackCurrentPosition, isPlayerPaused);
+        }
     }
-  }
 
-  @Override public void isPlay() {
-    ib_play_player.setImageResource(android.R.drawable.ic_media_play);
-  }
+    @Override
+    public void onStartAudioService(String trackUrl, ServiceConnection serviceConnection) {
 
-  @Override public void isPause() {
-    ib_play_player.setImageResource(android.R.drawable.ic_media_pause);
-  }
+        Intent serviceIntent = new Intent(getActivity(), AudioPlayerService.class);
+        serviceIntent.putExtra(AudioPlayerService.EXTRA_TRACK_PREVIEW_URL, trackUrl);
 
-  @Override public void setTimeStart(int trackCurrentPosition) {
-    sb_time_progress_player.setProgress(trackCurrentPosition);
-    txt_time_start.setText("00:" + String.format("%02d", trackCurrentPosition));
-  }
+        if (ServiceUtils.isAudioPlayerServiceRunning(AudioPlayerService.class, requireActivity())
+                && !isPlayerPlaying) {
+            trackCurrentPosition = 0;
+            getActivity().getApplicationContext().stopService(serviceIntent);
+            getActivity().getApplicationContext().startService(serviceIntent);
+        } else if (!ServiceUtils.isAudioPlayerServiceRunning(AudioPlayerService.class, requireActivity())) {
+            trackCurrentPosition = 0;
+            getActivity().getApplicationContext().startService(serviceIntent);
+        }
+        if (audioPlayerService == null) {
+            getActivity().getApplicationContext()
+                    .bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        }
+    }
 
-  @Override public void setTimeFinished(AudioPlayerService audioPlayerService) {
-    sb_time_progress_player.setMax(audioPlayerService.getTrackDuration());
-    txt_time_end.setText(audioPlayerService.getTrackDurationString());
-  }
+    @Override
+    public void isPlay() {
+        binding.ibPlayPlayer.setImageResource(android.R.drawable.ic_media_play);
+    }
 
-  @Override public void onResetTrackDuration() {
-    sb_time_progress_player.setProgress(0);
-    txt_time_start.setText("");
-    txt_time_end.setText("");
-  }
+    @Override
+    public void isPause() {
+        binding.ibPlayPlayer.setImageResource(android.R.drawable.ic_media_pause);
+    }
 
-  @Override public Context context() {
-    return getActivity();
-  }
+    @Override
+    public void setTimeStart(int trackCurrentPosition) {
+        binding.sbTimeProgressPlayer.setProgress(trackCurrentPosition);
+        binding.txtTimeStart.setText("00:" + String.format("%02d", trackCurrentPosition));
+    }
+
+    @Override
+    public void setTimeFinished(AudioPlayerService audioPlayerService) {
+        binding.sbTimeProgressPlayer.setMax(audioPlayerService.getTrackDuration());
+        binding.txtTimeEnd.setText(audioPlayerService.getTrackDurationString());
+    }
+
+    @Override
+    public void onResetTrackDuration() {
+        binding.sbTimeProgressPlayer.setProgress(0);
+        binding.txtTimeStart.setText("");
+        binding.txtTimeEnd.setText("");
+    }
+
+    @Override
+    public Context context() {
+        return getActivity();
+    }
 }

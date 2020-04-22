@@ -27,12 +27,9 @@ ext {
             rxandroid: "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
             rxjava   : "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"]
 
-    butterknifeVersion = '10.1.0'
     circleimageviewVersion = '3.1.0'
 
     elementalDependencies = [
-            butterknife         : "com.jakewharton:butterknife:${butterknifeVersion}",
-            butterknifeProcessor: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
             circleimageview     : "de.hdodenhof:circleimageview:${circleimageviewVersion}"
     ]
 
