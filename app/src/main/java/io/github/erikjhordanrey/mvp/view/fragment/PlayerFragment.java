@@ -92,7 +92,9 @@ public class PlayerFragment extends DialogFragment
 
     @Override
     public void onDestroyView() {
-        if (getDialog() != null && getRetainInstance()) getDialog().setDismissMessage(null);
+        if (getDialog() != null && getRetainInstance()) {
+            getDialog().setDismissMessage(null);
+        }
         audioPlayerPresenter.terminate();
         super.onDestroyView();
     }
