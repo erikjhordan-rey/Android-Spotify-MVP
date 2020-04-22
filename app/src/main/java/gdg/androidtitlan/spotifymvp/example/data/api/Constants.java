@@ -24,7 +24,8 @@ public class Constants {
   public static final String API_KEY = "Authorization";
 
   //This access token shouldn't be exposed, use it like a professional developer
-  public static final String ACCESS_TOKEN = "Bearer BQDHWAV3RaSxtD3He3szA7fAlY1MNM-PykmAt6tUO34tiz92rWKTOl1-hFzJlGoqyTIVRrPEUiUd5X98dE8qHrJ82z1Mz8zn8HYR-X_U99p6zjAxzvVsxwxndAqswDIWLIlcqKGssFoHFW4I";
+  public static final String ACCESS_TOKEN = "Bearer BQDHWAV3RaSxtD3He3szA7fAlY1MNM-PykmAt6tUO34tiz92rWKTOl1-hFzJlGoqyTIVRrPEUiUd5X98dE8" +
+          "qHrJ82z1Mz8zn8HYR-X_U99p6zjAxzvVsxwxndAqswDIWLIlcqKGssFoHFW4I";
 
   public static final class Endpoint {
 
