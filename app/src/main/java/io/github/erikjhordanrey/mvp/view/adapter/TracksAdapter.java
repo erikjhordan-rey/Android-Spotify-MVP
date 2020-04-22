@@ -88,7 +88,9 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TracksView
             if (track.album.trackImages.size() > 0) {
                 binding.ivTrack.setScaleType(ImageView.ScaleType.FIT_XY);
                 for (int i = 0; i < track.album.trackImages.size(); i++) {
-                    if (track.album.trackImages.get(i) != null) renderImage(track.album.trackImages.get(0).url);
+                    if (track.album.trackImages.get(i) != null) {
+                        renderImage(track.album.trackImages.get(0).url);
+                    }
                 }
             } else {
                 renderImage("http://d2c87l0yth4zbw-2.global.ssl.fastly.net/i/_global/open-graph-default.png");
