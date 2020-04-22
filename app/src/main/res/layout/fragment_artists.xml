@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-  <gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/light_grey"
-      >
-
-    <LinearLayout
-        android:id="@+id/headerbar_artists"
-        style="@style/Theme.AppTheme.Music.HeaderBar"
-        >
-
-      <include layout="@layout/toolbar"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:background="@color/light_grey">
 
-      <gdg.androidtitlan.spotifymvp.example.view.widget.AutoRecyclerView
-          android:id="@+id/rv_artists"
-          style="@style/Theme.AppTheme.Music.RecyclerView"
-          />
+        <LinearLayout
+            android:id="@+id/headerbar_artists"
+            style="@style/Theme.AppTheme.Music.HeaderBar">
 
-      <ProgressBar
-          android:id="@+id/pv_artists"
-          style="@style/Theme.AppTheme.Music.ProgressBar"
-          />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
-      <ImageView
-          android:id="@+id/iv_artists"
-          style="@style/Theme.AppTheme.Music.ImageView"
-          />
+        </LinearLayout>
 
-      <TextView
-          android:id="@+id/txt_line_artists"
-          android:text="@string/search_music_hint"
-          android:textSize="@dimen/size_title"
-          style="@style/Theme.AppTheme.Music.TextView"
-          />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?actionBarSize"
+            android:gravity="center"
+            android:orientation="vertical">
 
-      <TextView
-          android:id="@+id/txt_subline_artists"
-          android:text="@string/search_artist_hint"
-          android:textSize="@dimen/size_subtitle"
-          style="@style/Theme.AppTheme.Music.TextView"
-          />
+            <gdg.androidtitlan.spotifymvp.example.view.widget.AutoRecyclerView
+                android:id="@+id/rv_artists"
+                style="@style/Theme.AppTheme.Music.RecyclerView" />
+
+            <ProgressBar
+                android:id="@+id/pv_artists"
+                style="@style/Theme.AppTheme.Music.ProgressBar" />
+
+            <ImageView
+                android:id="@+id/iv_artists"
+                style="@style/Theme.AppTheme.Music.ImageView" />
+
+            <TextView
+                android:id="@+id/txt_line_artists"
+                style="@style/Theme.AppTheme.Music.TextView"
+                android:text="@string/search_music_hint"
+                android:textSize="@dimen/size_title" />
+
+            <TextView
+                android:id="@+id/txt_subline_artists"
+                style="@style/Theme.AppTheme.Music.TextView"
+                android:text="@string/search_artist_hint"
+                android:textSize="@dimen/size_subtitle" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-  </gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout>
+    </gdg.androidtitlan.spotifymvp.example.view.widget.ShadowFrameLayout>
 
 </LinearLayout>

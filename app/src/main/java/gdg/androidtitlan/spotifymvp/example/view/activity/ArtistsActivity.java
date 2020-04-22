@@ -17,15 +17,20 @@
 package gdg.androidtitlan.spotifymvp.example.view.activity;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import gdg.androidtitlan.spotifymvp.R;
+import gdg.androidtitlan.spotifymvp.databinding.ActivityArtistsBinding;
+import gdg.androidtitlan.spotifymvp.example.view.fragment.ArtistsFragment;
 
 public class ArtistsActivity extends AppCompatActivity {
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_artists);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityArtistsBinding binding = ActivityArtistsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, ArtistsFragment.newInstance()).commit();
+        }
+    }
 }

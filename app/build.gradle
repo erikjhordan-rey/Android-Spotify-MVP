@@ -1,59 +1,62 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 28
+    compileSdkVersion 28
 
-  defaultConfig {
-    applicationId "gdg.androidtitlan.musicmvp"
-    minSdkVersion 17
-    targetSdkVersion 28
-    versionCode 1
-    versionName "1.0"
-    renderscriptTargetApi 19
-    renderscriptSupportModeEnabled true
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        applicationId "gdg.androidtitlan.musicmvp"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
-  packagingOptions {
-    exclude 'META-INF/rxjava.properties'
-  }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-  lintOptions {
-    abortOnError false
-  }
+    lintOptions {
+        abortOnError false
+    }
 
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
 
-  implementation androidXdependencies.appCompat
-  implementation androidXdependencies.material
-  implementation androidXdependencies.recyclerView
-  implementation androidXdependencies.cardView
+    implementation androidXdependencies.appCompat
+    implementation androidXdependencies.material
+    implementation androidXdependencies.recyclerView
+    implementation androidXdependencies.cardView
 
-  implementation squareDependencies.retrofit
-  implementation squareDependencies.adapter_rx_java
-  implementation squareDependencies.converter_gson
-  implementation squareDependencies.picasso
+    implementation squareDependencies.retrofit
+    implementation squareDependencies.adapter_rx_java
+    implementation squareDependencies.converter_gson
+    implementation squareDependencies.picasso
 
-  implementation reactiveDependencies.rxandroid
-  implementation reactiveDependencies.rxjava
+    implementation reactiveDependencies.rxandroid
+    implementation reactiveDependencies.rxjava
 
-  implementation elementalDependencies.butterknife
-  annotationProcessor elementalDependencies.butterknifeProcessor
-  implementation elementalDependencies.circleimageview
+    implementation elementalDependencies.butterknife
+    annotationProcessor elementalDependencies.butterknifeProcessor
+    implementation elementalDependencies.circleimageview
 
-  testImplementation testingDependencies.junit
-  testImplementation testingDependencies.mockito
-  testImplementation testingDependencies.robolectric
+    testImplementation testingDependencies.junit
+    testImplementation testingDependencies.mockito
+    testImplementation testingDependencies.robolectric
 }
