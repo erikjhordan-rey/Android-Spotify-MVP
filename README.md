@@ -1,12 +1,11 @@
 # Android - Spotify + Model View Presenter (MVP) [![Build Status](https://travis-ci.org/erikjhordan-rey/Android-Spotify-MVP.svg?branch=master)](https://travis-ci.org/erikjhordan-rey/Android-Spotify-MVP)
-Example android Model View Presenter used to explain how to use this pattern in our android applications.
+Android Model View Presenter used to explain how to use this pattern in our android applications.
 
 This example was created to support an article explanation [Model View Presenter en Android][1] (spanish).
 
 Libraries used on the sample project
 ------------------------------------
-* [AppCompat, CardView, RecyclerView an Design][2]
-* [Butterknife][3]
+* [AppCompat, CardView, RecyclerView, Material][2]
 * [Retrofit 2][4]
 * [RxJava & RxAndroid][5]
 * [Gradle Retrolambda Plugin][6]
@@ -40,7 +39,6 @@ The Spotify Api has been changed an Access Token is required. The app sample pro
 [6]: https://github.com/evant/gradle-retrolambda
 [5]: https://github.com/ReactiveX/RxAndroid
 [4]: http://square.github.io/retrofit/
-[3]: http://jakewharton.github.io/butterknife/
 [2]: http://developer.android.com/intl/es/tools/support-library/index.html
 [1]: https://erikjhordan-rey.github.io/blog/2015/11/02/ANDROID-mvp.html
 
