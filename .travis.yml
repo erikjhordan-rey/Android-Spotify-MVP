@@ -22,4 +22,4 @@ licenses:
     - 'google-gdk-license-.+'
 
 script:
-  - ./gradlew checkstyle assemble
+  - ./gradlew assemble
